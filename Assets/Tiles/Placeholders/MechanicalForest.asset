@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: GenericTile
+  m_Name: MechanicalForest
   m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.Tilemaps.Tile
   m_Sprite: {fileID: 7482667652216324306, guid: d63589001033da74ba847d64a4a64226, type: 3}
   m_Color: {r: 0.09109115, g: 0.8396226, b: 0.24442619, a: 1}

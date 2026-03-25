@@ -1,3 +1,9 @@
 ﻿<Solution>
   <Project Path="Assembly-CSharp.csproj" />
+  <Project Path="Unity.SysrootPackage.Editor.csproj" />
+  <Project Path="Unity.Sysroot.Linux_x86_64.EditorTests.csproj" />
+  <Project Path="Unity.Sysroot.EditorTests.csproj" />
+  <Project Path="Unity.Toolchain.Linux-x86_64-Linux.csproj" />
+  <Project Path="Unity.Toolchain.Linux-x86_64-Linux.EditorTests.csproj" />
+  <Project Path="Unity.Sysroot.Linux_x86_64.csproj" />
 </Solution>
