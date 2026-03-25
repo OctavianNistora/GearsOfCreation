@@ -1,11 +1,10 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations;
 
 public class CenterCameraOnPlayer : MonoBehaviour
 {
-    [SerializeField] private Camera camera;
+    [SerializeField] private new Camera camera;
 
     private void Start()
     {
