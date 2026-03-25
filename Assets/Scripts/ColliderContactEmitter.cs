@@ -4,15 +4,15 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(Collider2D))]
-public class GroundedChecker : MonoBehaviour
+public class ColliderContactEmitter : MonoBehaviour
 {
     [Header("")]
     [SerializeField] private Events events;
     
-    private bool _wasGrounded = true;
+    private bool _wasMakingContact;
+    private readonly List<Collider2D> _colliders = new();
     
     private Collider2D _collider;
-    private List<Collider2D> _ = new();
 
     private void Start()
     {
@@ -21,17 +21,17 @@ public class GroundedChecker : MonoBehaviour
 
     private void FixedUpdate()
     {
-        var isGrounded = _collider.GetContacts(_) <= 0;
-        if (isGrounded != _wasGrounded)
+        var isMakingContact = _collider.GetContacts(_colliders) > 0;
+        if (isMakingContact != _wasMakingContact)
         {
-            events.onGroundedStateChange.Invoke(isGrounded);
-            _wasGrounded = isGrounded;
+            events.onMakingContactStateChange.Invoke(isMakingContact);
+            _wasMakingContact = isMakingContact;
         }
     }
     
     [Serializable]
     private class Events
     {
-        public UnityEvent<bool> onGroundedStateChange;
+        public UnityEvent<bool> onMakingContactStateChange;
     }
 }

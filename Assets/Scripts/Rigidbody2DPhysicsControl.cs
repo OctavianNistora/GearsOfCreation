@@ -14,6 +14,8 @@ public class Rigidbody2DPhysicsControl : MonoBehaviour
     
     private float _horizontalVelocity;
     private float _previousVerticalVelocity;
+    private bool _physicsEnabled;
+    private Vector2 _storedLinearVelocity;
     
     private Rigidbody2D _rigidbody;
 
@@ -21,10 +23,16 @@ public class Rigidbody2DPhysicsControl : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _previousVerticalVelocity = _rigidbody.linearVelocity.y;
+        _physicsEnabled = true;
     }
 
     private void FixedUpdate()
     {
+        if (!_physicsEnabled)
+        {
+            return;
+        }
+        
         _rigidbody.linearVelocity = new Vector2(_horizontalVelocity, _rigidbody.linearVelocity.y);
         
         if (_rigidbody.linearVelocity.y < 0)
@@ -48,20 +56,44 @@ public class Rigidbody2DPhysicsControl : MonoBehaviour
         _horizontalVelocity = horizontalVelocity;
     }
 
-    public void AddUpwardsImpulse(float verticalImpulse)
+    public void NegateNegativeVerticalVelocity()
     {
         if (_rigidbody.linearVelocity.y < 0)
         {
             _rigidbody.linearVelocity = new Vector2(_rigidbody.linearVelocity.x, 0);
         }
-        
+    }
+
+    public void AddUpwardsImpulse(float verticalImpulse)
+    {
         _rigidbody.AddForce(Vector2.up * verticalImpulse, ForceMode2D.Impulse);
     }
 
     public void ReduceUpwardsVelocity()
     {
+        if (!_physicsEnabled)
+        {
+            return;
+        }
+        
         _rigidbody.linearVelocity = new Vector2(_rigidbody.linearVelocity.x,
             Mathf.Min(_rigidbody.linearVelocity.y / 2, _rigidbody.linearVelocity.y));
+    }
+
+    public void PausePhysics()
+    {
+        _physicsEnabled = false;
+        
+        _rigidbody.bodyType = RigidbodyType2D.Kinematic;
+        _storedLinearVelocity  = _rigidbody.linearVelocity;
+        _rigidbody.linearVelocity = Vector2.zero;
+    }
+
+    public void RestartPhysics()
+    {
+        _rigidbody.bodyType = RigidbodyType2D.Dynamic;
+        
+        _physicsEnabled = true;
     }
     
     [Serializable]

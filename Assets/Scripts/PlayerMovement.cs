@@ -16,13 +16,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpForce;
     [SerializeField] private int airJumps;
 
-    private bool _canEndJumpEarly;
-    private int _remainingJumps;
-
-    private void Start()
-    {
-        _remainingJumps = airJumps;
-    }
+    public bool _canGroundJump;
+    public bool _canEndJumpEarly;
+    public int _remainingAirJumps;
 
     public void CheckCanStillEndJumpEarly(float verticalVelocity)
     {
@@ -54,20 +50,26 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isGrounded)
         {
-            _remainingJumps = airJumps;
+            _canGroundJump = true;
+            _remainingAirJumps = airJumps;
         }
     }
 
     private void Jump()
     {
-        var isGrounded = Physics2D.OverlapBox(groundCheckBoxCenter.transform.position, groundCheckBoxSize, 0, LayerMask.GetMask("Terrain"));
-        if (!isGrounded)
+        if (_canGroundJump)
         {
-            if (_remainingJumps <= 0) return;
-            _remainingJumps--;
+            _canGroundJump = false;
+        }
+        else
+        {
+            if (_remainingAirJumps <= 0) return;
+            _remainingAirJumps--;
         }
 
+        _rigidbodyControl.NegateNegativeVerticalVelocity();
         _rigidbodyControl.AddUpwardsImpulse(jumpForce);
+        
         _canEndJumpEarly = true;
     }
 
