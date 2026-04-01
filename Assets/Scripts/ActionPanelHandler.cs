@@ -8,9 +8,7 @@ public class ActionPanelHandler : MonoBehaviour
 {
     [SerializeField] private UIDocument uiDocument;
     [SerializeField] private String actionPanelName;
-
-    [SerializeField] private MainPanelsController mainPanelsController;
-
+    
     private VisualElement _actionPanel;
     private List<Button> _buttonList;
 
@@ -47,12 +45,12 @@ public class ActionPanelHandler : MonoBehaviour
 
     private void Fight()
     {
-        mainPanelsController.SelectAbility();
+        MainPanelsController.Instance.SelectAbility();
     }
     
     private void Items()
     {
-        mainPanelsController.SelectItem();
+        MainPanelsController.Instance.SelectItem();
     }
     
     private void Guard()
@@ -62,6 +60,6 @@ public class ActionPanelHandler : MonoBehaviour
     
     private void Escape()
     {
-        mainPanelsController.WaitEnemyTurn();
+        MainPanelsController.Instance.AttemptEscape();
     }
 }

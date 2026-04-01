@@ -11,6 +11,8 @@ public class ToastsHandler : MonoBehaviour
     [SerializeField] private String toastsParentName;
     [SerializeField] private float durationSeconds;
 
+    public static ToastsHandler Instance { get; private set; }
+    
     private List<Label> _toastList;
     private Queue<ToastData> _dataQueue;
     
@@ -28,6 +30,8 @@ public class ToastsHandler : MonoBehaviour
         _toastList.ForEach(toast => toast.text = "");
 
         _dataQueue = new Queue<ToastData>(_toastList.Count);
+
+        Instance = this;
     }
 
     public void CreateToastMessage(String message)
