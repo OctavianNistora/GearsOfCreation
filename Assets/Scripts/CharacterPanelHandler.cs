@@ -99,11 +99,11 @@ public class CharacterPanelHandler : MonoBehaviour
     private void SelectNotReady()
     {
         int index = 0;
-        for (int i = 0; i < PartyManager.Instance.members.Count; i++)
+        for (int i = 0; i < PartyManager.Instance.Members.Count; i++)
         {
-            if (!CombatManager.Instance.GetReadyAllies().Contains(PartyManager.Instance.members[i]))
+            if (!CombatManager.Instance.GetReadyAllies().Contains(PartyManager.Instance.Members[i]))
             {
-                CombatManager.Instance.SelectSource(PartyManager.Instance.members[i]);
+                CombatManager.Instance.SelectSource(PartyManager.Instance.Members[i]);
                 
                 index = i;
                 break;
@@ -115,9 +115,9 @@ public class CharacterPanelHandler : MonoBehaviour
 
     private void MarkReady()
     {
-        for(int i = 0; i < PartyManager.Instance.members.Count; i++)
+        for(int i = 0; i < PartyManager.Instance.Members.Count; i++)
         {
-            if (CombatManager.Instance.GetReadyAllies().Contains(PartyManager.Instance.members[i]))
+            if (CombatManager.Instance.GetReadyAllies().Contains(PartyManager.Instance.Members[i]))
             {
                 _panelsList[i].AddToClassList("character-panel-element-ready");
             }
@@ -133,16 +133,16 @@ public class CharacterPanelHandler : MonoBehaviour
             var isSelectingEnemy = CombatManager.Instance.GetSelectedAbility().TargetEnemy;
             var needsContinue = CombatManager.Instance.SelectTarget(isSelectingEnemy
                 ? CombatManager.Instance.enemies[elementNo]
-                : PartyManager.Instance.members[elementNo]);
+                : PartyManager.Instance.Members[elementNo]);
 
-            if (!needsContinue && CombatManager.Instance.GetReadyAllies().Count < PartyManager.Instance.members.Count)
+            if (!needsContinue && CombatManager.Instance.GetReadyAllies().Count < PartyManager.Instance.Members.Count)
             {
                 MainPanelsController.Instance.SelectCharacterAction();
             }
             return;
         }
 
-        CombatManager.Instance.SelectSource(PartyManager.Instance.members[elementNo]);
+        CombatManager.Instance.SelectSource(PartyManager.Instance.Members[elementNo]);
         _panelsList[elementNo].AddToClassList("character-panel-element-selected");
     }
 
@@ -199,7 +199,7 @@ public class CharacterPanelHandler : MonoBehaviour
 
     private void LoadAllies(bool isTargetSelecting)
     {
-        var enemyEnumerator = PartyManager.Instance.members.GetEnumerator();
+        var enemyEnumerator = PartyManager.Instance.Members.GetEnumerator();
 
         var i = 0;
         for (; i< _panelsList.Count && enemyEnumerator.MoveNext(); i++)

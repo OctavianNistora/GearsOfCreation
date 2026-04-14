@@ -15,8 +15,14 @@ public class MainPanelsController : MonoBehaviour
         
         SelectCharacterAction();
 
-        CombatManager.Instance.OnRoundStart += WaitRoundEnd;
-        CombatManager.Instance.OnRoundEnd += SelectCharacterAction;
+        CombatManager.Instance.OnPlayerChoiceEnd += WaitCombatRoundEnd;
+        CombatManager.Instance.OnPlayerChoiceStart += SelectCharacterAction;
+    }
+
+    private void OnDestroy()
+    {
+        CombatManager.Instance.OnPlayerChoiceEnd -= WaitCombatRoundEnd;
+        CombatManager.Instance.OnPlayerChoiceStart -= SelectCharacterAction;
     }
 
     public void SelectCharacterAction()
@@ -42,9 +48,6 @@ public class MainPanelsController : MonoBehaviour
 
     public void SelectItem()
     {
-        Debug.Log("Selecting item");
-        
-        return;
         actionHandler.Disable();
         characterHandler.Disable();
         optionsHandler.Enable(PanelsStateEnum.SelectItem);
@@ -52,13 +55,10 @@ public class MainPanelsController : MonoBehaviour
 
     public void AttemptEscape()
     {
-        Debug.Log("Attempting escape");
-        
-        return;
-        WaitRoundEnd();
+        CombatManager.Instance.AttemptEscape();
     }
 
-    private void WaitRoundEnd()
+    private void WaitCombatRoundEnd()
     {
         actionHandler.Disable();
         characterHandler.Disable();
