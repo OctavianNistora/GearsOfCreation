@@ -18,7 +18,7 @@ namespace DefaultNamespace.Combat.Items
         protected override IEnumerator ApplyLogic(BaseEntity source, List<BaseEntity> targets)
         {
             var target = targets.First();
-            var strengthModifier = new DamageReceivedModifier(target, Duration, DamageMultiplier);
+            var strengthModifier = new DamageDealtModifier(target, Duration, DamageMultiplier);
             
             target.AddModifier(strengthModifier);
             CombatManager.Instance.OnCombatRoundEnd += strengthModifier.RoundEnded;
