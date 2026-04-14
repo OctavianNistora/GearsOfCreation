@@ -9,9 +9,9 @@ public class EncounterInitializer : MonoBehaviour
             "Thief", 
             100,
             100,
-            new List<BaseAbility>()
+            new List<BaseCharacterAbility>()
             {
-                new SingleAttack("Stab", 20),
+                new SingleAttack("Stab", 20, 0),
             }
         );
         CombatManager.Instance.enemies.Add(firstEnemy);
@@ -20,9 +20,9 @@ public class EncounterInitializer : MonoBehaviour
             "Sentient Tree",
             100,
             100,
-            new List<BaseAbility>()
+            new List<BaseCharacterAbility>()
             {
-                new AoeAttack("Slash", 10),
+                new AoeAttack("Slash", 10, 0),
             }
         );
         CombatManager.Instance.enemies.Add(secondEnemy);

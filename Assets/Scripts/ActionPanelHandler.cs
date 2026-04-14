@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using DefaultNamespace.Combat.Abilities;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -55,7 +56,13 @@ public class ActionPanelHandler : MonoBehaviour
     
     private void Guard()
     {
-        Debug.Log("Guard");
+        var guardAbility = new Guard();
+        
+        CombatManager.Instance.SelectAbility(guardAbility);
+        if (CombatManager.Instance.GetReadyAllies().Count < PartyManager.Instance.Members.Count)
+        {
+            MainPanelsController.Instance.SelectCharacterAction();
+        }
     }
     
     private void Escape()
