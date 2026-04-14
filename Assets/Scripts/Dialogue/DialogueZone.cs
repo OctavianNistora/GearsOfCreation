@@ -1,8 +1,11 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class DialogueZone : MonoBehaviour
 {
+    [SerializeField] private DialogueSequence dialogueSequence;
+
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -22,8 +25,10 @@ public class DialogueZone : MonoBehaviour
 
         await FadeManager.Instance.FadeToTransparent();
         
-        player.GetComponent<PlayerInput>().actions.Enable();
+        //player.GetComponent<PlayerInput>().actions.Enable();
 
-        Destroy(gameObject);
+        //Destroy(gameObject);
+
+        DialogueManager.Instance.StartDialogue(dialogueSequence);
     }
 }
