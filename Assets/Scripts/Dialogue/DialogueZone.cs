@@ -1,10 +1,12 @@
 using System;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class DialogueZone : MonoBehaviour
 {
     [SerializeField] private DialogueSequence dialogueSequence;
+    [SerializeField] private GameObject playerPosition;
 
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -16,19 +18,18 @@ public class DialogueZone : MonoBehaviour
 
     async void FadeTransition(GameObject player)
     {
-        // player input might be disabled/enabled in a dialogue manager
-        player.GetComponent<PlayerInput>().actions.Disable();
 
         await FadeManager.Instance.FadeToBlack();
 
-        player.transform.position = transform.position;
+        await Task.Delay(500);
+
+        player.GetComponent<PlayerInput>().SwitchCurrentActionMap("Dialogue");
+        player.transform.position = playerPosition.transform.position;
 
         await FadeManager.Instance.FadeToTransparent();
         
-        //player.GetComponent<PlayerInput>().actions.Enable();
-
-        //Destroy(gameObject);
-
         DialogueManager.Instance.StartDialogue(dialogueSequence);
+
+        Destroy(gameObject);
     }
 }

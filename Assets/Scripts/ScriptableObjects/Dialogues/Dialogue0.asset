@@ -14,5 +14,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogueSequence
   lines:
   - speaker: {fileID: 11400000, guid: 109aaa7b5af893c4c96748d371c82df3, type: 2}
-    text: Oare acum, merge?
+    text: Hey! Over here!
+    voiceLine: {fileID: 0}
+  - speaker: {fileID: 11400000, guid: 4ee4e9d4eef6abd45acf5dc2a5863900, type: 2}
+    text: Hi, have you seen my gramps? I've been looking everywhere...
+    voiceLine: {fileID: 0}
+  - speaker: {fileID: 11400000, guid: 109aaa7b5af893c4c96748d371c82df3, type: 2}
+    text: Oh, poor him! Last I've seen him, he tried getting water from this well...
+    voiceLine: {fileID: 0}
+  - speaker: {fileID: 11400000, guid: 109aaa7b5af893c4c96748d371c82df3, type: 2}
+    text: However, his age betrayed his balance, as he tripped and fell down into...
+      I don't even want to think about it-
+    voiceLine: {fileID: 0}
+  - speaker: {fileID: 11400000, guid: 109aaa7b5af893c4c96748d371c82df3, type: 2}
+    text: 'My boy, you have to go and get him!!! I tried to get to him myself, but... '
+    voiceLine: {fileID: 0}
+  - speaker: {fileID: 11400000, guid: 109aaa7b5af893c4c96748d371c82df3, type: 2}
+    text: Someone decided to guard the well! They wouldn't let me descent, despite
+      my attempts at peaceful negotiation. Alas, even my fighting spirit wasn't strong
+      enough to subdue his...
+    voiceLine: {fileID: 0}
+  - speaker: {fileID: 11400000, guid: 109aaa7b5af893c4c96748d371c82df3, type: 2}
+    text: AH! I see you brought a weapon. How fortuitous!! If you understand what's
+      at stake, then you have to take him out... please?
     voiceLine: {fileID: 0}

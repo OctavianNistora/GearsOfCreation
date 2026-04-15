@@ -16,6 +16,10 @@ public class PlatformerTutorial : MonoBehaviour
     [SerializeField] private NarrationManager narrationManager;
     [SerializeField] private PlayerInput playerInput;
 
+    //temp
+    private bool waitingForClimbLedge = false;
+    private bool waitingForJump = false;
+
     void Start()
     {
         ShowStep();
@@ -23,7 +27,8 @@ public class PlatformerTutorial : MonoBehaviour
 
     void Update()
     {
-        if ((currentStep == PlatformerTutorialStep.Jump || currentStep == PlatformerTutorialStep.ClimbLedge) && playerInput.actions["Jump"].triggered)
+        if (((currentStep == PlatformerTutorialStep.Jump && waitingForJump) || (currentStep == PlatformerTutorialStep.ClimbLedge && waitingForClimbLedge)) 
+            && playerInput.actions["Jump"].triggered)
         {
             NextStep();
         }
@@ -45,9 +50,11 @@ public class PlatformerTutorial : MonoBehaviour
                 break;
             case PlatformerTutorialStep.Jump:
                 narrationManager.ShowText("Press SPACE to jump");
+                waitingForJump = true;
                 break;
             case PlatformerTutorialStep.ClimbLedge:
                 narrationManager.ShowText("That cliff seems a bit too high to jump on... Try to reach it anyway!");
+                waitingForClimbLedge = true;
                 break;
             case PlatformerTutorialStep.PickUpWeapon:
                 narrationManager.ShowText("Might be useful later...");

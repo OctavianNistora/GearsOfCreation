@@ -8,6 +8,7 @@ public class TutorialStepZone : MonoBehaviour
         {
             PlatformerTutorial parent = gameObject.transform.parent.GetComponent<PlatformerTutorial>();
             parent.ShowStep();
+            Destroy(gameObject);
         }
     }
 }

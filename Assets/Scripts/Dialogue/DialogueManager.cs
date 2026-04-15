@@ -1,28 +1,35 @@
 using System.Collections;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager Instance;
     public TextMeshProUGUI textUI;
+    [SerializeField] private PlayerInput playerInput;
     private DialogueLine[] lines;
     private int lineIndex;
     private int currentVisibleCharactersIndex;
     private Coroutine typingCoroutine;
     private bool isTyping = false;
-    private WaitForSeconds simpleDelay = new WaitForSeconds(0.1f);
-    private WaitForSeconds interpunctuationDelay = new WaitForSeconds(0.5f);
-    [SerializeField] private float charactersPerSecond = 20;
+    private bool dialogueActive = false;
+    private float simpleDelayAmount = 0.05f;
+    private float interpunctuationDelayAmount = 0.1f;
 
     private void Awake()
     {
-        if (Instance == null) Instance = this;
+        if (Instance == null) 
+        {
+            Instance = this;
+        }
         else Destroy(gameObject);
     }
 
     public void StartDialogue(DialogueSequence dialogue)
     {
+        dialogueActive = true;
         lines = dialogue.lines;
         lineIndex = 0;
         textUI.gameObject.SetActive(true);
@@ -52,17 +59,42 @@ public class DialogueManager : MonoBehaviour
 
             if (character == ';' || character == ',' || character == ':' || character == '-' || character == '.' || character == '?' || character == '!')
             {
-                yield return interpunctuationDelay;
+                yield return new WaitForSeconds(interpunctuationDelayAmount);
             }
             else
             {
-                yield return simpleDelay;
+                yield return new WaitForSeconds(simpleDelayAmount);
             }
 
             currentVisibleCharactersIndex++;
         }
 
         isTyping = false;
+    }
+
+    public void OnClick(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+
+        if (dialogueActive)
+        {
+            Advance();
+        }
+    }
+
+    public void Advance()
+    {
+        if (isTyping)
+        {
+            // Finish instantly
+            StopCoroutine(typingCoroutine);
+            textUI.maxVisibleCharacters = lines[lineIndex].speaker.characterName.Length + 2 + lines[lineIndex].text.Length;
+            isTyping = false;
+        }
+        else
+        {
+            NextLine();
+        }
     }
 
     public void NextLine()
@@ -75,18 +107,20 @@ public class DialogueManager : MonoBehaviour
         }
         else
         {
+            dialogueActive = false;
             textUI.gameObject.SetActive(false);
+            FadeTransition();
         }
     }
 
-    public void ShowText(string message)
+    async void FadeTransition()
     {
-        textUI.text = message;
-        textUI.gameObject.SetActive(true);
-    }
+        await FadeManager.Instance.FadeToBlack();
 
-    public void HideText()
-    {
-        textUI.gameObject.SetActive(false);
+        await Task.Delay(500);
+
+        playerInput.SwitchCurrentActionMap("Player");
+        
+        await FadeManager.Instance.FadeToTransparent();
     }
 }
