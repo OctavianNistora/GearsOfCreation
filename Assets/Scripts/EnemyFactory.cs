@@ -6,7 +6,8 @@ public class EnemyFactory : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
     }
 
     public GameObject CreateEnemy(EnemyData data, Vector3 position)
