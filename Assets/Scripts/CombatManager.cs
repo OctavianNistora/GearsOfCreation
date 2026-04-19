@@ -10,14 +10,17 @@ public class CombatManager : MonoBehaviour
     public static CombatManager Instance { get; private set; }
     
     public List<EnemyEntity> enemies = new();
-    public event Action OnRoundStart;
-    public event Action OnRoundEnd;
-    public event Action onBattleWon;
+    public event Action OnPlayerChoiceStart;
+    public event Action OnPlayerChoiceEnd;
+    public event Action OnCombatRoundStart;
+    public event Action OnCombatRoundEnd;
+    public event Action<BattleEndStateEnum> OnBattleEnded;
     
-    private PlayerEntity selectedSource;
-    private BaseAbility selectedAbility;
-    private List<BaseEntity> selectedTargets;
-    private Dictionary<PlayerEntity, SourceActionData> sourceActions = new();
+    private PlayerEntity _selectedSource;
+    private BaseAction _selectedAction;
+    private List<BaseEntity> _selectedTargets;
+    private Dictionary<PlayerEntity, SourceActionData> _sourceActions = new();
+    private bool _isEscaping;
     
     private void Awake()
     {
@@ -29,75 +32,91 @@ public class CombatManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
+    
+    public void InitializeCombat(List<EnemyEntity> newEnemies)
+    {
+        enemies = newEnemies;
+        
+        OnPlayerChoiceStart?.GetInvocationList().ToList().ForEach(d => OnPlayerChoiceStart -= (Action)d);
+        OnPlayerChoiceEnd?.GetInvocationList().ToList().ForEach(d => OnPlayerChoiceEnd -= (Action)d);
+        OnCombatRoundStart?.GetInvocationList().ToList().ForEach(d => OnCombatRoundStart -= (Action)d);
+        OnCombatRoundEnd?.GetInvocationList().ToList().ForEach(d => OnCombatRoundEnd -= (Action)d);
+        OnBattleEnded?.GetInvocationList().ToList().ForEach(d => OnBattleEnded -= (Action<BattleEndStateEnum>)d);
+        
+        _sourceActions.Clear();
+        _selectedSource = null;
+        _selectedAction = null;
+        _selectedTargets = null;
+    }
 
     public List<PlayerEntity> GetActionedAllies()
     {
-        return sourceActions.Keys.ToList();
+        return _sourceActions.Keys.ToList();
     }
 
     public void SelectSource(PlayerEntity entity)
     {
-        selectedSource = entity;
+        _selectedSource = entity;
         
         Debug.Log("Selected source: " + entity.Name);
     }
     
     public PlayerEntity GetSelectedSource()
     {
-        return selectedSource;
+        return _selectedSource;
     }
 
-    public bool SelectAbility(BaseAbility ability)
+    public bool SelectAbility(BaseAction action)
     {
-        selectedAbility = ability;
-        selectedTargets = new List<BaseEntity>();
+        _selectedAction = action;
+        _selectedTargets = new List<BaseEntity>();
         
-        var needsContinue = selectedAbility.TargetCount > 0;
+        var needsContinue = _selectedAction.TargetCount > 0;
         
         if (!needsContinue)
         {
-            sourceActions[selectedSource] = new SourceActionData
+            _sourceActions[_selectedSource] = new SourceActionData
             {
-                Ability = selectedAbility,
-                Targets = selectedAbility.TargetEnemy ? 
+                action = _selectedAction,
+                Targets = _selectedAction.TargetEnemy ? 
                     enemies.Select(entity => entity as BaseEntity).ToList() :
-                    PartyManager.Instance.members.Select(entity => entity as BaseEntity).ToList()
+                    PartyManager.Instance.Members.Select(entity => entity as BaseEntity).ToList()
             };
             
-            if (sourceActions.Count >= PartyManager.Instance.members.Count)
+            if (_sourceActions.Count >= PartyManager.Instance.Members.Count)
             {
                 StartCoroutine(StartRound());
             }
         }
 
-        Debug.Log("Selected ability: " + ability.Name);
+        Debug.Log("Selected ability: " + action.Name);
         return needsContinue;
     }
     
-    public BaseAbility GetSelectedAbility()
+    public BaseAction GetSelectedAbility()
     {
-        return selectedAbility;
+        return _selectedAction;
     }
     
     public bool SelectTarget(BaseEntity entity)
     {
-        selectedTargets.Add(entity);
+        _selectedTargets.Add(entity);
         
-        var needsContinue = selectedTargets.Count < selectedAbility.TargetCount && 
+        var needsContinue = _selectedTargets.Count < _selectedAction.TargetCount && 
                             !(
-                                selectedAbility.TargetEnemy && selectedTargets.Count >= enemies.Count || 
-                                !selectedAbility.TargetEnemy && selectedTargets.Count >= PartyManager.Instance.members.Count
+                                _selectedAction.TargetEnemy && _selectedTargets.Count >= enemies.Count || 
+                                !_selectedAction.TargetEnemy && _selectedTargets.Count >= PartyManager.Instance.Members.Count
                                 );
 
         if (!needsContinue)
         {
-            sourceActions[selectedSource] = new SourceActionData
+            _sourceActions[_selectedSource] = new SourceActionData
             {
-                Ability = selectedAbility,
-                Targets = selectedTargets
+                action = _selectedAction,
+                Targets = _selectedTargets
             };
             
-            if (sourceActions.Count >= PartyManager.Instance.members.Count)
+            if (_sourceActions.Count >= PartyManager.Instance.Members.Count)
             {
                 StartCoroutine(StartRound());
             }
@@ -109,16 +128,50 @@ public class CombatManager : MonoBehaviour
 
     public List<PlayerEntity> GetReadyAllies()
     {
-        return sourceActions.Keys.ToList();
+        return _sourceActions.Keys.ToList();
+    }
+    
+    public void AttemptEscape()
+    {
+        CheckEscapeRng(1f);
+        
+        _sourceActions.Clear();
+        
+        StartCoroutine(StartRound());
+    }
+    
+    public int GetItemUsedQuantity(BaseCombatItem item)
+    {
+        var quantityUsed = 0;
+        foreach (var action in _sourceActions.Values)
+        {
+            if (action.action == item)
+            {
+                quantityUsed++;
+            }
+        }
+        
+        return quantityUsed;
+    }
+    
+    private void CheckEscapeRng(float chance)
+    {
+        var roll = Random.Range(0f, 1f);
+        if (roll <= chance)
+        {
+            _isEscaping = true;
+        }
     }
 
-    public IEnumerator StartRound()
+    private IEnumerator StartRound()
     {
-        OnRoundStart?.Invoke();
+        OnPlayerChoiceEnd?.Invoke();
         
-        foreach (var sourceAction in sourceActions)
+        OnCombatRoundStart?.Invoke();
+        
+        foreach (var sourceAction in _sourceActions)
         {
-            yield return sourceAction.Value.Ability.Apply(sourceAction.Key, sourceAction.Value.Targets);
+            yield return sourceAction.Value.action.Apply(sourceAction.Key, sourceAction.Value.Targets);
         }
         
         yield return new WaitForSeconds(1.5f);
@@ -134,14 +187,14 @@ public class CombatManager : MonoBehaviour
 
             if (ability.TargetCount <= 0)
             {
-                yield return ability.Apply(enemy, PartyManager.Instance.members.Where(member => member.CurrentHp > 0).Select(entity => entity as BaseEntity).ToList());
+                yield return ability.Apply(enemy, PartyManager.Instance.Members.Where(member => member.CurrentHp > 0).Select(entity => entity as BaseEntity).ToList());
                 continue;
             }
 
             List<BaseEntity> targets;
             if (ability.TargetEnemy)
             {
-                targets = PartyManager.Instance.members.Where(member => member.CurrentHp > 0).OrderBy(qu => Guid.NewGuid()).Take(ability.TargetCount).Select(entity => entity as BaseEntity).ToList();
+                targets = PartyManager.Instance.Members.Where(member => member.CurrentHp > 0).OrderBy(qu => Guid.NewGuid()).Take(ability.TargetCount).Select(entity => entity as BaseEntity).ToList();
                 yield return ability.Apply(enemy, targets);
             }
             else
@@ -151,20 +204,42 @@ public class CombatManager : MonoBehaviour
             }
         }
         
-        sourceActions.Clear();
+        _sourceActions.Clear();
+        
+        OnCombatRoundEnd?.Invoke();
         
         if (enemies.All(enemy => enemy.CurrentHp <= 0))
         {
             Debug.Log("Victory!");
-            onBattleWon?.Invoke();
+            OnBattleEnded?.Invoke(BattleEndStateEnum.Victory);
             yield break;
         }
-        OnRoundEnd?.Invoke();
+        if (PartyManager.Instance.Members.All(member => member.CurrentHp <= 0))
+        {
+            Debug.Log("Defeat!");
+            OnBattleEnded?.Invoke(BattleEndStateEnum.Defeat);
+            yield break;
+        }
+        if (_isEscaping)
+        {
+            Debug.Log("Escaped!");
+            OnBattleEnded?.Invoke(BattleEndStateEnum.Escape);
+            yield break;
+        }
+        
+        OnPlayerChoiceStart?.Invoke();
     }
 }
 
 public struct SourceActionData
 {
-    public BaseAbility Ability { get; set; }
+    public BaseAction action { get; set; }
     public List<BaseEntity> Targets { get; set; }
+}
+
+public enum BattleEndStateEnum
+{
+    Victory,
+    Defeat,
+    Escape
 }

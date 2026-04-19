@@ -22,15 +22,13 @@ public class OptionsPanelHandler : MonoBehaviour
         var first = _actionPanel.Children();
         var second = first.Select(element => element.Children()).SelectMany(element => element);
         _buttonList = second.Select(element => element.Children().FirstOrDefault() as Button).ToList();
-        
-        var i = 0;
     }
 
     public void Enable(PanelsStateEnum state)
     {
         if (state == PanelsStateEnum.SelectItem)
         {
-            
+            LoadItems();
         }
         else
         {
@@ -57,20 +55,36 @@ public class OptionsPanelHandler : MonoBehaviour
         _currentButtonActions.Add(_buttonList[index], action);
         _buttonList[index].clicked += action;
     }
-
-    private void LoadAbilities()
+    
+    private void LoadItems()
     {
-        var abilities = CombatManager.Instance.GetSelectedSource().Abilities;
+        var items = PartyManager.Instance.Inventory;
+        var itemsRemainingQuantity = items.Select(item =>
+        {
+            var oldQuantity = item.Quantity;
+            var usedQuantity = CombatManager.Instance.GetItemUsedQuantity(item);
+            return oldQuantity - usedQuantity;
+        }).ToList();
+        
+        List<BaseCombatItem> itemsWithQuantity = new();
+        List<int> quantityList = new();
+        for (var j = 0; j < items.Count; j++)
+        {
+            if (itemsRemainingQuantity[j] <= 0) continue;
+            
+            itemsWithQuantity.Add(items[j]);
+            quantityList.Add(itemsRemainingQuantity[j]);
+        }
+        
         var i = 0;
-
-        for (; i < abilities.Count && i < _buttonList.Count; i++)
+        for (; i < itemsWithQuantity.Count && i < _buttonList.Count; i++)
         {
             _buttonList[i].style.display = DisplayStyle.Flex;
-            _buttonList[i].text = abilities[i].Name;
+            _buttonList[i].text = $"{itemsWithQuantity[i].Name}\tx{quantityList[i]}";
             
             RemovePreviousEvent(i);
-            var ability = abilities[i];
-            AddButtonEvent(i, () => SelectAbility(ability));
+            var item = itemsWithQuantity[i];
+            AddButtonEvent(i, () => SelectAction(item));
         }
 
         for (; i < _buttonList.Count; i++)
@@ -81,15 +95,38 @@ public class OptionsPanelHandler : MonoBehaviour
         }
     }
 
-    private void SelectAbility(BaseAbility ability)
+    private void LoadAbilities()
     {
-        var needsContinue = CombatManager.Instance.SelectAbility(ability);
+        var abilities = CombatManager.Instance.GetSelectedSource().Abilities;
+        var i = 0;
+
+        for (; i < abilities.Count && i < _buttonList.Count; i++)
+        {
+            _buttonList[i].style.display = DisplayStyle.Flex;
+            _buttonList[i].text = abilities[i].Name + (abilities[i].ManaCost > 0 ? $"\tMP: {abilities[i].ManaCost}" : "");
+            
+            RemovePreviousEvent(i);
+            var ability = abilities[i];
+            AddButtonEvent(i, () => SelectAction(ability));
+        }
+
+        for (; i < _buttonList.Count; i++)
+        {
+            _buttonList[i].style.display = DisplayStyle.None;
+            
+            RemovePreviousEvent(i);
+        }
+    }
+
+    private void SelectAction(BaseAction action)
+    {
+        var needsContinue = CombatManager.Instance.SelectAbility(action);
 
         if (needsContinue)
         {
             MainPanelsController.Instance.SelectTarget();
         }
-        else if (CombatManager.Instance.GetReadyAllies().Count < PartyManager.Instance.members.Count)
+        else if (CombatManager.Instance.GetReadyAllies().Count < PartyManager.Instance.Members.Count)
         {
             MainPanelsController.Instance.SelectCharacterAction();
         }
