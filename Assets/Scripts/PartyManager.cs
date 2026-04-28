@@ -31,6 +31,7 @@ public abstract class BaseEntity
     public int MaxHp { get; private set; }
     public int CurrentHp { get; private set; }
     public List<BaseCharacterAbility> Abilities { get; private set; }
+    public CombatCharacterAnimationHandler CombatCharacterAnimationHandler { get; set; }
     
     private List<BaseCombatModifier> _modifiers = new();
 
@@ -46,9 +47,9 @@ public abstract class BaseEntity
         Abilities = abilities;
     }
     
-    public void Damage(int damage)
+    public IEnumerator Damage(int damage)
     {
-        if (CurrentHp <= 0) return;
+        if (CurrentHp <= 0) yield break;
         
         var damageModifiers = _modifiers.OfType<DamageReceivedModifier>().ToList();
         
@@ -56,11 +57,14 @@ public abstract class BaseEntity
         
         CurrentHp -= (int)modifiedDamage;
         ToastsHandler.Instance.CreateToastMessage($"{Name} took {modifiedDamage} damage!");
+        yield return CombatCharacterAnimationHandler.PlayHurtAnimation();
         OnDamageTaken?.Invoke();
         
-        if (CurrentHp > 0) return;
+        if (CurrentHp > 0) yield break;
+        
         CurrentHp = 0;
         ToastsHandler.Instance.CreateToastMessage($"{Name} has died!");
+        yield return CombatCharacterAnimationHandler.PlayDeathAnimation();
         OnDeath?.Invoke();
     }
     
@@ -129,12 +133,14 @@ public abstract class BaseAction
     public string Name { get; private set; }
     public int TargetCount {get; private set;}
     public bool TargetEnemy  { get; private set; }
+    public int VFXNumber { get; private set; }
     
-    protected BaseAction(string name, int targetCount, bool targetEnemy)
+    protected BaseAction(string name, int targetCount, bool targetEnemy, int vfxNumber)
     {
         Name = name;
         TargetCount = targetCount;
         TargetEnemy = targetEnemy;
+        VFXNumber = vfxNumber;
     }
 
     public virtual IEnumerator Apply(BaseEntity source, List<BaseEntity> targets)
@@ -143,7 +149,6 @@ public abstract class BaseAction
             $"{source.Name} used {Name} on {string.Join(", ", targets.Select(t => t.Name))}!" : 
             $"{source.Name} used {Name}!";
         ToastsHandler.Instance.CreateToastMessage(toastString);
-        yield return new WaitForSeconds(1.5f);
         
         yield return ApplyLogic(source, targets);
     }
@@ -155,7 +160,7 @@ public abstract class BaseCharacterAbility : BaseAction
 {
     public int ManaCost { get; private set; }
     
-    protected BaseCharacterAbility(string name, int targetCount, bool targetEnemy, int manaCost) : base(name, targetCount, targetEnemy)
+    protected BaseCharacterAbility(string name, int targetCount, bool targetEnemy, int manaCost, int vfxNumber) : base(name, targetCount, targetEnemy, vfxNumber)
     {
         ManaCost = manaCost;
     }
@@ -181,15 +186,17 @@ public class SingleAttack : BaseCharacterAbility
 {
     public int Damage { get; private set; }
     
-    public SingleAttack(string name, int damage, int manaCost) : base(name, 1, true, manaCost)
+    public SingleAttack(string name, int damage, int manaCost, int vfxNumber) : base(name, 1, true, manaCost, vfxNumber)
     {
         Damage = damage;
     }
 
     protected override IEnumerator ApplyLogic(BaseEntity source, List<BaseEntity> targets)
     {
-        targets.First().Damage(Damage);
-        yield break;
+        var target = targets.First();
+        
+        yield return target.CombatCharacterAnimationHandler.PlayVFXAnimation(VFXNumber);
+        target.Damage(Damage);
     }
 }
 
@@ -197,15 +204,26 @@ public class AoeAttack : BaseCharacterAbility
 {
     public int Damage { get; private set; }
     
-    public AoeAttack(string name, int damage, int manaCost) : base(name, 0, true, manaCost)
+    public AoeAttack(string name, int damage, int manaCost, int vfxNumber) : base(name, 0, true, manaCost, vfxNumber)
     {
         Damage = damage;
     }
 
     protected override IEnumerator ApplyLogic(BaseEntity source, List<BaseEntity> targets)
     {
-        targets.ForEach(target => target.Damage(Damage));
-        yield break;
+        var animationEnumeratorList = new List<IEnumerator>();
+        targets.ForEach(target => animationEnumeratorList.Add(Wrapper(source, target)));
+
+        foreach (var animationEnumerator in animationEnumeratorList)
+        {
+            yield return animationEnumerator;
+        }
+    }
+
+    private IEnumerator Wrapper(BaseEntity source, BaseEntity target)
+    {
+        yield return target.CombatCharacterAnimationHandler.PlayVFXAnimation(VFXNumber);
+        target.Damage(Damage);
     }
 }
 
@@ -213,14 +231,16 @@ public class Heal : BaseCharacterAbility
 {
     public int HealAmount { get; private set; }
     
-    public Heal(string name, int healAmount, int manaCost) : base(name, 1, false, manaCost)
+    public Heal(string name, int healAmount, int manaCost, int vfxNumber) : base(name, 1, false, manaCost, vfxNumber)
     {
         HealAmount = healAmount;
     }
 
     protected override IEnumerator ApplyLogic(BaseEntity source, List<BaseEntity> targets)
     {
-        targets.First().Heal(HealAmount);
-        yield break;
+        var target = targets.First();
+        
+        yield return target.CombatCharacterAnimationHandler.PlayVFXAnimation(VFXNumber);
+        target.Heal(HealAmount);
     }
 }

@@ -6,7 +6,7 @@ public abstract class BaseCombatItem : BaseAction
 {
     public int Quantity { get; private set; }
 
-    protected BaseCombatItem(string name, int targetCount, bool targetEnemy, int quantity) : base(name, targetCount, targetEnemy)
+    protected BaseCombatItem(string name, int targetCount, bool targetEnemy, int quantity, int vfxNumber) : base(name, targetCount, targetEnemy, vfxNumber)
     {
         this.Quantity = quantity;
     }

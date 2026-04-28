@@ -11,7 +11,7 @@ public class EncounterInitializer : MonoBehaviour
             100,
             new List<BaseCharacterAbility>()
             {
-                new SingleAttack("Stab", 20, 0),
+                new SingleAttack("Slash", 20, 0, 1),
             }
         );
         CombatManager.Instance.enemies.Add(firstEnemy);
@@ -22,7 +22,7 @@ public class EncounterInitializer : MonoBehaviour
             100,
             new List<BaseCharacterAbility>()
             {
-                new AoeAttack("Slash", 10, 0),
+                new AoeAttack("Cleave", 10, 0, 3),
             }
         );
         CombatManager.Instance.enemies.Add(secondEnemy);

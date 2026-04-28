@@ -9,7 +9,7 @@ namespace DefaultNamespace.Combat.Items
         public int Duration { get; private set; }
         public float DamageMultiplier { get; private set; }
         
-        public StrengthPotion(string name, int quantity, int duration, float damageMultiplier) : base(name, 1, false, quantity)
+        public StrengthPotion(string name, int quantity, int duration, float damageMultiplier, int vfxNumber) : base(name, 1, false, quantity, vfxNumber)
         {
             Duration = duration;
             DamageMultiplier = damageMultiplier;
