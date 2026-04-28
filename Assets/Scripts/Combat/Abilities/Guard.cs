@@ -6,7 +6,7 @@ namespace DefaultNamespace.Combat.Abilities
 {
     public class Guard : BaseAction
     {
-        public Guard() : base("Guard", 0, false)
+        public Guard() : base("Guard", 0, false, 0)
         {
         }
 

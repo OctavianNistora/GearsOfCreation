@@ -57,8 +57,6 @@ public class CombatManager : MonoBehaviour
     public void SelectSource(PlayerEntity entity)
     {
         _selectedSource = entity;
-        
-        Debug.Log("Selected source: " + entity.Name);
     }
     
     public PlayerEntity GetSelectedSource()
@@ -89,7 +87,6 @@ public class CombatManager : MonoBehaviour
             }
         }
 
-        Debug.Log("Selected ability: " + action.Name);
         return needsContinue;
     }
     
@@ -122,7 +119,6 @@ public class CombatManager : MonoBehaviour
             }
         }
         
-        Debug.Log("Selected target: " + entity.Name);
         return needsContinue;
     }
 

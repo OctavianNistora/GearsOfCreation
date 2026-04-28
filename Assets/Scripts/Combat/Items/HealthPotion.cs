@@ -8,7 +8,7 @@ namespace DefaultNamespace.Combat.Items
     {
         public int HealAmount { get; private set; }
         
-        public HealthPotion(string name, int quantity, int healAmount) : base(name, 1, false, quantity)
+        public HealthPotion(string name, int quantity, int healAmount, int vfxNumber) : base(name, 1, false, quantity, vfxNumber)
         {
             HealAmount = healAmount;
         }
