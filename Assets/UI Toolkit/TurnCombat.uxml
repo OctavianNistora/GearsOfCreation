@@ -32,15 +32,16 @@
             <ui:Label name="CombatToast_Text" text="Text 10" class="combat-notification-row-text normal-text" style="-unity-text-auto-size: best-fit 8px 64px; -unity-text-generator: advanced; font-size: 18px;"/>
         </ui:VisualElement>
     </ui:VisualElement>
+    <ui:Button text="Back" enable-rich-text="false" emoji-fallback-support="false" selectable="true" double-click-selects-word="false" triple-click-selects-line="false" display-tooltip-when-elided="false" name="BackButton" class="normal-text" style="position: absolute; bottom: 40%; font-size: 24px; border-top-left-radius: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px; border-bottom-left-radius: 8px;"/>
     <ui:VisualElement name="MainPanels" style="flex-grow: initial; height: 40%; bottom: -1px; width: 100%; position: absolute; background-color: rgba(77, 77, 77, 0.6); flex-direction: row; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 15px; padding-right: 15px; padding-bottom: 15px; padding-left: 15px; justify-content: space-around; display: flex; left: -1px; opacity: 1;">
         <ui:VisualElement enabled="true" name="ActionsPanel" class="panel-background" style="flex-grow: initial; background-color: rgb(51, 51, 51); flex-shrink: initial; position: relative; width: 20%; margin-left: 0; display: flex; margin-right: 0; justify-content: space-evenly; margin-top: 0; margin-bottom: 0;">
-            <ui:Button text="Fight&#10;" name="ActionMenu_Fight" enable-rich-text="false" double-click-selects-word="false" triple-click-selects-line="false" display-tooltip-when-elided="false" selectable="false" emoji-fallback-support="false" focusable="true" class="action-menu_button normal-text" style="padding-left: 0%;"/>
-            <ui:Button text="Items&#10;" name="ActionMenu_Items" enable-rich-text="false" emoji-fallback-support="false" selectable="false" double-click-selects-word="false" triple-click-selects-line="false" display-tooltip-when-elided="false" focusable="true" class="action-menu_button normal-text"/>
-            <ui:Button text="Guard&#10;" name="ActionMenu_Guard" enable-rich-text="false" emoji-fallback-support="false" selectable="false" double-click-selects-word="false" triple-click-selects-line="false" display-tooltip-when-elided="false" focusable="true" class="action-menu_button normal-text"/>
-            <ui:Button text="Escape&#10;" name="ActionMenu_Escape" display-tooltip-when-elided="false" triple-click-selects-line="false" double-click-selects-word="false" selectable="false" emoji-fallback-support="false" enable-rich-text="false" focusable="true" class="action-menu_button normal-text"/>
+            <ui:Button text="Fight&#10;" name="ActionMenu_Fight" enable-rich-text="false" double-click-selects-word="false" triple-click-selects-line="false" display-tooltip-when-elided="false" selectable="true" emoji-fallback-support="false" focusable="true" class="action-menu_button normal-text" style="padding-left: 0%;"/>
+            <ui:Button text="Items&#10;" name="ActionMenu_Items" enable-rich-text="false" emoji-fallback-support="false" selectable="true" double-click-selects-word="false" triple-click-selects-line="false" display-tooltip-when-elided="false" focusable="true" class="action-menu_button normal-text"/>
+            <ui:Button text="Guard&#10;" name="ActionMenu_Guard" enable-rich-text="false" emoji-fallback-support="false" selectable="true" double-click-selects-word="false" triple-click-selects-line="false" display-tooltip-when-elided="false" focusable="true" class="action-menu_button normal-text"/>
+            <ui:Button text="Rest" name="ActionMenu_Escape" display-tooltip-when-elided="false" triple-click-selects-line="false" double-click-selects-word="false" selectable="true" emoji-fallback-support="false" enable-rich-text="false" focusable="true" class="action-menu_button normal-text"/>
         </ui:VisualElement>
         <ui:VisualElement name="CharactersPanel" enabled="true" focusable="false" class="panel-background" style="background-color: rgb(51, 51, 51); margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; width: 75%; flex-direction: row; flex-grow: initial; justify-content: space-evenly; display: flex;">
-            <ui:Button text="" name="" display-tooltip-when-elided="false" triple-click-selects-line="false" double-click-selects-word="false" emoji-fallback-support="false" enable-rich-text="false" selectable="false" focusable="true" class="character-panel-element" style="display: flex;">
+            <ui:Button text="" name="" display-tooltip-when-elided="false" triple-click-selects-line="false" double-click-selects-word="false" emoji-fallback-support="false" enable-rich-text="false" selectable="true" focusable="true" class="character-panel-element" style="display: flex;">
                 <ui:VisualElement name="Character_Root">
                     <ui:Image name="Thumbnail" source="project://database/Assets/Images/No_Image_Available.jpg?fileID=2800000&amp;guid=cd3a516f85c504c3fbf0f9d34f46cebb&amp;type=3#No_Image_Available" class="character-panel-image" style="padding-top: 2%; padding-right: 2%; padding-bottom: 2%; padding-left: 2%;"/>
                     <ui:Label text="Name" name="Name" class="normal-text" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 2%; padding-right: 2%; padding-bottom: 2%; padding-left: 2%; -unity-text-align: middle-center;"/>
@@ -54,7 +55,7 @@
                     </ui:VisualElement>
                 </ui:VisualElement>
             </ui:Button>
-            <ui:Button text="" enable-rich-text="false" emoji-fallback-support="false" double-click-selects-word="false" triple-click-selects-line="false" display-tooltip-when-elided="false" selectable="false" focusable="true" class="character-panel-element" style="display: flex;">
+            <ui:Button text="" enable-rich-text="false" emoji-fallback-support="false" double-click-selects-word="false" triple-click-selects-line="false" display-tooltip-when-elided="false" selectable="true" focusable="true" class="character-panel-element" style="display: flex;">
                 <ui:VisualElement name="Character_Root">
                     <ui:Image name="Thumbnail" source="project://database/Assets/Images/No_Image_Available.jpg?fileID=2800000&amp;guid=cd3a516f85c504c3fbf0f9d34f46cebb&amp;type=3#No_Image_Available" class="character-panel-image" style="padding-top: 2%; padding-right: 2%; padding-bottom: 2%; padding-left: 2%;"/>
                     <ui:Label text="Name" name="Name" class="normal-text" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 2%; padding-right: 2%; padding-bottom: 2%; padding-left: 2%; -unity-text-align: middle-center;"/>
@@ -68,7 +69,7 @@
                     </ui:VisualElement>
                 </ui:VisualElement>
             </ui:Button>
-            <ui:Button text="" selectable="false" emoji-fallback-support="false" enable-rich-text="false" double-click-selects-word="false" triple-click-selects-line="false" display-tooltip-when-elided="false" focusable="true" class="character-panel-element">
+            <ui:Button text="" selectable="true" emoji-fallback-support="false" enable-rich-text="false" double-click-selects-word="false" triple-click-selects-line="false" display-tooltip-when-elided="false" focusable="true" class="character-panel-element">
                 <ui:VisualElement name="Character_Root">
                     <ui:Image name="Thumbnail" source="project://database/Assets/Images/No_Image_Available.jpg?fileID=2800000&amp;guid=cd3a516f85c504c3fbf0f9d34f46cebb&amp;type=3#No_Image_Available" class="character-panel-image" style="padding-top: 2%; padding-right: 2%; padding-bottom: 2%; padding-left: 2%;"/>
                     <ui:Label text="Name" name="Name" class="normal-text" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 2%; padding-right: 2%; padding-bottom: 2%; padding-left: 2%; -unity-text-align: middle-center;"/>
@@ -82,7 +83,7 @@
                     </ui:VisualElement>
                 </ui:VisualElement>
             </ui:Button>
-            <ui:Button text="" focusable="true" emoji-fallback-support="false" enable-rich-text="false" double-click-selects-word="false" triple-click-selects-line="false" display-tooltip-when-elided="false" class="character-panel-element" style="display: flex;">
+            <ui:Button text="" focusable="true" emoji-fallback-support="false" enable-rich-text="false" double-click-selects-word="false" triple-click-selects-line="false" display-tooltip-when-elided="false" name="Button" selectable="true" class="character-panel-element" style="display: flex;">
                 <ui:VisualElement name="Character_Root">
                     <ui:Image name="Thumbnail" source="project://database/Assets/Images/No_Image_Available.jpg?fileID=2800000&amp;guid=cd3a516f85c504c3fbf0f9d34f46cebb&amp;type=3#No_Image_Available" class="character-panel-image" style="padding-top: 2%; padding-right: 2%; padding-bottom: 2%; padding-left: 2%;"/>
                     <ui:Label text="Name" name="Name" class="normal-text" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 2%; padding-right: 2%; padding-bottom: 2%; padding-left: 2%; -unity-text-align: middle-center;"/>

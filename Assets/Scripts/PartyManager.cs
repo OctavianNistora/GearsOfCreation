@@ -134,6 +134,8 @@ public abstract class BaseAction
     public int TargetCount {get; private set;}
     public bool TargetEnemy  { get; private set; }
     public int VFXNumber { get; private set; }
+
+    private float _minimumWaitSeconds = 1f;
     
     protected BaseAction(string name, int targetCount, bool targetEnemy, int vfxNumber)
     {
@@ -145,12 +147,19 @@ public abstract class BaseAction
 
     public virtual IEnumerator Apply(BaseEntity source, List<BaseEntity> targets)
     {
+        var minimumEndTime = Time.time  + _minimumWaitSeconds;
+        
         var toastString = TargetCount > 0 && targets.Count > 0 ?
             $"{source.Name} used {Name} on {string.Join(", ", targets.Select(t => t.Name))}!" : 
             $"{source.Name} used {Name}!";
         ToastsHandler.Instance.CreateToastMessage(toastString);
         
         yield return ApplyLogic(source, targets);
+        
+        if (Time.time < minimumEndTime)
+        {
+            yield return new WaitForSeconds(minimumEndTime - Time.time);
+        }
     }
     
     protected abstract IEnumerator ApplyLogic(BaseEntity source, List<BaseEntity> targets);
@@ -196,7 +205,7 @@ public class SingleAttack : BaseCharacterAbility
         var target = targets.First();
         
         yield return target.CombatCharacterAnimationHandler.PlayVFXAnimation(VFXNumber);
-        target.Damage(Damage);
+        yield return target.Damage(Damage);
     }
 }
 
@@ -223,7 +232,7 @@ public class AoeAttack : BaseCharacterAbility
     private IEnumerator Wrapper(BaseEntity source, BaseEntity target)
     {
         yield return target.CombatCharacterAnimationHandler.PlayVFXAnimation(VFXNumber);
-        target.Damage(Damage);
+        yield return target.Damage(Damage);
     }
 }
 

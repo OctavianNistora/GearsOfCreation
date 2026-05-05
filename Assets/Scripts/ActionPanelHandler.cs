@@ -23,7 +23,7 @@ public class ActionPanelHandler : MonoBehaviour
         _buttonList[0].clicked += Fight;
         _buttonList[1].clicked += Items;
         _buttonList[2].clicked += Guard;
-        _buttonList[3].clicked += Escape;
+        _buttonList[3].clicked += Rest;
     }
 
     private void OnDestroy()
@@ -31,10 +31,10 @@ public class ActionPanelHandler : MonoBehaviour
         _buttonList[0].clicked -= Fight;
         _buttonList[1].clicked -= Items;
         _buttonList[2].clicked -= Guard;
-        _buttonList[3].clicked -= Escape;
+        _buttonList[3].clicked -= Rest;
     }
 
-    public void Enable(PanelsStateEnum state)
+    public void Enable()
     {
         _actionPanel.style.display = DisplayStyle.Flex;
     }
@@ -68,5 +68,16 @@ public class ActionPanelHandler : MonoBehaviour
     private void Escape()
     {
         MainPanelsController.Instance.AttemptEscape();
+    }
+
+    private void Rest()
+    {
+        var restAbility = new Rest();
+        
+        CombatManager.Instance.SelectAbility(restAbility);
+        if (CombatManager.Instance.GetReadyAllies().Count < PartyManager.Instance.Members.Count)
+        {
+            MainPanelsController.Instance.SelectCharacterAction();
+        }
     }
 }
