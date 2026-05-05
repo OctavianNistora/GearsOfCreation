@@ -34,7 +34,7 @@ public class ActionPanelHandler : MonoBehaviour
         _buttonList[3].clicked -= Rest;
     }
 
-    public void Enable(PanelsStateEnum state)
+    public void Enable()
     {
         _actionPanel.style.display = DisplayStyle.Flex;
     }
