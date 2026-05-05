@@ -97,13 +97,16 @@ public class OptionsPanelHandler : MonoBehaviour
 
     private void LoadAbilities()
     {
-        var abilities = CombatManager.Instance.GetSelectedSource().Abilities;
+        var user = CombatManager.Instance.GetSelectedSource();
+        var abilities = user.Abilities;
         var i = 0;
 
         for (; i < abilities.Count && i < _buttonList.Count; i++)
         {
             _buttonList[i].style.display = DisplayStyle.Flex;
             _buttonList[i].text = abilities[i].Name + (abilities[i].ManaCost > 0 ? $"\tMP: {abilities[i].ManaCost}" : "");
+            
+            _buttonList[i].SetEnabled(user.CurrentMana >= abilities[i].ManaCost);
             
             RemovePreviousEvent(i);
             var ability = abilities[i];

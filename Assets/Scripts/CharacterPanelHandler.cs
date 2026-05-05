@@ -220,7 +220,8 @@ public class CharacterPanelHandler : MonoBehaviour
             panelElements.ManaProgressBar.value = (float)ally.CurrentMana / ally.MaxMana * 100;
             panelElements.ManaProgressBar.title = $"{ally.CurrentMana}/{ally.MaxMana}";
             
-            _panelsList[i].focusable = ally.CurrentHp > 0 || isTargetSelecting;
+            _panelsList[i].focusable = isTargetSelecting;
+            _panelsList[i].SetEnabled(!CombatManager.Instance.GetReadyAllies().Contains(ally) && ally.CurrentHp > 0);
         }
 
         for (; i < _panelElementsList.Count; i++)

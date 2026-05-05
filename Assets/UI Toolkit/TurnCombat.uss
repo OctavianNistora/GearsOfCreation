@@ -73,10 +73,10 @@ Button.character-panel-element > VisualElement {
 }
 
 Button.character-panel-element-selected > VisualElement {
-    border-left-color: rgba(255, 125, 0, 0.49);
-    border-right-color: rgba(255, 125, 0, 0.49);
-    border-top-color: rgba(255, 125, 0, 0.49);
-    border-bottom-color: rgba(255, 125, 0, 0.49);
+    border-left-color: rgba(0, 125, 255, 0.49);
+    border-right-color: rgba(0, 125, 255, 0.49);
+    border-top-color: rgba(0, 125, 255, 0.49);
+    border-bottom-color: rgba(0, 125, 255, 0.49);
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
