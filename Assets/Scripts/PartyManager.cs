@@ -196,7 +196,7 @@ public class SingleAttack : BaseCharacterAbility
         var target = targets.First();
         
         yield return target.CombatCharacterAnimationHandler.PlayVFXAnimation(VFXNumber);
-        target.Damage(Damage);
+        yield return target.Damage(Damage);
     }
 }
 
@@ -223,7 +223,7 @@ public class AoeAttack : BaseCharacterAbility
     private IEnumerator Wrapper(BaseEntity source, BaseEntity target)
     {
         yield return target.CombatCharacterAnimationHandler.PlayVFXAnimation(VFXNumber);
-        target.Damage(Damage);
+        yield return target.Damage(Damage);
     }
 }
 
