@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Rigidbody2DPhysicsControl _rigidbodyControl;
+    [SerializeField] private Animator _animator;
 
     [Header("Ground Check")]
     [SerializeField] private GameObject groundCheckBoxCenter;
@@ -31,7 +32,16 @@ public class PlayerMovement : MonoBehaviour
     {
         var horizontal = context.ReadValue<float>();
 
-        _rigidbodyControl.SetHorizontalVelocity(horizontal * horizontalMovementSpeed);
+        if (Mathf.Approximately(horizontal, 0))
+        {
+            _animator.SetBool("walk", false);
+        }
+        else
+        {
+            _animator.SetBool("walk", true);
+        }
+
+        _rigidbodyControl.SetHorizontalVelocity(horizontal * horizontalMovementSpeed);    
     }
 
     public void ControlJump(InputAction.CallbackContext context)
@@ -48,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnGroundedStateChange(bool isGrounded)
     {
+        _animator.SetBool("mid_air", !isGrounded);
         if (isGrounded)
         {
             _canGroundJump = true;

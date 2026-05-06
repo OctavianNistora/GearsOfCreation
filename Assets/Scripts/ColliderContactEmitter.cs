@@ -22,6 +22,7 @@ public class ColliderContactEmitter : MonoBehaviour
     private void FixedUpdate()
     {
         var isMakingContact = _collider.GetContacts(_colliders) > 0;
+
         if (isMakingContact != _wasMakingContact)
         {
             events.onMakingContactStateChange.Invoke(isMakingContact);
