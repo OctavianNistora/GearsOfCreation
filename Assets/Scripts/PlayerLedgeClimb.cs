@@ -9,6 +9,7 @@ using UnityEngine.InputSystem;
 public class PlayerLedgeClimb : MonoBehaviour
 {
     [Header("References")]
+    [SerializeField] private Animator _animator;
     [SerializeField] private GameObject xRaycastReference;
     [SerializeField] private GameObject yRaycastReference;
     [SerializeField] private Rigidbody2DPhysicsControl playerRigidbody2DPhysicsControl;
@@ -58,6 +59,8 @@ public class PlayerLedgeClimb : MonoBehaviour
 
     private void ClimbLedge()
     {
+        _animator.SetTrigger("ledge_grab");
+
         RaycastHit2D hit = Physics2D.Raycast(xRaycastReference.transform.position, xRaycastReference.transform.right,
             raycastDistance, LayerMask.GetMask("Terrain"));
         if (!hit.collider)
