@@ -4,19 +4,20 @@ using UnityEngine;
 
 namespace DefaultNamespace.Combat.Abilities
 {
+    [CreateAssetMenu(fileName = "Rest", menuName = "Combat/Abilities/Rest")]
     public class Rest : BaseAction
     {
-        private readonly int _manaRestored = 20;
+        public override int TargetCount => 0;
+        public override bool TargetEnemy => false;
         
-        public Rest() : base("Rest", 0, false, 0)
-        {
-        }
-
+        [SerializeField]
+        private int manaRestored = 20;
+        
         protected override IEnumerator ApplyLogic(BaseEntity source, List<BaseEntity> targets)
         {
             if (source is PlayerEntity player)
             {
-                player.RestoreMana(_manaRestored);
+                player.RestoreMana(manaRestored);
             }
             yield break;
         }

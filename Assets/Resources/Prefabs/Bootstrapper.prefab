@@ -57,6 +57,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4180185803268c49ea6ea3154551178c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  initialPartyMembers:
+  - {fileID: 11400000, guid: bffe82b87e4e519eabed93fd19095806, type: 2}
+  - {fileID: 11400000, guid: e4f60a3e16ee8fc10ab44eed9951b7e0, type: 2}
+  initialInventoryItems: []
 --- !u!1 &930246628801185277
 GameObject:
   m_ObjectHideFlags: 0
@@ -135,6 +139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c95c08c24e689c8cfabfdc5c5ef3c589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  enemies: []
 --- !u!114 &8757563714935320807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,3 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78615445b96a43f392f25220d1c03980, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EncounterInitializer
+  initialPartyMembers:
+  - {fileID: 11400000, guid: 8732e2f8a2d1e4fc1a2dd46a374c85e5, type: 2}
+  - {fileID: 11400000, guid: 8732e2f8a2d1e4fc1a2dd46a374c85e5, type: 2}
+  - {fileID: 11400000, guid: 8732e2f8a2d1e4fc1a2dd46a374c85e5, type: 2}

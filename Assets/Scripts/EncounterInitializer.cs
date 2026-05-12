@@ -3,9 +3,19 @@ using UnityEngine;
 
 public class EncounterInitializer : MonoBehaviour
 {
+    [SerializeField] private List<EnemyEntity> initialPartyMembers;
+    
     void Start()
     {
-        var firstEnemy = new EnemyEntity(
+        initialPartyMembers.ForEach(member =>
+        {
+            {
+                var instance = (EnemyEntity)member.CreateInstance();
+                CombatManager.Instance.enemies.Add(instance);
+            }
+        });
+        
+        /*var firstEnemy = new EnemyEntity(
             "Thief", 
             100,
             100,
@@ -25,6 +35,6 @@ public class EncounterInitializer : MonoBehaviour
                 new AoeAttack("Cleave", 10, 0, 3),
             }
         );
-        CombatManager.Instance.enemies.Add(secondEnemy);
+        CombatManager.Instance.enemies.Add(secondEnemy);*/
     }
 }

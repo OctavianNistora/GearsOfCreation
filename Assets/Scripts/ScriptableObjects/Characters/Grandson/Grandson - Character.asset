@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba0f5540caf94c288588a97364f1baab, type: 3}
+  m_Name: Grandson - Character
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerEntity
+  <Name>k__BackingField: Grandson
+  <MaxHp>k__BackingField: 100
+  <CurrentHp>k__BackingField: 100
+  <Abilities>k__BackingField:
+  - {fileID: 11400000, guid: e14e352465aa0fedfa476f9f52f81c68, type: 2}
+  - {fileID: 11400000, guid: 86ab0acb4c892b17da43c8426e0f4953, type: 2}
+  <MaxMana>k__BackingField: 50
+  <CurrentMana>k__BackingField: 50

@@ -4,9 +4,24 @@ using UnityEngine;
 
 public class PartyInitializer : MonoBehaviour
 {
+    [SerializeField] private List<PlayerEntity> initialPartyMembers;
+    [SerializeField] private List<BaseCombatItem> initialInventoryItems;
+    
     void Start()
     {
-        var mainCharacter = new PlayerEntity(
+        initialPartyMembers.ForEach(member =>
+        {
+            var instance = (PlayerEntity)member.CreateInstance();
+            PartyManager.Instance.Members.Add(instance);
+        });
+        initialInventoryItems.ForEach(item =>
+        {
+            var instance = (BaseCombatItem)item.CreateInstance();
+            instance.IncreaseQuantity(1);
+            PartyManager.Instance.Inventory.Add(instance);
+        });
+        
+        /*var mainCharacter = new PlayerEntity(
             "Hero", 
             100,
             100,
@@ -14,8 +29,8 @@ public class PartyInitializer : MonoBehaviour
             50,
             new List<BaseCharacterAbility>()
             {
-                new SingleAttack("Slash", 25, 0, 1),
-                new AoeAttack("Cleave", 15, 5, 3),
+                new SingleAttack("Slash", 0, 1, 25),
+                new AoeAttack("Cleave", 5, 3, 15),
             }
             );
         PartyManager.Instance.Members.Add(mainCharacter);
@@ -28,8 +43,8 @@ public class PartyInitializer : MonoBehaviour
             50,
             new List<BaseCharacterAbility>()
             {
-                new SingleAttack("Slash", 20, 0, 1),
-                new Heal("Heal", 40, 10, 2),
+                new SingleAttack("Slash", 0, 1, 20),
+                new Heal("Heal", 10, 2, 40),
             }
             );
         PartyManager.Instance.Members.Add(sideCharacter);
@@ -42,6 +57,6 @@ public class PartyInitializer : MonoBehaviour
         PartyManager.Instance.Inventory.Add(mediumPotion);
         
         var smallStrengthPotion = new StrengthPotion("Small Strength Potion", 2, 3, 1.25f, 0);
-        PartyManager.Instance.Inventory.Add(smallStrengthPotion);
+        PartyManager.Instance.Inventory.Add(smallStrengthPotion);*/
     }
 }

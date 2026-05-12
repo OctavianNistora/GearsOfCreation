@@ -9,6 +9,8 @@ public class ActionPanelHandler : MonoBehaviour
 {
     [SerializeField] private UIDocument uiDocument;
     [SerializeField] private String actionPanelName;
+    [SerializeField] private BaseAction firstGeneralAbility;
+    [SerializeField] private BaseAction secondGeneralAbility;
     
     private VisualElement _actionPanel;
     private List<Button> _buttonList;
@@ -20,18 +22,21 @@ public class ActionPanelHandler : MonoBehaviour
 
         _buttonList = _actionPanel.Children().Select(element => element as Button).ToList();
         
+        _buttonList[2].text = firstGeneralAbility.Name;
+        _buttonList[3].text = secondGeneralAbility.Name;
+        
         _buttonList[0].clicked += Fight;
         _buttonList[1].clicked += Items;
-        _buttonList[2].clicked += Guard;
-        _buttonList[3].clicked += Rest;
+        _buttonList[2].clicked += FirstGeneralAction;
+        _buttonList[3].clicked += SecondGeneralAction;
     }
 
     private void OnDestroy()
     {
         _buttonList[0].clicked -= Fight;
         _buttonList[1].clicked -= Items;
-        _buttonList[2].clicked -= Guard;
-        _buttonList[3].clicked -= Rest;
+        _buttonList[2].clicked -= FirstGeneralAction;
+        _buttonList[3].clicked -= SecondGeneralAction;
     }
 
     public void Enable()
@@ -54,11 +59,11 @@ public class ActionPanelHandler : MonoBehaviour
         MainPanelsController.Instance.SelectItem();
     }
     
-    private void Guard()
+    private void FirstGeneralAction()
     {
-        var guardAbility = new Guard();
+        var instance = firstGeneralAbility.CreateInstance();
         
-        CombatManager.Instance.SelectAbility(guardAbility);
+        CombatManager.Instance.SelectAbility(instance);
         if (CombatManager.Instance.GetReadyAllies().Count < PartyManager.Instance.Members.Count)
         {
             MainPanelsController.Instance.SelectCharacterAction();
@@ -70,11 +75,11 @@ public class ActionPanelHandler : MonoBehaviour
         MainPanelsController.Instance.AttemptEscape();
     }
 
-    private void Rest()
+    private void SecondGeneralAction()
     {
-        var restAbility = new Rest();
+        var instance = secondGeneralAbility.CreateInstance();
         
-        CombatManager.Instance.SelectAbility(restAbility);
+        CombatManager.Instance.SelectAbility(instance);
         if (CombatManager.Instance.GetReadyAllies().Count < PartyManager.Instance.Members.Count)
         {
             MainPanelsController.Instance.SelectCharacterAction();

@@ -368,6 +368,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ActionPanelHandler
   uiDocument: {fileID: 1632463761}
   actionPanelName: ActionsPanel
+  firstGeneralAbility: {fileID: 11400000, guid: dbac3b6475c1632a1b53b503cc37cfd7, type: 2}
+  secondGeneralAbility: {fileID: 11400000, guid: 377c7725244af8e62b9e2e0a35b0226a, type: 2}
 --- !u!1 &309321204
 GameObject:
   m_ObjectHideFlags: 0

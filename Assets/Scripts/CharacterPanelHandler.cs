@@ -55,16 +55,16 @@ public class CharacterPanelHandler : MonoBehaviour
         {
             if (CombatManager.Instance.GetSelectedAbility().TargetEnemy)
             {
-                LoadEnemies();
+                LoadEntities(CombatManager.Instance.enemies, true, false, false);
             }
             else
             {
-                LoadAllies(true);
+                LoadEntities(PartyManager.Instance.Members, false, true, true);
             }
         }
         else
         {
-            LoadAllies(false);
+            LoadEntities(PartyManager.Instance.Members, false, true, false, CombatManager.Instance.GetReadyAllies());
             MarkReady();
             SelectNotReady();
         }
@@ -166,62 +166,51 @@ public class CharacterPanelHandler : MonoBehaviour
         SelectEntity(3);
     }
 
-    private void LoadEnemies()
+    private void LoadEntities(IEnumerable<BaseEntity> entities, bool hideDead, bool displayMana, bool selectDead,
+        IEnumerable<BaseEntity> unselectableEntities = null)
     {
-        var enemyEnumerator = CombatManager.Instance.enemies.GetEnumerator();
-
+        using var entityEnumerator = entities.GetEnumerator();
         var i = 0;
-        for (; i< _panelsList.Count && enemyEnumerator.MoveNext(); i++)
+        
+        for (; i< _panelsList.Count && entityEnumerator.MoveNext(); i++)
         {
-            var enemy = enemyEnumerator.Current;
-            if (enemy.CurrentHp <= 0)
+            var entity = entityEnumerator.Current;
+            if (entity == null)
             {
-                _panelsList[i].style.display = DisplayStyle.None;
                 continue;
             }
             
             var panelElements = _panelElementsList[i];
             
+            if (hideDead && entity.CurrentHp <= 0)
+            {
+                _panelsList[i].style.display = DisplayStyle.None;
+                continue;
+            }
             _panelsList[i].style.display = DisplayStyle.Flex;
             
             //panelElements.Image.sprite = enemy.Thumbnail;
-            panelElements.Name.text = enemy.Name;
-            panelElements.HpProgressBar.value = (float)enemy.CurrentHp / enemy.MaxHp * 100;
-            panelElements.HpProgressBar.title = $"{enemy.CurrentHp}/{enemy.MaxHp}";
-            panelElements.ManaProgressBarParent.style.display = DisplayStyle.None;
-        }
 
-        for (; i < _panelElementsList.Count; i++)
-        {
-            _panelsList[i].style.display = DisplayStyle.None;
-        }
-    }
-
-    private void LoadAllies(bool isTargetSelecting)
-    {
-        var enemyEnumerator = PartyManager.Instance.Members.GetEnumerator();
-
-        var i = 0;
-        for (; i< _panelsList.Count && enemyEnumerator.MoveNext(); i++)
-        {
-            var ally = enemyEnumerator.Current;
-            var panelElements = _panelElementsList[i];
+            panelElements.Name.text = entity.Name;
             
-            _panelsList[i].style.display = DisplayStyle.Flex;
+            panelElements.HpProgressBar.value = (float)entity.CurrentHp / entity.MaxHp * 100;
+            panelElements.HpProgressBar.title = $"{entity.CurrentHp}/{entity.MaxHp}";
             
-            //panelElements.Image.sprite = enemy.Thumbnail;
+            if (displayMana)
+            {
+                var ally = (PlayerEntity)entity;
+                panelElements.ManaProgressBarParent.style.display = DisplayStyle.Flex;
+                panelElements.ManaProgressBar.value = (float)ally.CurrentMana / ally.MaxMana * 100;
+                panelElements.ManaProgressBar.title = $"{ally.CurrentMana}/{ally.MaxMana}";
+            }
+            else
+            {
+                panelElements.ManaProgressBarParent.style.display = DisplayStyle.None;
+            }
             
-            panelElements.Name.text = ally.Name;
-            
-            panelElements.HpProgressBar.value = (float)ally.CurrentHp / ally.MaxHp * 100;
-            panelElements.HpProgressBar.title = $"{ally.CurrentHp}/{ally.MaxHp}";
-            
-            panelElements.ManaProgressBarParent.style.display = DisplayStyle.Flex;
-            panelElements.ManaProgressBar.value = (float)ally.CurrentMana / ally.MaxMana * 100;
-            panelElements.ManaProgressBar.title = $"{ally.CurrentMana}/{ally.MaxMana}";
-            
-            _panelsList[i].focusable = isTargetSelecting;
-            _panelsList[i].SetEnabled(!CombatManager.Instance.GetReadyAllies().Contains(ally) && ally.CurrentHp > 0);
+            unselectableEntities ??= new List<BaseEntity>();
+            var isEnabled = selectDead || entity.CurrentHp > 0 && !unselectableEntities.Contains(entity);
+            _panelsList[i].SetEnabled(isEnabled);
         }
 
         for (; i < _panelElementsList.Count; i++)
