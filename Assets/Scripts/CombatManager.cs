@@ -150,6 +150,16 @@ public class CombatManager : MonoBehaviour
         return quantityUsed;
     }
     
+    public void SetEncounter(CombatEncounter encounter)
+    {
+        enemies.Clear();
+        encounter.enemies.ForEach(enemy =>
+        {
+            var instance = (EnemyEntity)enemy.CreateInstance();
+            enemies.Add(instance);
+        });
+    }
+    
     private void CheckEscapeRng(float chance)
     {
         var roll = Random.Range(0f, 1f);
