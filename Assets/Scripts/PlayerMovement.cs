@@ -22,14 +22,6 @@ public class PlayerMovement : MonoBehaviour
     public bool _canEndJumpEarly;
     public int _remainingAirJumps;
 
-    public void Awake()
-    {
-        gameObject.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
-        if (gameObject.GetComponent<PlayerInput>().isActiveAndEnabled == true)
-            //print("movement enabled!");
-            print(gameObject.GetComponent<PlayerInput>().currentActionMap.name);
-    }
-
     public void Start()
     {
         ResetInput();
@@ -51,7 +43,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void MoveHorizontal(InputAction.CallbackContext context)
     {
-        print("detectat incercare miscare orizontala");
         var horizontal = context.ReadValue<float>();
 
         if (Mathf.Approximately(horizontal, 0))
@@ -61,7 +52,6 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             _animator.SetBool("walk", true);
-            print("Acum ar trebui sa mearga");
         }
 
         _rigidbodyControl.SetHorizontalVelocity(horizontal * horizontalMovementSpeed);    

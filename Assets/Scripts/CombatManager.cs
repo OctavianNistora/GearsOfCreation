@@ -243,21 +243,11 @@ public class CombatManager : MonoBehaviour
 
     async void FadeToPlatformerScene()
     {
-        //await FadeManager.Instance.FadeToBlack();
-
-        //await Task.Delay(500);
+        await FadeManager.Instance.FadeToBlack();
         
-        SceneManager.LoadScene("PlatformerScene");
+        await SceneManager.LoadSceneAsync("PlatformerScene");
 
-
-        //player.GetComponent<PlayerInput>().SwitchCurrentActionMap("Dialogue");
-        //player.transform.position = playerPosition.transform.position;
-
-        //await FadeManager.Instance.FadeToTransparent();
-        
-        //DialogueManager.Instance.StartDialogue(dialogueSequence);
-
-        //Destroy(gameObject);
+        await FadeManager.Instance.FadeToTransparent();
     }
 
 }
