@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class DialogueZone : MonoBehaviour
 {
     [SerializeField] private DialogueSequence dialogueSequence;
+    [SerializeField] private BoxCollider2D boxCollider;
     [SerializeField] private GameObject playerPosition;
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -30,6 +31,6 @@ public class DialogueZone : MonoBehaviour
         
         DialogueManager.Instance.StartDialogue(dialogueSequence);
 
-        Destroy(gameObject);
+        boxCollider.enabled = false;
     }
 }
