@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6adbb955294b3b750a9e918c66ee44e8, type: 3}
   m_Name: WaterNymphs
   m_EditorClassIdentifier: Assembly-CSharp::CombatEncounter
-  enemies: []
+  enemies:
+  - {fileID: 11400000, guid: 8732e2f8a2d1e4fc1a2dd46a374c85e5, type: 2}
+  - {fileID: 11400000, guid: 8732e2f8a2d1e4fc1a2dd46a374c85e5, type: 2}
+  - {fileID: 11400000, guid: 8732e2f8a2d1e4fc1a2dd46a374c85e5, type: 2}
