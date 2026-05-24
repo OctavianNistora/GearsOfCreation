@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba0f5540caf94c288588a97364f1baab, type: 3}
   m_Name: Zana Apelor - Character
   m_EditorClassIdentifier: Assembly-CSharp::PlayerEntity
-  <Name>k__BackingField: Grandson
+  <Name>k__BackingField: Zana Apelor
   <MaxHp>k__BackingField: 80
   <CurrentHp>k__BackingField: 80
   <Abilities>k__BackingField:
