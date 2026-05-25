@@ -25,7 +25,17 @@ public class Encounter : MonoBehaviourID
             EncounterProgressManager.Instance.ChangeCurrentEncounter(Guid.Parse(_id.Value));
             CombatManager.Instance.SetEncounter(combatEncounter);
 
-            CustomSceneManager.Instance.ChangeScene("TurnCombatScene");
+            //CustomSceneManager.Instance.ChangeScene("TurnCombatScene");
+            FadeToCombatScene();
         }
+    }
+
+    async void FadeToCombatScene()
+    {
+        await FadeManager.Instance.FadeToBlack();
+        
+        await SceneManager.LoadSceneAsync("TurnCombatScene");
+
+        await FadeManager.Instance.FadeToTransparent();
     }
 }
