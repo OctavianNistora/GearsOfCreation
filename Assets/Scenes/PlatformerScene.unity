@@ -46901,7 +46901,7 @@ PrefabInstance:
     - target: {fileID: 1985801285407210832, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
       propertyPath: _sprite
       value: 
-      objectReference: {fileID: 192124200958946098}
+      objectReference: {fileID: 192124200958946093}
     - target: {fileID: 4520663943707124916, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -46924,11 +46924,11 @@ PrefabInstance:
       objectReference: {fileID: 192124200958946090}
     - target: {fileID: 5016439724168772201, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 73.32
+      value: -33
       objectReference: {fileID: 0}
     - target: {fileID: 5016439724168772201, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.9
+      value: -21.8
       objectReference: {fileID: 0}
     - target: {fileID: 5016439724168772201, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -47130,19 +47130,10 @@ PrefabInstance:
       addedObject: {fileID: 192124200958946095}
     - targetCorrespondingSourceObject: {fileID: 9126168573564037596, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 192124200958946098}
+      addedObject: {fileID: 192124200958946099}
     - targetCorrespondingSourceObject: {fileID: 9126168573564037596, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 192124200958946099}
-    - targetCorrespondingSourceObject: {fileID: 6600953929716625170, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1696701697}
-    - targetCorrespondingSourceObject: {fileID: 6600953929716625170, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1696701696}
-    - targetCorrespondingSourceObject: {fileID: 2441302875530312150, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1818531249}
+      addedObject: {fileID: 192124200958946093}
   m_SourcePrefab: {fileID: 100100000, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
 --- !u!4 &192124200958946089 stripped
 Transform:
@@ -47171,22 +47162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
---- !u!114 &192124200958946095
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 13256202}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd1eebbc90328064f95cd04688075436, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerOriginator
-  _health: 100
-  _stamina: 100
-  _score: 0
---- !u!61 &192124200958946098
+--- !u!61 &192124200958946093
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -47223,15 +47199,30 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 1.529419}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 2.73, y: 6.31}
+    newSize: {x: 2.72, y: 6.31}
+    adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   m_Size: {x: 1, y: 3.060688}
   m_EdgeRadius: 0
+--- !u!114 &192124200958946095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13256202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd1eebbc90328064f95cd04688075436, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerOriginator
+  _health: 100
+  _stamina: 100
+  _score: 0
 --- !u!114 &192124200958946099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47250,7 +47241,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 6200308266781654865}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 305013805129143905, guid: e03d095f08c2932428759ad7dea0e8e3, type: 3}
       propertyPath: m_Alpha
@@ -47349,20 +47340,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e03d095f08c2932428759ad7dea0e8e3, type: 3}
---- !u!224 &2503582430253283343 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 3878809913000010796, guid: e03d095f08c2932428759ad7dea0e8e3, type: 3}
-  m_PrefabInstance: {fileID: 2503582430253283342}
-  m_PrefabAsset: {fileID: 0}
---- !u!225 &2503582430253283344 stripped
-CanvasGroup:
-  m_CorrespondingSourceObject: {fileID: 305013805129143905, guid: e03d095f08c2932428759ad7dea0e8e3, type: 3}
-  m_PrefabInstance: {fileID: 2503582430253283342}
---- !u!212 &192124200958946098 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 6274506871324234883, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
-  m_PrefabInstance: {fileID: 192124200958946088}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4613004028655585399
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -47790,10 +47767,7 @@ SceneRoots:
   - {fileID: 1185366313}
   - {fileID: 1199619058}
   - {fileID: 1179359384}
-  - {fileID: 300602304}
-  - {fileID: 1036351738}
-  - {fileID: 322573836}
-  - {fileID: 1621399399}
   - {fileID: 933296462}
   - {fileID: 1961275986}
   - {fileID: 514646887}
+  - {fileID: 2503582430253283342}
