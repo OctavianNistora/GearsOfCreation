@@ -10740,50 +10740,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1833317220640196325, guid: e2a6404652d2bcb42aeaf610fe263022, type: 3}
   m_PrefabInstance: {fileID: 962030637}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &997570748
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 997570750}
-  - component: {fileID: 997570749}
-  m_Layer: 0
-  m_Name: EncounterManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &997570749
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 997570748}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d111412785418245a454a88c2151048, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EncounterManager
---- !u!4 &997570750
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 997570748}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &998072202
 GameObject:
   m_ObjectHideFlags: 0
@@ -44184,6 +44140,13 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6935809653661813212, guid: 1b203dcacc625d34289a8a0ad64ee0d4, type: 3}
+<<<<<<< HEAD
+      propertyPath: _id.Value
+      value: 0bf192c9-85de-40f4-8b3a-e9b0b62c42c6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6935809653661813212, guid: 1b203dcacc625d34289a8a0ad64ee0d4, type: 3}
+=======
+>>>>>>> origin/main
       propertyPath: combatEncounter
       value: 
       objectReference: {fileID: 11400000, guid: 66abdf8d11db63b4c9fefc91b0d09f7f, type: 2}
@@ -46593,11 +46556,11 @@ PrefabInstance:
       objectReference: {fileID: 192124200958946090}
     - target: {fileID: 5016439724168772201, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 44.74
+      value: 73.32
       objectReference: {fileID: 0}
     - target: {fileID: 5016439724168772201, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.91
+      value: -1.91
       objectReference: {fileID: 0}
     - target: {fileID: 5016439724168772201, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -47212,7 +47175,6 @@ SceneRoots:
   - {fileID: 1645653228}
   - {fileID: 741467772}
   - {fileID: 827321171}
-  - {fileID: 997570750}
   - {fileID: 1706219878}
   - {fileID: 13552391}
   - {fileID: 6200308266781654864}
