@@ -46507,10 +46507,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 55462971064855938, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 325030725255473417, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
       propertyPath: camera
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 518697002230282592, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1003881965047671689, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
       propertyPath: airJumps
       value: 0
@@ -46526,6 +46534,10 @@ PrefabInstance:
     - target: {fileID: 1003881965047671689, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
       propertyPath: horizontalMovementSpeed
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1635594685888968858, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1985801285407210832, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
       propertyPath: _sprite
@@ -46557,7 +46569,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5016439724168772201, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.91
+      value: -1.9
       objectReference: {fileID: 0}
     - target: {fileID: 5016439724168772201, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -46619,9 +46631,33 @@ PrefabInstance:
       propertyPath: events.onVerticalVelocityChange.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 5932903831379440595, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5987822332183709387, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5987822332183709387, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198230718836212147, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198230718836212147, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7517075527780315911, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8247326529018439547, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8547492642380666099, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
       propertyPath: m_Actions
@@ -46706,6 +46742,10 @@ PrefabInstance:
     - target: {fileID: 9126168573564037596, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 9126168573564037596, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 9126168573564037596, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
       propertyPath: m_TagString

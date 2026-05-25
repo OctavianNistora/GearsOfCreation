@@ -221,7 +221,7 @@ public class CombatManager : MonoBehaviour
             Debug.Log("Victory!");
             OnBattleEnded?.Invoke(BattleEndStateEnum.Victory);
 
-            //FadeToPlatformerScene();
+            FadeToPlatformerScene();
             
             yield break;
         }
