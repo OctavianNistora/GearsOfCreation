@@ -2,81 +2,113 @@ using UnityEngine;
 
 /// <summary>
 /// CARETAKER
-/// Singleton that stores the latest PlayerMemento.
-/// CheckpointTriggers push new mementos here;
-/// PlayerOriginator pulls from here when restoring.
+/// Manages player checkpoints using the Memento pattern.
+/// Stores the latest saved PlayerMemento and restores it when requested.
 /// </summary>
 public class CheckpointManager : MonoBehaviour
 {
     // -------------------------------------------------------------------------
-    // Singleton
+    // Singleton Instance
     // -------------------------------------------------------------------------
 
     public static CheckpointManager Instance { get; private set; }
 
+    // -------------------------------------------------------------------------
+    // Private Fields
+    // -------------------------------------------------------------------------
+
+    private PlayerMemento latestMemento;
+
+    // -------------------------------------------------------------------------
+    // Public Properties
+    // -------------------------------------------------------------------------
+
+    /// <summary>
+    /// The last checkpoint trigger that saved the player state.
+    /// </summary>
+    public CheckpointTrigger LastCheckpoint { get; private set; }
+
+    // -------------------------------------------------------------------------
+    // Unity Methods
+    // -------------------------------------------------------------------------
+
     private void Awake()
     {
+        // Singleton protection
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
         }
+
         Instance = this;
-        DontDestroyOnLoad(gameObject); // Remove if you don't need cross-scene persistence
+
+        // Keeps the manager alive between scene loads
+        DontDestroyOnLoad(gameObject);
     }
 
     // -------------------------------------------------------------------------
-    // Caretaker state
-    // -------------------------------------------------------------------------
-
-    private PlayerMemento _latestMemento;
-
-    /// <summary>The checkpoint trigger that produced the current memento.</summary>
-    public CheckpointTrigger LastCheckpoint { get; private set; }
-
-    // -------------------------------------------------------------------------
-    // Public API
+    // Save Checkpoint
     // -------------------------------------------------------------------------
 
     /// <summary>
-    /// Called by a CheckpointTrigger to store the player's state.
+    /// Saves the player's current state.
+    /// Called by a checkpoint trigger.
     /// </summary>
+    /// <param name="player">Player originator</param>
+    /// <param name="trigger">Checkpoint trigger</param>
     public void SaveCheckpoint(PlayerOriginator player, CheckpointTrigger trigger)
     {
-        // Disable the collider on the previous checkpoint so it can't trigger again
-        if (LastCheckpoint != null)
+        if (player == null || trigger == null)
         {
-            Collider2D prevCollider = LastCheckpoint.GetComponent<Collider2D>();
-            if (prevCollider != null)
-                prevCollider.enabled = false;
-
-            Debug.Log($"[Checkpoint] Disabled collider on previous checkpoint '{LastCheckpoint.name}'.");
-        }
-
-        _latestMemento = player.SaveState();
-        LastCheckpoint = trigger;
-
-        Debug.Log($"[Checkpoint] Saved at '{trigger.name}' " +
-                  $"pos={_latestMemento.Position} HP={_latestMemento.Health}");
-    }
-
-    /// <summary>
-    /// Called by PlayerOriginator (X key) to restore the last saved state.
-    /// </summary>
-    public void RestoreLastCheckpoint(PlayerOriginator player)
-    {
-        if (_latestMemento == null)
-        {
-            Debug.LogWarning("[Checkpoint] No checkpoint saved yet.");
+            Debug.LogWarning("Checkpoint save failed: Missing player or trigger.");
             return;
         }
 
-        player.RestoreState(_latestMemento);
+        latestMemento = player.SaveState();
+        LastCheckpoint = trigger;
+
+        Debug.Log(
+            $"Checkpoint saved at '{trigger.name}' | " +
+            $"Position: {latestMemento.Position} | " +
+            $"Health: {latestMemento.Health}"
+        );
     }
 
+    // -------------------------------------------------------------------------
+    // Restore Checkpoint
+    // -------------------------------------------------------------------------
+
     /// <summary>
-    /// Returns true if at least one checkpoint has been saved.
-    /// Useful for UI ("Press X to respawn" hint).
+    /// Restores the player to the latest saved checkpoint.
     /// </summary>
-    public bool HasCheckpoint() => _latestMemento != null;
+    /// <param name="player">Player originator</param>
+    public void RestoreLastCheckpoint(PlayerOriginator player)
+    {
+        if (latestMemento == null)
+        {
+            Debug.LogWarning("No checkpoint has been saved yet.");
+            return;
+        }
+
+        if (player == null)
+        {
+            Debug.LogWarning("Restore failed: Player reference is missing.");
+            return;
+        }
+
+        player.RestoreState(latestMemento);
+    }
+
+    // -------------------------------------------------------------------------
+    // Utility
+    // -------------------------------------------------------------------------
+
+    /// <summary>
+    /// Returns true if a checkpoint exists.
+    /// </summary>
+    public bool HasCheckpoint()
+    {
+        return latestMemento != null;
+    }
 }
