@@ -44140,10 +44140,13 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6935809653661813212, guid: 1b203dcacc625d34289a8a0ad64ee0d4, type: 3}
+<<<<<<< HEAD
       propertyPath: _id.Value
       value: 0bf192c9-85de-40f4-8b3a-e9b0b62c42c6
       objectReference: {fileID: 0}
     - target: {fileID: 6935809653661813212, guid: 1b203dcacc625d34289a8a0ad64ee0d4, type: 3}
+=======
+>>>>>>> origin/main
       propertyPath: combatEncounter
       value: 
       objectReference: {fileID: 11400000, guid: 66abdf8d11db63b4c9fefc91b0d09f7f, type: 2}

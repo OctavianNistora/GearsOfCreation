@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using System;
 using DefaultNamespace;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -24,17 +25,7 @@ public class Encounter : MonoBehaviourID
             EncounterProgressManager.Instance.ChangeCurrentEncounter(Guid.Parse(_id.Value));
             CombatManager.Instance.SetEncounter(combatEncounter);
 
-            FadeToCombatScene();
-            //CustomSceneManager.Instance.ChangeScene("TurnCombatScene");
+            CustomSceneManager.Instance.ChangeScene("TurnCombatScene");
         }
-    }
-
-    async void FadeToCombatScene()
-    {
-        await FadeManager.Instance.FadeToBlack();
-        
-        await SceneManager.LoadSceneAsync("TurnCombatScene");
-
-        await FadeManager.Instance.FadeToTransparent();
     }
 }

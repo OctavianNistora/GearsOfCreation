@@ -253,6 +253,18 @@ public class CombatManager : MonoBehaviour
 }
 
 
+    async void FadeToPlatformerScene()
+    {
+        await FadeManager.Instance.FadeToBlack();
+        
+        await SceneManager.LoadSceneAsync("PlatformerScene");
+
+        await FadeManager.Instance.FadeToTransparent();
+    }
+
+}
+
+
 public struct SourceActionData
 {
     public BaseAction action { get; set; }
