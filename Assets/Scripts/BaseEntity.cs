@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DefaultNamespace;
 using UnityEngine;
+using UnityEngine.U2D.Animation;
 
 public abstract class BaseEntity : ScriptableObject
 {
@@ -15,7 +16,10 @@ public abstract class BaseEntity : ScriptableObject
     public int CurrentHp { get; private set; }
     [field: SerializeField]
     public List<BaseCharacterAbility> Abilities { get; private set; }
-    
+    [field: SerializeField]
+    public Sprite Thumbnail { get; private set; }
+    [field: SerializeField]
+    public SpriteLibraryAsset characterSpriteLibraryAsset { get; private set; }
     public CombatCharacterAnimationHandler CombatCharacterAnimationHandler { get; set; }
 
     private List<BaseCombatModifier> _modifiers = new List<BaseCombatModifier>();
