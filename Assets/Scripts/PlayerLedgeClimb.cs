@@ -78,6 +78,7 @@ public class PlayerLedgeClimb : MonoBehaviour
         var yPosition = hit.point.y;
         
         Debug.Log("ClimbLedge");
+        
         if (_climbLedgeCoroutine != null)
         {
             StopCoroutine(_climbLedgeCoroutine);
