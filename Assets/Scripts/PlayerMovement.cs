@@ -2,12 +2,14 @@ using System;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Tilemaps;
 
 public class PlayerMovement : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Rigidbody2DPhysicsControl _rigidbodyControl;
     [SerializeField] private Animator _animator;
+    [SerializeField] private Tilemap groundTilemap;
     
     [Header("Ground Check")]
     [SerializeField] private GameObject groundCheckBoxCenter;
@@ -22,9 +24,18 @@ public class PlayerMovement : MonoBehaviour
     public bool _canEndJumpEarly;
     public int _remainingAirJumps;
 
+    [SerializeField] private MovementStrategy defaultStrategy;
+    private MovementStrategy currentStrategy;
+
     public void Start()
     {
+        currentStrategy = defaultStrategy;
         ResetInput();
+    }
+
+    public void Update()
+    {
+        DetectTileUnderPlayer();
     }
 
     async void ResetInput()
@@ -54,7 +65,8 @@ public class PlayerMovement : MonoBehaviour
             _animator.SetBool("walk", true);
         }
 
-        _rigidbodyControl.SetHorizontalVelocity(horizontal * horizontalMovementSpeed);    
+        //_rigidbodyControl.SetHorizontalVelocity(horizontal * horizontalMovementSpeed);
+        currentStrategy.Move(_rigidbodyControl, horizontal, horizontalMovementSpeed);
     }
 
     public void ControlJump(InputAction.CallbackContext context)
@@ -103,5 +115,26 @@ public class PlayerMovement : MonoBehaviour
 
         _canEndJumpEarly = false;
         _rigidbodyControl.ReduceUpwardsVelocity();
+    }
+
+    private void DetectTileUnderPlayer()
+    {
+        Vector3Int cellPosition =
+            groundTilemap.WorldToCell(
+                transform.position + Vector3.down * 0.1f
+            );
+
+        TileBase tile = groundTilemap.GetTile(cellPosition);
+
+        if (tile is MovementTile movementTile && movementTile.strategy != null)
+        {
+            currentStrategy = movementTile.strategy;
+            print("Current strategy: " + currentStrategy.name);
+        }
+        else
+        {
+            currentStrategy = defaultStrategy;
+            print("Current strategy: " + currentStrategy.name);
+        }
     }
 }

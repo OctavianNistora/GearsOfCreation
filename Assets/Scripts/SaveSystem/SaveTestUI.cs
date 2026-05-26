@@ -14,7 +14,7 @@ public class SaveTestUI : MonoBehaviour
         if (playerOriginator != null)
         {
             // We pass a dummy checkpoint name for testing
-            playerOriginator.SaveGameState("Test_ManualSave_Checkpoint");
+            //playerOriginator.SaveGameState("Test_ManualSave_Checkpoint");
             Debug.Log("[TestUI] Save Button Triggered!");
         }
         else
@@ -32,7 +32,7 @@ public class SaveTestUI : MonoBehaviour
         {
             if (SaveSystem.HasSave())
             {
-                playerOriginator.LoadGameState();
+                //playerOriginator.LoadGameState();
                 Debug.Log("[TestUI] Load Button Triggered!");
             }
             else
