@@ -59,7 +59,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   initialPartyMembers:
   - {fileID: 11400000, guid: bffe82b87e4e519eabed93fd19095806, type: 2}
-  - {fileID: 11400000, guid: e4f60a3e16ee8fc10ab44eed9951b7e0, type: 2}
   initialInventoryItems: []
 --- !u!1 &930246628801185277
 GameObject:
@@ -90,6 +89,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1110204473976266637}
   - {fileID: 626080907802237982}
   - {fileID: 1753762395773543339}
   - {fileID: 4426456045549043046}
