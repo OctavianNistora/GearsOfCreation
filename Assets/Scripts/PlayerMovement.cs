@@ -21,8 +21,6 @@ public class PlayerMovement : MonoBehaviour
     public bool _canEndJumpEarly;
     public int _remainingAirJumps;
 
-    private bool _isWalking;
-    private bool _isGrounded;
     public void CheckCanStillEndJumpEarly(float verticalVelocity)
     {
         if (!_canEndJumpEarly) return;
@@ -34,22 +32,21 @@ public class PlayerMovement : MonoBehaviour
     {
         var horizontal = context.ReadValue<float>();
 
-        bool isMoving = !Mathf.Approximately(horizontal, 0);
-        bool shouldWalk = isMoving && _isGrounded;
-
-        _animator.SetBool("walk", shouldWalk);
-        if (shouldWalk && !_isWalking)
+        if (Mathf.Approximately(horizontal, 0))
         {
-            AudioManager.Instance.PlayWalk();
-            _isWalking = true;
+            _animator.SetBool("walk", false);
         }
-        else if (!shouldWalk && _isWalking)
+        else
         {
-            AudioManager.Instance.StopWalk();
-            _isWalking = false;
+            _animator.SetBool("walk", true);
         }
 
-        _rigidbodyControl.SetHorizontalVelocity(horizontal * horizontalMovementSpeed);
+        _rigidbodyControl.SetHorizontalVelocity(horizontal * horizontalMovementSpeed);    
+    }
+
+    public void PlayWalkSound()
+    {
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.walk);
     }
 
     public void ControlJump(InputAction.CallbackContext context)
@@ -66,16 +63,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnGroundedStateChange(bool isGrounded)
     {
-        _isGrounded = isGrounded;
-
         _animator.SetBool("mid_air", !isGrounded);
-
-        if (!isGrounded)
-        {
-            AudioManager.Instance.StopWalk();
-            _isWalking = false;
-        }
-
         if (isGrounded)
         {
             _canGroundJump = true;
