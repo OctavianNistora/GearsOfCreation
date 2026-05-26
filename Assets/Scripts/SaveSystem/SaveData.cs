@@ -1,27 +1,37 @@
 using System;
-using System.Collections.Generic;
 
 /// <summary>
-/// Plain serializable container — everything that gets written to disk.
-/// No Unity types allowed here (Vector3 etc. aren't serializable by default),
-/// so we store primitives only and convert in SaveSystem.
+/// Plain serializable save container.
+/// Only primitives/string values allowed.
 /// </summary>
 [Serializable]
 public class SaveData
 {
-    // ── Player transform ──────────────────────────────────────────────────
+    // ─────────────────────────────────────────────────────────────────────────
+    // PLAYER TRANSFORM
+    // ─────────────────────────────────────────────────────────────────────────
+
     public float PlayerX;
     public float PlayerY;
-    public float RotationZ;   // 2D only needs the Z rotation angle
+    public float RotationZ;
 
-    // ── Player stats ──────────────────────────────────────────────────────
+    // ─────────────────────────────────────────────────────────────────────────
+    // PLAYER STATS
+    // ─────────────────────────────────────────────────────────────────────────
+
     public float Health;
     public float Stamina;
-    public int   Score;
+    public int Score;
 
-    // ── Checkpoint ────────────────────────────────────────────────────────
-    public string LastCheckpointName; // GameObject name of the last checkpoint
+    // ─────────────────────────────────────────────────────────────────────────
+    // CHECKPOINT
+    // ─────────────────────────────────────────────────────────────────────────
 
-    // ── Meta ──────────────────────────────────────────────────────────────
-    public string SaveDateTime; // human-readable, for debugging
+    public string LastCheckpointName;
+
+    // ─────────────────────────────────────────────────────────────────────────
+    // META
+    // ─────────────────────────────────────────────────────────────────────────
+
+    public string SaveDateTime;
 }
