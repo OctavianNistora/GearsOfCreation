@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51494eccf7ff38d4eb5b441a93d8a199, type: 3}
+  m_Name: EnemyData2
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyData
+  combatPrefab: {fileID: 2985452701073150178, guid: 2167871230d505c4fb32f87773ca000f, type: 3}
+  enemyName: Enemy2

@@ -51,11 +51,6 @@ public class Rigidbody2DPhysicsControl : MonoBehaviour
         return _rigidbody.linearVelocity.y > 0;
     }
 
-    public float GetHorizontalVelocity()
-    {
-        return _horizontalVelocity;
-    }
-
     public void SetHorizontalVelocity(float horizontalVelocity)
     {
         _horizontalVelocity = horizontalVelocity;
