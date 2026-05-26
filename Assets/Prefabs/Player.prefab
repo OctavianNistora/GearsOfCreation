@@ -81,7 +81,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 254dac27254839c8fa32f9ae078a9065, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  _sprite: {fileID: 6952703636223438958}
+  _sprite: {fileID: 6274506871324234883}
 --- !u!1 &2441302875530312150
 GameObject:
   m_ObjectHideFlags: 0
@@ -246,7 +246,7 @@ Transform:
   m_GameObject: {fileID: 5932903831379440595}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 1.5, z: 0}
+  m_LocalPosition: {x: 1.028, y: 1.5, z: 0}
   m_LocalScale: {x: 0.1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -286,7 +286,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 2.8004682}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -296,7 +296,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 3.5909858}
   m_EdgeRadius: 0
 --- !u!114 &3776950804405620547
 MonoBehaviour:
@@ -405,7 +405,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.04651761, y: 2.0535724}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -415,7 +415,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 2.2627258, y: 6.107145}
   m_EdgeRadius: 0
 --- !u!1 &6198230718836212147
 GameObject:
@@ -576,7 +576,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.10494882, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -586,7 +586,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.95, y: 0.1}
+  m_Size: {x: 1.9565886, y: 0.1}
   m_EdgeRadius: 0
 --- !u!114 &3418727247124720701
 MonoBehaviour:
@@ -644,7 +644,7 @@ Transform:
   m_GameObject: {fileID: 7517075527780315911}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0.51, z: 0}
+  m_LocalPosition: {x: 1.031, y: 0.51, z: 0}
   m_LocalScale: {x: 0.1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -684,7 +684,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.74503684}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -694,7 +694,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 2.490074}
   m_EdgeRadius: 0
 --- !u!114 &8184862005397271238
 MonoBehaviour:
@@ -752,11 +752,11 @@ GameObject:
   - component: {fileID: 5021865447653570579}
   - component: {fileID: 4520663943707124916}
   - component: {fileID: 8991932007213929776}
-  - component: {fileID: 6952703636223438958}
-  - component: {fileID: 4310508363151885648}
+  - component: {fileID: 6274506871324234883}
+  - component: {fileID: 6441579774555318973}
   m_Layer: 6
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -960,7 +960,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   _rigidbodyControl: {fileID: 5021865447653570579}
-  _animator: {fileID: 4310508363151885648}
+  _animator: {fileID: 6441579774555318973}
   groundCheckBoxCenter: {fileID: 6600953929716625170}
   groundCheckBoxSize: {x: 1, y: 0.1}
   horizontalMovementSpeed: 5
@@ -1010,7 +1010,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2448b3283a03ac26bdb1a5fafd0b9f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  _animator: {fileID: 4310508363151885648}
+  _animator: {fileID: 6441579774555318973}
   xRaycastReference: {fileID: 0}
   yRaycastReference: {fileID: 0}
   playerRigidbody2DPhysicsControl: {fileID: 0}
@@ -1036,7 +1036,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DefaultNamespace.ButtonConditionRepeater
   invertCondition: 0
---- !u!212 &6952703636223438958
+--- !u!212 &6274506871324234883
 SpriteRenderer:
   serializedVersion: 2
   m_ObjectHideFlags: 0
@@ -1087,7 +1087,7 @@ SpriteRenderer:
   m_MaskInteraction: 0
   m_Sprite: {fileID: 8755549510213687561, guid: fa35130b997d74e4ba871838cb93d22b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 2.72, y: 6.31}
@@ -1095,7 +1095,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!95 &4310508363151885648
+--- !u!95 &6441579774555318973
 Animator:
   serializedVersion: 7
   m_ObjectHideFlags: 0

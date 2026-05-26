@@ -6,9 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Main_Menu.unity
-    guid: f75f04cf4db32054cbd9787a1f78b134
-  - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
@@ -17,6 +14,5 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TurnCombatScene.unity
     guid: a86354bc3809bff53845dc420d44ca66
-  m_configObjects:
-    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
