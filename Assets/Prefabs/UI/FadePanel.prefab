@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3936174079855535069}
   - component: {fileID: 2074122568748893325}
   - component: {fileID: 305013805129143905}
+  - component: {fileID: 4696572336607253699}
   m_Layer: 5
   m_Name: FadePanel
   m_TagString: Untagged
@@ -88,3 +89,17 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
+--- !u!114 &4696572336607253699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8546971833938463395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4069b60a57dd74c449e380c2c30b83f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FadeManager
+  canvasGroup: {fileID: 305013805129143905}
+  fadeDuration: 0.5
