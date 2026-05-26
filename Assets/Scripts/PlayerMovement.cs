@@ -1,5 +1,4 @@
 using System;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("References")]
     [SerializeField] private Rigidbody2DPhysicsControl _rigidbodyControl;
     [SerializeField] private Animator _animator;
-    
+
     [Header("Ground Check")]
     [SerializeField] private GameObject groundCheckBoxCenter;
     [SerializeField] private Vector2 groundCheckBoxSize;
@@ -21,18 +20,6 @@ public class PlayerMovement : MonoBehaviour
     public bool _canGroundJump;
     public bool _canEndJumpEarly;
     public int _remainingAirJumps;
-
-    public void Start()
-    {
-        ResetInput();
-    }
-
-    async void ResetInput()
-    {
-        gameObject.GetComponent<PlayerInput>().enabled = false;
-        await Task.Delay(1000);
-        gameObject.GetComponent<PlayerInput>().enabled = true;
-    }
 
     public void CheckCanStillEndJumpEarly(float verticalVelocity)
     {

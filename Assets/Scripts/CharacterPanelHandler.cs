@@ -189,7 +189,7 @@ public class CharacterPanelHandler : MonoBehaviour
             }
             _panelsList[i].style.display = DisplayStyle.Flex;
             
-            panelElements.Image.sprite = entity.Thumbnail;
+            //panelElements.Image.sprite = enemy.Thumbnail;
 
             panelElements.Name.text = entity.Name;
             
