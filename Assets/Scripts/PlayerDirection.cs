@@ -11,7 +11,7 @@ public class PlayerDirection : MonoBehaviour
         {
             var degrees = direction > 0 ? 0 : 180;
             
-            _sprite.flipX = direction > 0;
+            _sprite.flipX = direction < 0;
             
             transform.localRotation = Quaternion.AngleAxis(degrees, Vector3.up);
         }

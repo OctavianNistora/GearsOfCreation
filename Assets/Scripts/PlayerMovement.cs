@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("References")]
     [SerializeField] private Rigidbody2DPhysicsControl _rigidbodyControl;
     [SerializeField] private Animator _animator;
-
+    
     [Header("Ground Check")]
     [SerializeField] private GameObject groundCheckBoxCenter;
     [SerializeField] private Vector2 groundCheckBoxSize;
@@ -20,6 +21,18 @@ public class PlayerMovement : MonoBehaviour
     public bool _canGroundJump;
     public bool _canEndJumpEarly;
     public int _remainingAirJumps;
+
+    public void Start()
+    {
+        ResetInput();
+    }
+
+    async void ResetInput()
+    {
+        gameObject.GetComponent<PlayerInput>().enabled = false;
+        await Task.Delay(1000);
+        gameObject.GetComponent<PlayerInput>().enabled = true;
+    }
 
     public void CheckCanStillEndJumpEarly(float verticalVelocity)
     {
@@ -42,11 +55,6 @@ public class PlayerMovement : MonoBehaviour
         }
 
         _rigidbodyControl.SetHorizontalVelocity(horizontal * horizontalMovementSpeed);    
-    }
-
-    public void PlayWalkSound()
-    {
-        AudioManager.Instance.PlaySFX(AudioManager.Instance.walk);
     }
 
     public void ControlJump(InputAction.CallbackContext context)
@@ -85,9 +93,7 @@ public class PlayerMovement : MonoBehaviour
 
         _rigidbodyControl.NegateNegativeVerticalVelocity();
         _rigidbodyControl.AddUpwardsImpulse(jumpForce);
-
-        AudioManager.Instance.PlaySFX(AudioManager.Instance.jump);
-
+        
         _canEndJumpEarly = true;
     }
 
