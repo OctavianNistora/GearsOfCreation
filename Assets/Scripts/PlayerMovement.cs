@@ -57,6 +57,11 @@ public class PlayerMovement : MonoBehaviour
         _rigidbodyControl.SetHorizontalVelocity(horizontal * horizontalMovementSpeed);    
     }
 
+    public void PlayWalkSound()
+    {
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.walk);
+    }
+
     public void ControlJump(InputAction.CallbackContext context)
     {
         if (context.started)
@@ -93,7 +98,9 @@ public class PlayerMovement : MonoBehaviour
 
         _rigidbodyControl.NegateNegativeVerticalVelocity();
         _rigidbodyControl.AddUpwardsImpulse(jumpForce);
-        
+
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.jump);
+
         _canEndJumpEarly = true;
     }
 

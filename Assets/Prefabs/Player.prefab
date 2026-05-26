@@ -960,7 +960,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   _rigidbodyControl: {fileID: 5021865447653570579}
-  _animator: {fileID: 6441579774555318973}
+  _animator: {fileID: 4310508363151885648}
   groundCheckBoxCenter: {fileID: 6600953929716625170}
   groundCheckBoxSize: {x: 1, y: 0.1}
   horizontalMovementSpeed: 5
@@ -1010,7 +1010,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2448b3283a03ac26bdb1a5fafd0b9f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  _animator: {fileID: 6441579774555318973}
+  _animator: {fileID: 4310508363151885648}
   xRaycastReference: {fileID: 0}
   yRaycastReference: {fileID: 0}
   playerRigidbody2DPhysicsControl: {fileID: 0}
