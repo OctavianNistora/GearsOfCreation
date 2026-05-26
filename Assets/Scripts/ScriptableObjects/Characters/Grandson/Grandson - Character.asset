@@ -18,7 +18,5 @@ MonoBehaviour:
   <Abilities>k__BackingField:
   - {fileID: 11400000, guid: e14e352465aa0fedfa476f9f52f81c68, type: 2}
   - {fileID: 11400000, guid: 86ab0acb4c892b17da43c8426e0f4953, type: 2}
-  <Thumbnail>k__BackingField: {fileID: 21300000, guid: a927eae0ad8d34d4aa9cb1161506c91a, type: 3}
-  <characterSpriteLibraryAsset>k__BackingField: {fileID: 7108339969198208228, guid: 7eb5743625faf664983321fc3952aae0, type: 3}
   <MaxMana>k__BackingField: 50
   <CurrentMana>k__BackingField: 50

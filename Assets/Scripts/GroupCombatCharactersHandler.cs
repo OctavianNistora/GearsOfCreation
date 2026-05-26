@@ -19,7 +19,7 @@ public class GroupCombatCharactersHandler : MonoBehaviour
                 continue;
             }
 
-            allies[i].Initialize(PartyManager.Instance.Members[i].characterSpriteLibraryAsset);
+            allies[i].Initialize();
             PartyManager.Instance.Members[i].CombatCharacterAnimationHandler = allies[i];
         }
 
@@ -33,7 +33,7 @@ public class GroupCombatCharactersHandler : MonoBehaviour
                 continue;
             }
             
-            enemies[i].Initialize(CombatManager.Instance.enemies[i-enemyOffset].characterSpriteLibraryAsset);
+            enemies[i].Initialize();
             CombatManager.Instance.enemies[i-enemyOffset].CombatCharacterAnimationHandler = enemies[i];
         }
     }

@@ -2,9 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class CombatManager : MonoBehaviour
@@ -220,9 +218,6 @@ public class CombatManager : MonoBehaviour
         {
             Debug.Log("Victory!");
             OnBattleEnded?.Invoke(BattleEndStateEnum.Victory);
-
-            FadeToPlatformerScene();
-            
             yield break;
         }
         if (PartyManager.Instance.Members.All(member => member.CurrentHp <= 0))
@@ -240,16 +235,6 @@ public class CombatManager : MonoBehaviour
         
         OnPlayerChoiceStart?.Invoke();
     }
-
-    async void FadeToPlatformerScene()
-    {
-        await FadeManager.Instance.FadeToBlack();
-        
-        await SceneManager.LoadSceneAsync("PlatformerScene");
-
-        await FadeManager.Instance.FadeToTransparent();
-    }
-
 }
 
 public struct SourceActionData
