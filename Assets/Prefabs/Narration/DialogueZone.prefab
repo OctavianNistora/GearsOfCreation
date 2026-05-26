@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueZone
   dialogueSequence: {fileID: 0}
+  boxCollider: {fileID: 8120267112281019596}
   playerPosition: {fileID: 2775631421118227390}
 --- !u!61 &8120267112281019596
 BoxCollider2D:
