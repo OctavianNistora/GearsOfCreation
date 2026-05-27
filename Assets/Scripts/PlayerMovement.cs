@@ -135,7 +135,10 @@ public class PlayerMovement : MonoBehaviour
 
         if (tile is MovementTile movementTile && movementTile.strategy != null)
         {
+            if (currentStrategy == movementTile.strategy) 
+                return;
             currentStrategy = movementTile.strategy;
+            currentStrategy.Move(_rigidbodyControl, 0, horizontalMovementSpeed);
             //print("Current strategy: " + currentStrategy.name);
         }
         else
