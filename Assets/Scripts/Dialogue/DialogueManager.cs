@@ -17,6 +17,7 @@ public class DialogueManager : MonoBehaviour
     private bool dialogueActive = false;
     private float simpleDelayAmount = 0.05f;
     private float interpunctuationDelayAmount = 0.1f;
+    private DialogueCharacter currentDialogueCharacter;
 
     private void Awake()
     {
@@ -25,6 +26,11 @@ public class DialogueManager : MonoBehaviour
             Instance = this;
         }
         else Destroy(gameObject);
+    }
+
+    public void SetCurrentDialogueCharacter(DialogueCharacter dialogueCharacter)
+    {
+        currentDialogueCharacter = dialogueCharacter;
     }
 
     public void StartDialogue(DialogueSequence dialogue)
@@ -38,6 +44,8 @@ public class DialogueManager : MonoBehaviour
 
     public void ShowLine()
     {
+        currentDialogueCharacter.SetTalking(true);
+
         if (typingCoroutine != null)
             StopCoroutine(typingCoroutine);
 
@@ -68,6 +76,8 @@ public class DialogueManager : MonoBehaviour
 
             currentVisibleCharactersIndex++;
         }
+
+        currentDialogueCharacter.SetTalking(false);
 
         isTyping = false;
     }
@@ -107,6 +117,8 @@ public class DialogueManager : MonoBehaviour
         }
         else
         {
+            currentDialogueCharacter.SetTalking(false);
+
             dialogueActive = false;
             textUI.gameObject.SetActive(false);
             FadeTransition();
