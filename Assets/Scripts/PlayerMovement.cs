@@ -136,12 +136,12 @@ public class PlayerMovement : MonoBehaviour
         if (tile is MovementTile movementTile && movementTile.strategy != null)
         {
             currentStrategy = movementTile.strategy;
-            print("Current strategy: " + currentStrategy.name);
+            //print("Current strategy: " + currentStrategy.name);
         }
         else
         {
             currentStrategy = defaultStrategy;
-            print("Current strategy: " + currentStrategy.name);
+            //print("Current strategy: " + currentStrategy.name);
         }
     }
 }
