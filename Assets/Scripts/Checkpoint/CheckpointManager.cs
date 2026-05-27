@@ -18,6 +18,12 @@ public class CheckpointManager : MonoBehaviour
 /// </summary>
 public class CheckpointManager : MonoBehaviour
 {
+/// CARETAKER — extended with save/load.
+/// - Checkpoint reached  → snapshots memento + writes to disk.
+/// - Game start          → loads from disk if a save exists.
+/// </summary>
+public class CheckpointManager : MonoBehaviour
+{
     public static CheckpointManager Instance { get; private set; }
 
     private void Awake()
