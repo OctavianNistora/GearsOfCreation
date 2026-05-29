@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec1b1f72bea0c3142818b7ce7d49ce95, type: 3}
+  m_Name: ConveyorBeltRight2
+  m_EditorClassIdentifier: Assembly-CSharp::AnimatedMovementTile
+  m_AnimatedSprites:
+  - {fileID: 235746933, guid: 7cfb90e53c70ba14488b3c0df05563f2, type: 3}
+  - {fileID: 758740154, guid: 7cfb90e53c70ba14488b3c0df05563f2, type: 3}
+  - {fileID: 385829998, guid: 7cfb90e53c70ba14488b3c0df05563f2, type: 3}
+  m_MinSpeed: 5
+  m_MaxSpeed: 5
+  m_AnimationStartTime: 0
+  m_AnimationStartFrame: 0
+  m_TileColliderType: 1
+  m_TileAnimationFlags: 0
+  strategy: {fileID: 11400000, guid: 39ed898306214a64ca3761a839cfbd47, type: 2}

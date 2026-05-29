@@ -139,12 +139,18 @@ public class PlayerMovement : MonoBehaviour
                 return;
             currentStrategy = movementTile.strategy;
             currentStrategy.Move(_rigidbodyControl, 0, horizontalMovementSpeed);
-            //print("Current strategy: " + currentStrategy.name);
         }
         else
         {
-            currentStrategy = defaultStrategy;
-            //print("Current strategy: " + currentStrategy.name);
+            if (tile is AnimatedMovementTile animatedMovementTile && animatedMovementTile.strategy != null)
+            {
+                if (currentStrategy == animatedMovementTile.strategy) 
+                    return;
+                currentStrategy = animatedMovementTile.strategy;
+                currentStrategy.Move(_rigidbodyControl, 0, horizontalMovementSpeed);
+            }
+            else
+                currentStrategy = defaultStrategy;
         }
     }
 }
