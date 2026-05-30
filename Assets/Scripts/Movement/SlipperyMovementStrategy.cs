@@ -7,9 +7,10 @@ public class SlipperyMovementStrategy : MovementStrategy
 
     public override void Move(
         Rigidbody2DPhysicsControl _rigidbodyControl,
-        float input)
+        float input,
+        float speed)
     {
-        float target = input;
+        float target = input * speed;
 
         float velocity = Mathf.Lerp(
             _rigidbodyControl.GetHorizontalVelocity(),

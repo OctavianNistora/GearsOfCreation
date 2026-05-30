@@ -5,6 +5,7 @@ public abstract class MovementStrategy : ScriptableObject
 {
     public abstract void Move(
         Rigidbody2DPhysicsControl _rigidbodyControl,
-        float input
+        float input,
+        float speed
     );
 }

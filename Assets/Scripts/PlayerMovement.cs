@@ -10,14 +10,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Rigidbody2DPhysicsControl _rigidbodyControl;
     [SerializeField] private Animator _animator;
     [SerializeField] private Tilemap groundTilemap;
-    [SerializeField] private PlayerMovementStats movementStats;
     
     [Header("Ground Check")]
     [SerializeField] private GameObject groundCheckBoxCenter;
     [SerializeField] private Vector2 groundCheckBoxSize;
 
     [Header("Constants")]
-    //[SerializeField] private float horizontalMovementSpeed;
+    [SerializeField] private float horizontalMovementSpeed;
     [SerializeField] private float jumpForce;
     [SerializeField] private int airJumps;
 
@@ -25,22 +24,16 @@ public class PlayerMovement : MonoBehaviour
     public bool _canEndJumpEarly;
     public int _remainingAirJumps;
 
-    private float currentAcceleration;
-    private float currentDeceleration;
-
     [SerializeField] private MovementStrategy defaultStrategy;
     private MovementStrategy currentStrategy;
 
     public void Start()
     {
-        currentAcceleration = movementStats.groundAcceleration;
-        currentDeceleration = movementStats.groundDeceleration;
-
         currentStrategy = defaultStrategy;
         ResetInput();
     }
 
-    public void FixedUpdate()
+    public void Update()
     {
         DetectTileUnderPlayer();
     }
@@ -63,24 +56,17 @@ public class PlayerMovement : MonoBehaviour
     {
         var horizontal = context.ReadValue<float>();
 
-        float targetVelocity = horizontal * movementStats.maxWalkSpeed;
-        float newVelocity = 0f;
-
         if (Mathf.Approximately(horizontal, 0))
         {
             _animator.SetBool("walk", false);
-            newVelocity = Mathf.Lerp(newVelocity, 0, currentDeceleration * Time.fixedDeltaTime);
         }
         else
         {
             _animator.SetBool("walk", true);
-            newVelocity = Mathf.Lerp(newVelocity, targetVelocity, currentAcceleration * Time.fixedDeltaTime);
         }
 
         //_rigidbodyControl.SetHorizontalVelocity(horizontal * horizontalMovementSpeed);
-
-
-        currentStrategy.Move(_rigidbodyControl, newVelocity);
+        currentStrategy.Move(_rigidbodyControl, horizontal, horizontalMovementSpeed);
     }
 
     public void PlayWalkSound()
@@ -105,16 +91,8 @@ public class PlayerMovement : MonoBehaviour
         _animator.SetBool("mid_air", !isGrounded);
         if (isGrounded)
         {
-            currentAcceleration = movementStats.groundAcceleration;
-            currentDeceleration = movementStats.groundDeceleration;
-
             _canGroundJump = true;
             _remainingAirJumps = airJumps;
-        }
-        else
-        {
-            currentAcceleration = movementStats.airAcceleration;
-            currentDeceleration = movementStats.airDeceleration;
         }
     }
 
@@ -157,22 +135,13 @@ public class PlayerMovement : MonoBehaviour
 
         if (tile is MovementTile movementTile && movementTile.strategy != null)
         {
-            if (currentStrategy == movementTile.strategy) 
-                return;
             currentStrategy = movementTile.strategy;
-            currentStrategy.Move(_rigidbodyControl, 0);
+            //print("Current strategy: " + currentStrategy.name);
         }
         else
         {
-            if (tile is AnimatedMovementTile animatedMovementTile && animatedMovementTile.strategy != null)
-            {
-                if (currentStrategy == animatedMovementTile.strategy) 
-                    return;
-                currentStrategy = animatedMovementTile.strategy;
-                currentStrategy.Move(_rigidbodyControl, 0);
-            }
-            else
-                currentStrategy = defaultStrategy;
+            currentStrategy = defaultStrategy;
+            //print("Current strategy: " + currentStrategy.name);
         }
     }
 }

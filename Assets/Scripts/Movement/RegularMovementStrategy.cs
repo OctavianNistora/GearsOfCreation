@@ -5,8 +5,9 @@ public class RegularMovementStrategy : MovementStrategy
 {
     public override void Move(
         Rigidbody2DPhysicsControl _rigidbodyControl,
-        float input)
+        float input,
+        float speed)
     {
-        _rigidbodyControl.SetHorizontalVelocity(input);
+        _rigidbodyControl.SetHorizontalVelocity(input * speed);
     }
 }
