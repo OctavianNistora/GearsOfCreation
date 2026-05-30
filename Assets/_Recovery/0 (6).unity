@@ -52842,7 +52842,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 192124200958946088}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 13256202}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e1f8415ec6555cbdcb286bce9d00ebc1, type: 3}
   m_Name: 
@@ -53109,36 +53109,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1003881965047671689, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
       propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1003881965047671689, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
-      propertyPath: maxWalkSpeed
-      value: 20
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1003881965047671689, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
       propertyPath: groundTilemap
       value: 
       objectReference: {fileID: 1533694257}
     - target: {fileID: 1003881965047671689, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
-      propertyPath: movementStats
-      value: 
-      objectReference: {fileID: 11400000, guid: 399a7a3d62786564bbd38f67d1997ca3, type: 2}
-    - target: {fileID: 1003881965047671689, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
-      propertyPath: airAcceleration
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 1003881965047671689, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
       propertyPath: defaultStrategy
       value: 
       objectReference: {fileID: 11400000, guid: 9d12d8a8357bebd4cbd346b91c72b29f, type: 2}
-    - target: {fileID: 1003881965047671689, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
-      propertyPath: groundAcceleration
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 1003881965047671689, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
-      propertyPath: groundDeceleration
-      value: 0.3
-      objectReference: {fileID: 0}
     - target: {fileID: 1003881965047671689, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
       propertyPath: horizontalMovementSpeed
       value: 5
@@ -53181,11 +53161,11 @@ PrefabInstance:
       objectReference: {fileID: 192124200958946090}
     - target: {fileID: 5016439724168772201, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -35.74
+      value: 63.76
       objectReference: {fileID: 0}
     - target: {fileID: 5016439724168772201, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -21.63
+      value: -1.18
       objectReference: {fileID: 0}
     - target: {fileID: 5016439724168772201, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -53223,10 +53203,6 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 5021865447653570579, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
-      propertyPath: movementStats
-      value: 
-      objectReference: {fileID: 11400000, guid: 399a7a3d62786564bbd38f67d1997ca3, type: 2}
     - target: {fileID: 5021865447653570579, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
       propertyPath: events.onVerticalVelocityChange.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -53279,6 +53255,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 7631985871825779774, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
+      propertyPath: moveStats
+      value: 
+      objectReference: {fileID: 11400000, guid: 88ffa6e09542b894ba5afc49b94639d8, type: 2}
+    - target: {fileID: 7631985871825779774, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
+      propertyPath: groundTilemap
+      value: 
+      objectReference: {fileID: 1533694257}
     - target: {fileID: 7890490681832514852, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -53332,6 +53316,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8547492642380666099, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8547492642380666099, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
       propertyPath: m_ActionEvents.Array.data[8].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1199619057}
@@ -53354,6 +53342,10 @@ PrefabInstance:
     - target: {fileID: 8547492642380666099, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
       propertyPath: m_ActionEvents.Array.data[14].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OnClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 8547492642380666099, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MovementController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8547492642380666099, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
       propertyPath: m_ActionEvents.Array.data[8].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName

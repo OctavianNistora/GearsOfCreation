@@ -16,11 +16,10 @@ public class ConveyorMovementStrategy : MovementStrategy
 
     public override void Move(
         Rigidbody2DPhysicsControl _rigidbodyControl,
-        float horizontalInput,
-        float moveSpeed)
+        float input)
     {
         float playerVelocity =
-            horizontalInput * moveSpeed;
+            input;
 
         float conveyorVelocity =
             conveyorSpeed * (int)direction;
