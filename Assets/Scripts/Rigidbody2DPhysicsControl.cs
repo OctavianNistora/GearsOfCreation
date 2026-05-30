@@ -6,6 +6,9 @@ using UnityEngine.Serialization;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Rigidbody2DPhysicsControl : MonoBehaviour
 {
+    [Header("References")]
+    [SerializeField] private PlayerMovementStats movementStats;
+
     [Header("Constants")]
     [SerializeField] private float maxFallSpeed;
     
@@ -35,9 +38,18 @@ public class Rigidbody2DPhysicsControl : MonoBehaviour
         
         _rigidbody.linearVelocity = new Vector2(_horizontalVelocity, _rigidbody.linearVelocity.y);
         
+        
         if (_rigidbody.linearVelocity.y < 0)
+        {
+            _rigidbody.gravityScale = movementStats.baseGravity * movementStats.fallSpeedMultiplier;
+
             _rigidbody.linearVelocity = new Vector2(_rigidbody.linearVelocity.x,
-                Mathf.Max(_rigidbody.linearVelocity.y, -maxFallSpeed));
+            Mathf.Max(_rigidbody.linearVelocity.y, -movementStats.maxFallSpeed));
+        }
+        else
+        {
+            _rigidbody.gravityScale = movementStats.baseGravity;
+        }
 
         if (!Mathf.Approximately(_rigidbody.linearVelocity.y, _previousVerticalVelocity))
         {
