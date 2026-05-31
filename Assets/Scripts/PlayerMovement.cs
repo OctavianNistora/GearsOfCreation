@@ -27,6 +27,15 @@ public class PlayerMovement : MonoBehaviour
 
     private float currentAcceleration;
     private float currentDeceleration;
+    private bool _isGrounded = true;
+    private bool jumpPressed = false;
+    private bool jumpReleased = false;
+
+    //jump buffer vars
+    private float _jumpBufferTimeCounter;
+
+    //coyote time vars
+    private float _coyoteTimeCounter;
 
     [SerializeField] private MovementStrategy defaultStrategy;
     private MovementStrategy currentStrategy;
@@ -43,6 +52,7 @@ public class PlayerMovement : MonoBehaviour
     public void FixedUpdate()
     {
         DetectTileUnderPlayer();
+        JumpChecks();
     }
 
     async void ResetInput()
@@ -88,20 +98,50 @@ public class PlayerMovement : MonoBehaviour
         AudioManager.Instance.PlaySFX(AudioManager.Instance.walk);
     }
 
+    public void JumpChecks()
+    {
+        if(_isGrounded)
+        {
+            _coyoteTimeCounter = movementStats.jumpCoyoteTime;
+        }
+        else
+        {
+            if (_coyoteTimeCounter > 0f)
+                _coyoteTimeCounter -= Time.fixedDeltaTime;
+        }
+
+        if (_jumpBufferTimeCounter > 0f)
+            _jumpBufferTimeCounter -= Time.fixedDeltaTime;
+
+        if (_coyoteTimeCounter > 0f && _jumpBufferTimeCounter > 0f)
+        {
+            Jump();
+            _jumpBufferTimeCounter = 0f;
+        }
+    }
+
     public void ControlJump(InputAction.CallbackContext context)
     {
         if (context.started)
         {
             Jump();
+            _jumpBufferTimeCounter = movementStats.jumpBufferTime;
+            jumpPressed = true;
+            jumpReleased = false;
         }
         else if (context.canceled)
         {
             StopJumpEarly();
+            _coyoteTimeCounter = 0f;
+            jumpPressed = false;
+            jumpReleased = true;
         }
     }
 
     public void OnGroundedStateChange(bool isGrounded)
     {
+        _isGrounded = isGrounded;
+
         _animator.SetBool("mid_air", !isGrounded);
         if (isGrounded)
         {
@@ -120,6 +160,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
+        if (!_isGrounded && _coyoteTimeCounter <= 0)
+            return;
+
         if (_canGroundJump)
         {
             _canGroundJump = false;

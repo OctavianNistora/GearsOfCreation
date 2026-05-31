@@ -9,6 +9,7 @@ public class Encounter : MonoBehaviourID
 {
     [SerializeField] private CombatEncounter combatEncounter;
     [SerializeField] private GameObject endPlayerPosition;
+    [SerializeField] private EncounterType encounterType;
 
     private void Start()
     {
@@ -26,6 +27,7 @@ public class Encounter : MonoBehaviourID
             CombatManager.Instance.SetEncounter(combatEncounter);
 
             //CustomSceneManager.Instance.ChangeScene("TurnCombatScene");
+            CombatManager.Instance.currentEncounterType = encounterType;
             FadeToCombatScene();
         }
     }
@@ -38,4 +40,10 @@ public class Encounter : MonoBehaviourID
 
         await FadeManager.Instance.FadeToTransparent();
     }
+}
+
+public enum EncounterType
+{
+    Tutorial,
+    GlassyWaters
 }

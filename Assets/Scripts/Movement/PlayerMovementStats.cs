@@ -14,4 +14,10 @@ public class PlayerMovementStats : ScriptableObject
     public float baseGravity = 2f;
     public float maxFallSpeed = 18f;
     public float fallSpeedMultiplier = 2f;
+
+    [Header("Jump Buffer")]
+    [Range(0f, 1f)] public float jumpBufferTime = 0.125f;
+
+    [Header("Jump Coyote Time")]
+    [Range(0f, 1f)] public float jumpCoyoteTime = 0.2f;
 }
