@@ -11,12 +11,14 @@ public class CombatManager : MonoBehaviour
 {
     public static CombatManager Instance { get; private set; }
     
+    public EncounterType currentEncounterType;
     public List<EnemyEntity> enemies = new();
     public event Action OnPlayerChoiceStart;
     public event Action OnPlayerChoiceEnd;
     public event Action OnCombatRoundStart;
     public event Action OnCombatRoundEnd;
     public event Action<BattleEndStateEnum> OnBattleEnded;
+    
     
     private PlayerEntity _selectedSource;
     private BaseAction _selectedAction;
