@@ -25,6 +25,11 @@ public class PlayerOriginator : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
     }
 
+    private void Start()
+    {
+        CheckpointManager.Instance.RestoreLastCheckpoint(this);
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.X))
