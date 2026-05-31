@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 [Serializable]
 public class SaveData
@@ -13,4 +14,8 @@ public class SaveData
 
     public string LastCheckpointName;
     public string SaveDateTime;
+
+    // --- NOILE CÂMPURI PENTRU STAREA LUMII ---
+    public List<string> DisabledDialogueZones = new List<string>();
+    public List<string> DefeatedEncounterIDs = new List<string>();
 }
