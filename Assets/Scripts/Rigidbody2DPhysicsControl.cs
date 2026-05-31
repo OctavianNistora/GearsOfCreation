@@ -63,6 +63,16 @@ public class Rigidbody2DPhysicsControl : MonoBehaviour
         return _rigidbody.linearVelocity.y > 0;
     }
 
+    public float GetVerticalVelocity()
+    {
+        return _rigidbody.linearVelocity.y;
+    }
+
+    public void SetVerticalVelocity(float verticalVelocity)
+    {
+        _rigidbody.linearVelocity = new Vector2(_rigidbody.linearVelocity.x, verticalVelocity);
+    }
+
     public float GetHorizontalVelocity()
     {
         return _horizontalVelocity;
