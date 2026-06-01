@@ -907,6 +907,7 @@ GameObject:
   - component: {fileID: 4520663943707124916}
   - component: {fileID: 8991932007213929776}
   - component: {fileID: 6356993685768637664}
+  - component: {fileID: 591517028919296758}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -1337,6 +1338,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DefaultNamespace.ButtonConditionRepeater
   invertCondition: 0
 --- !u!114 &6356993685768637664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9126168573564037596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd1eebbc90328064f95cd04688075436, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerOriginator
+  _health: 100
+  _stamina: 100
+  _score: 0
+--- !u!114 &591517028919296758
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

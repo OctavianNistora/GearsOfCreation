@@ -7,24 +7,6 @@ public class SaveTestUI : MonoBehaviour
     [SerializeField] private PlayerOriginator playerOriginator;
 
     /// <summary>
-    /// Hook this up to your UI "Save Button" OnClick() event
-    /// </summary>
-    public void OnSaveButtonClicked()
-    {
-        if (playerOriginator != null)
-        {
-            // We pass a dummy checkpoint name for testing
-            //playerOriginator.SaveGameState("Test_ManualSave_Checkpoint");
-            playerOriginator.SaveGameState("Test_ManualSave_Checkpoint");
-            Debug.Log("[TestUI] Save Button Triggered!");
-        }
-        else
-        {
-            Debug.LogError("[TestUI] Cannot save: PlayerOriginator reference is missing!");
-        }
-    }
-
-    /// <summary>
     /// Hook this up to your UI "Load Button" OnClick() event
     /// </summary>
     public void OnLoadButtonClicked()

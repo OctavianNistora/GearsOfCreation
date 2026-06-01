@@ -1,4 +1,7 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
+using DefaultNamespace;
 
 public class CheckpointManager : MonoBehaviour
 {
@@ -82,6 +85,29 @@ public class CheckpointManager : MonoBehaviour
             Score              = _latestMemento.Score,
             LastCheckpointName = LastCheckpoint != null ? LastCheckpoint.name : string.Empty,
         };
+
+        // --- SALVARE STARE DIALOGURI ---
+        foreach (var zone in FindObjectsByType<DialogueZone>(FindObjectsSortMode.None))
+        {
+            if (zone.IsDisabled)
+            {
+                data.DisabledDialogueZones.Add(zone.gameObject.name);
+            }
+        }
+
+        // --- SALVARE STARE ENCOUNTERS VIA REFLECTION ---
+        foreach (var encounter in FindObjectsByType<Encounter>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+        {
+            if (!encounter.gameObject.activeSelf)
+            {
+                string encounterID = GetEncounterIDViaReflection(encounter);
+                if (!string.IsNullOrEmpty(encounterID))
+                {
+                    data.DefeatedEncounterIDs.Add(encounterID);
+                }
+            }
+        }
+
         SaveSystem.Save(data);
     }
 
@@ -94,6 +120,36 @@ public class CheckpointManager : MonoBehaviour
         {
             if (cp.name == data.LastCheckpointName)
                 LastCheckpoint = cp;
+        }
+
+        // --- RESTAURARE DIALOGURI ---
+        foreach (var zone in FindObjectsByType<DialogueZone>(FindObjectsSortMode.None))
+        {
+            if (data.DisabledDialogueZones.Contains(zone.gameObject.name))
+            {
+                zone.ForceDisable();
+            }
+            else
+            {
+                var collider = zone.GetComponent<BoxCollider2D>();
+                if (collider != null) collider.enabled = true;
+            }
+        }
+
+        // --- RESTAURARE ENCOUNTERS ---
+        foreach (var encounter in FindObjectsByType<Encounter>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+        {
+            string encounterID = GetEncounterIDViaReflection(encounter);
+            if (string.IsNullOrEmpty(encounterID)) continue;
+
+            if (data.DefeatedEncounterIDs.Contains(encounterID))
+            {
+                encounter.gameObject.SetActive(false);
+            }
+            else
+            {
+                encounter.gameObject.SetActive(true);
+            }
         }
 
         _latestMemento = new PlayerMemento(
@@ -110,6 +166,40 @@ public class CheckpointManager : MonoBehaviour
         if (player == null) { Debug.LogError("[SaveSystem] PlayerOriginator not found!"); return; }
         player.RestoreState(_latestMemento);
         Debug.Log("[SaveSystem] Game loaded. Player at (" + data.PlayerX + ", " + data.PlayerY + ")");
+    }
+
+    // Rutină ajutătoare de Reflection pentru a extrage valoarea din câmpul privat/protejat '_id' moștenit din MonoBehaviourID
+    private string GetEncounterIDViaReflection(Encounter encounter)
+    {
+        try
+        {
+            // Căutăm câmpul numit "_id" în ierarhia claselor (deoarece aparține clasei părinte MonoBehaviourID)
+            var field = typeof(Encounter).GetField("_id", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.FlattenHierarchy);
+            if (field == null)
+            {
+                // Dacă nu-l găsește direct, verificăm tipul de bază explicit
+                field = typeof(Encounter).BaseType?.GetField("_id", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            }
+
+            if (field != null)
+            {
+                var idObj = field.GetValue(encounter);
+                if (idObj != null)
+                {
+                    // Accesăm proprietatea .Value a obiectului ID (presupunând că ID-ul are proprietatea publică .Value de tip string)
+                    var valueProperty = idObj.GetType().GetProperty("Value");
+                    if (valueProperty != null)
+                    {
+                        return valueProperty.GetValue(idObj)?.ToString();
+                    }
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("[CheckpointManager] Reflection failed to get ID: " + e.Message);
+        }
+        return string.Empty;
     }
 
     private void OnApplicationQuit()

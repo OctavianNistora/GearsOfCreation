@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;   // ← add this
 
 [Serializable]
 public class SaveData
@@ -13,4 +14,7 @@ public class SaveData
 
     public string LastCheckpointName;
     public string SaveDateTime;
+
+    public List<string> DisabledDialogueZones = new List<string>();
+    public List<string> DefeatedEncounterIDs  = new List<string>();
 }

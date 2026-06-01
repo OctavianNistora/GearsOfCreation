@@ -7,21 +7,30 @@ public class Pause : MonoBehaviour
     public static Pause Instance { get; private set; }
 
     [Header("References")]
-    [SerializeField] private GameObject  _pauseCanvas;
-    [SerializeField] private PlayerInput _playerInput;
+    [SerializeField] private GameObject _pauseCanvas;
 
+    // Eliminat [SerializeField] pentru _playerInput deoarece va fi căutat dinamic
+    private PlayerInput _cachedPlayerInput;
     private bool _isPaused = false;
 
     private void Awake()
     {
-        if (Instance != null && Instance != this) { Destroy(gameObject); return; }
+        // Logica de Singleton corectă pentru elemente persistente (DontDestroyOnLoad)
+        if (Instance != null && Instance != this) 
+        { 
+            Destroy(gameObject); 
+            return; 
+        }
+        
         Instance = this;
+        DontDestroyOnLoad(gameObject); // Face ca prefab-ul să supraviețuiască între scene
+        
         _pauseCanvas.SetActive(false);
     }
 
     private void Update()
     {
-        // Time.unscaledDeltaTime based input check — works even when timeScale = 0
+        // Verificăm tasta X. Va funcționa în orice scenă
         if (Input.GetKeyDown(KeyCode.X))
         {
             Debug.Log("[Pause] X detected in Pause.Update");
@@ -36,14 +45,35 @@ public class Pause : MonoBehaviour
 
         _pauseCanvas.SetActive(_isPaused);
         Time.timeScale = _isPaused ? 0f : 1f;
-        _playerInput.enabled = !_isPaused;
 
-        // Zero velocity so player doesn't drift while frozen
-        Rigidbody2D rb = _playerInput.GetComponent<Rigidbody2D>();
-        if (rb != null)
+        // Căutăm dinamic PlayerInput-ul din scena curentă (dacă există)
+        if (_cachedPlayerInput == null)
         {
-            rb.linearVelocity  = Vector2.zero;
-            rb.angularVelocity = 0f;
+            _cachedPlayerInput = FindFirstObjectByType<PlayerInput>();
+        }
+
+        // Dacă am găsit un jucător în scenă, îi gestionăm input-ul și fizica
+        if (_cachedPlayerInput != null)
+        {
+            _cachedPlayerInput.enabled = !_isPaused;
+
+            if (_isPaused)
+            {
+                // Oprim complet mișcarea fizică a jucătorului când e pauză
+                Rigidbody2D rb = _cachedPlayerInput.GetComponent<Rigidbody2D>();
+                if (rb != null)
+                {
+                    rb.linearVelocity = Vector2.zero;
+                    rb.angularVelocity = 0f;
+                }
+            }
+        }
+        
+        // Dacă dăm unpause, resetăm referința memorată pentru a o putea căuta proaspătă tura următoare 
+        // (în caz că am schimbat scena între timp)
+        if (!_isPaused)
+        {
+            _cachedPlayerInput = null;
         }
     }
 
@@ -54,12 +84,19 @@ public class Pause : MonoBehaviour
 
     public void QuitToMainMenu()
     {
+        _isPaused = false;
+        _pauseCanvas.SetActive(false);
         Time.timeScale = 1f;
+        _cachedPlayerInput = null;
+        
         SceneManager.LoadScene("Main_Menu");
     }
 
     private void OnDestroy()
     {
-        Time.timeScale = 1f;
+        if (Instance == this)
+        {
+            Time.timeScale = 1f;
+        }
     }
 }

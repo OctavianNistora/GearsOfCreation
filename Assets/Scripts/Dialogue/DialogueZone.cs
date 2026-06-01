@@ -10,6 +10,14 @@ public class DialogueZone : MonoBehaviour
     [SerializeField] private GameObject playerPosition;
     [SerializeField] private DialogueCharacter dialogueCharacter;
 
+    // Adăugăm o proprietate publică/metodă pentru a verifica dacă e consumat
+    public bool IsDisabled => !boxCollider.enabled;
+
+    public void ForceDisable()
+    {
+        boxCollider.enabled = false;
+    }
+
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -20,7 +28,6 @@ public class DialogueZone : MonoBehaviour
 
     async void FadeTransition(GameObject player)
     {
-
         await FadeManager.Instance.FadeToBlack();
 
         await Task.Delay(500);
@@ -33,6 +40,6 @@ public class DialogueZone : MonoBehaviour
         DialogueManager.Instance.SetCurrentDialogueCharacter(dialogueCharacter);
         DialogueManager.Instance.StartDialogue(dialogueSequence);
 
-        boxCollider.enabled = false;
+        boxCollider.enabled = false; // Se dezactivează collider-ul
     }
 }
