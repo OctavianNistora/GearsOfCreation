@@ -5,19 +5,25 @@ using System.Linq;
 using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class PlayerLedgeClimb : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Animator _animator;
-    [SerializeField] private GameObject xRaycastReference;
-    [SerializeField] private GameObject yRaycastReference;
+    [SerializeField] private GameObject xRaycastLowReference;
+    [SerializeField] private GameObject xRaycastHighReference;
+    [SerializeField] private GameObject yRaycastCloseReference;
+    [SerializeField] private GameObject yRaycastFarReference;
     [SerializeField] private Rigidbody2DPhysicsControl playerRigidbody2DPhysicsControl;
     [SerializeField] private PlayerInput playerInput;
     
     [Header("Settings")]
     [SerializeField] private List<AbstractConditionEmitter> conditionList;
-    [SerializeField] private float raycastDistance = 5;
+    [SerializeField] private float xRaycastCount = 7;
+    [SerializeField] private float yRaycastCount = 3;
+    [SerializeField] private float raycastXDistance = 1;
+    [SerializeField] private float raycastYDistance = 2;
     [SerializeField] private float verticalSpeed = 5;
     [SerializeField] private float horizontalSpeed = 5;
     [SerializeField] private float verticalErrorCorrection = 0.05f;
@@ -60,30 +66,76 @@ public class PlayerLedgeClimb : MonoBehaviour
     private void ClimbLedge()
     {
         _animator.SetTrigger("ledge_grab");
-
-        RaycastHit2D hit = Physics2D.Raycast(xRaycastReference.transform.position, xRaycastReference.transform.right,
-            raycastDistance, LayerMask.GetMask("Terrain"));
-        if (!hit.collider)
-        {
-            return;
-        }
-        var xPosition = hit.point.x;
-
-        hit = Physics2D.Raycast(yRaycastReference.transform.position, yRaycastReference.transform.right,
-            raycastDistance, LayerMask.GetMask("Terrain"));
-        if (!hit.collider)
-        {
-            return;
-        }
-        var yPosition = hit.point.y;
         
+        float? xPosition = null;
+
+        var hit = Physics2D.Raycast(xRaycastHighReference.transform.position, xRaycastHighReference.transform.right,
+            raycastXDistance, LayerMask.GetMask("Terrain"));
+        if (hit.collider)
+        {
+            xPosition = hit.point.x;
+        }
+        else if (xRaycastCount > 1)
+        {
+            var rayStep = (xRaycastLowReference.transform.position - xRaycastHighReference.transform.position) / (xRaycastCount - 1);
+            
+            for (int i = 1; i <= xRaycastCount - 1; i++)
+            {
+                var rayOrigin = xRaycastHighReference.transform.position + rayStep * i;
+                hit = Physics2D.Raycast(rayOrigin, xRaycastHighReference.transform.right,
+                    raycastXDistance, LayerMask.GetMask("Terrain"));
+                if (hit.collider)
+                {
+                    xPosition = hit.point.x;
+                    break;
+                }
+            }
+        }
+
+        if (!xPosition.HasValue)
+        {
+            return;
+        }
+
+        
+        float? yPosition = null;
+        
+        hit = Physics2D.Raycast(yRaycastCloseReference.transform.position, yRaycastCloseReference.transform.right,
+            raycastYDistance, LayerMask.GetMask("Terrain"));
+        if (hit.collider)
+        {
+            yPosition = hit.point.y;
+        }
+        else if (yRaycastCount > 1)
+        {
+            var rayStep = (yRaycastFarReference.transform.position - yRaycastCloseReference.transform.position) / (yRaycastCount - 1);
+            
+            for (int i = 1; i <= yRaycastCount - 1; i++)
+            {
+                var rayOrigin = yRaycastCloseReference.transform.position + rayStep * i;
+                hit = Physics2D.Raycast(rayOrigin, yRaycastCloseReference.transform.right,
+                    raycastYDistance, LayerMask.GetMask("Terrain"));
+                if (hit.collider)
+                {
+                    yPosition = hit.point.y;
+                    break;
+                }
+            }
+        }
+        
+        if (!yPosition.HasValue)
+        {
+            return;
+        }
+
+        Debug.Log($"xPosition: {xPosition.Value}, yPosition: {yPosition.Value}");
         Debug.Log("ClimbLedge");
         
         if (_climbLedgeCoroutine != null)
         {
             StopCoroutine(_climbLedgeCoroutine);
         }
-        _climbLedgeCoroutine = StartCoroutine(ClimbLedgeCoroutine(xPosition, yPosition));
+        _climbLedgeCoroutine = StartCoroutine(ClimbLedgeCoroutine(xPosition.Value, yPosition.Value));
     }
 
     private IEnumerator ClimbLedgeCoroutine(float xTarget, float yTarget)
