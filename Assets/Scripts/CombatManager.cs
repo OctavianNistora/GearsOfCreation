@@ -19,6 +19,7 @@ public class CombatManager : MonoBehaviour
     public event Action OnCombatRoundEnd;
     public event Action<BattleEndStateEnum> OnBattleEnded;
     
+    public Vector3 playerPositionAfterCombat = new Vector3(0, 0, 0);
     
     private PlayerEntity _selectedSource;
     private BaseAction _selectedAction;
@@ -223,6 +224,8 @@ public class CombatManager : MonoBehaviour
             Debug.Log("Victory!");
             OnBattleEnded?.Invoke(BattleEndStateEnum.Victory);
 
+            CheckpointManager.Instance.SetNewMementoPosition(playerPositionAfterCombat);
+
             FadeToPlatformerScene();
             
             yield break;
@@ -246,7 +249,7 @@ public class CombatManager : MonoBehaviour
     async void FadeToPlatformerScene()
     {
         await FadeManager.Instance.FadeToBlack();
-        
+
         await SceneManager.LoadSceneAsync("PlatformerScene");
 
         await FadeManager.Instance.FadeToTransparent();
