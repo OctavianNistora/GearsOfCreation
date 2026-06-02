@@ -79,9 +79,9 @@ Transform:
   m_GameObject: {fileID: 6164737097858835869}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.8, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 7, y: 7, z: 7}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 4998411793086683619}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.2D.Animation.Runtime::UnityEngine.U2D.Animation.SpriteLibrary
   m_Library: []
-  m_SpriteLibraryAsset: {fileID: 7108339969198208228, guid: a1b6e3d9a5b1dde0e991f7ff015d5ea4, type: 3}
+  m_SpriteLibraryAsset: {fileID: 7108339969198208228, guid: 221e96daaa415ff46a4b85ea2b16f53a, type: 3}
 --- !u!114 &584766750736119860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,8 +170,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed8b1ae4e4e52b34ea557c1c11e076fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.2D.Animation.Runtime::UnityEngine.U2D.Animation.SpriteResolver
-  m_CategoryHash: 2.697242e-35
-  m_labelHash: 2.022424e-34
+  m_CategoryHash: 2.9883346e-14
+  m_labelHash: 2.977024e-14
   m_SpriteKey: 0
   m_SpriteHash: 589944641
 --- !u!95 &8851817550779783556
