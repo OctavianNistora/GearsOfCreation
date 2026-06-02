@@ -87,6 +87,27 @@ MonoBehaviour:
       m_SpriteOverride: {fileID: -2417485077206544988, guid: cc94913f791617c4ab6e82b63e41cd13, type: 3}
     m_FromMain: 0
     m_EntryOverrideCount: 3
+  - m_Name: Rain
+    m_Hash: 392177043
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Rain_1
+      m_Hash: 1011632544
+      m_Sprite: {fileID: -803654290, guid: cc94913f791617c4ab6e82b63e41cd13, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -803654290, guid: cc94913f791617c4ab6e82b63e41cd13, type: 3}
+    - m_Name: Rain_2
+      m_Hash: 625285146
+      m_Sprite: {fileID: 1935700618, guid: cc94913f791617c4ab6e82b63e41cd13, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1935700618, guid: cc94913f791617c4ab6e82b63e41cd13, type: 3}
+    - m_Name: Rain_3
+      m_Hash: 306325644
+      m_Sprite: {fileID: 823662195, guid: cc94913f791617c4ab6e82b63e41cd13, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 823662195, guid: cc94913f791617c4ab6e82b63e41cd13, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 3
   m_PrimaryLibraryGUID: 
-  m_ModificationHash: 639160148105993646
+  m_ModificationHash: 639160372157890349
   m_Version: 1
