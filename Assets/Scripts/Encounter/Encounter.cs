@@ -29,6 +29,7 @@ public class Encounter : MonoBehaviourID
             //CustomSceneManager.Instance.ChangeScene("TurnCombatScene");
             CombatManager.Instance.currentEncounterType = encounterType;
             CombatManager.Instance.playerPositionAfterCombat = playerPositionAfterCombat.transform.position;
+            
             FadeToCombatScene();
         }
     }

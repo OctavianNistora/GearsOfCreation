@@ -6,17 +6,25 @@ public class EncounterTypeAdapter : MonoBehaviour
     [SerializeField] private GameObject glassyWatersBackground;
     
     [Header ("Party Members")]
+    [SerializeField] private PlayerEntity Grandson;
     [SerializeField] private PlayerEntity WaterFairy;
 
     private void Start()
     {
+        print(PartyManager.Instance.Members);
         switch (CombatManager.Instance.currentEncounterType)
         {
             case EncounterType.Tutorial:
+                if (!PartyManager.Instance.Members.Contains(Grandson))
+                    PartyManager.Instance.Members.Add(Grandson);
+
                 tutorialBackground.SetActive(true);
                 glassyWatersBackground.SetActive(false);
                 break;
             case EncounterType.GlassyWaters:
+                if (!PartyManager.Instance.Members.Contains(Grandson))
+                    PartyManager.Instance.Members.Add(Grandson);
+                    
                 if (!PartyManager.Instance.Members.Contains(WaterFairy))
                     PartyManager.Instance.Members.Add(WaterFairy);
                     
@@ -27,5 +35,6 @@ public class EncounterTypeAdapter : MonoBehaviour
                 Debug.LogError("Unknown encounter type: " + CombatManager.Instance.currentEncounterType);
                 break;
         }
+        PartyManager.Instance.RestoreAllPartyMembersStats();
     }
 }

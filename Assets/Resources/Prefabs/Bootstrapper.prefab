@@ -57,8 +57,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4180185803268c49ea6ea3154551178c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  initialPartyMembers:
-  - {fileID: 11400000, guid: bffe82b87e4e519eabed93fd19095806, type: 2}
+  initialPartyMembers: []
   initialInventoryItems:
   - {fileID: 11400000, guid: 00415c0734dce382c8e26c177c40a4d6, type: 2}
   - {fileID: 11400000, guid: ac95107bd49dcf3819b1ffe3da8201dc, type: 2}
@@ -417,6 +416,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   currentEncounterType: 0
   enemies: []
+  playerPositionAfterCombat: {x: 0, y: 0, z: 0}
 --- !u!114 &8757563714935320807
 MonoBehaviour:
   m_ObjectHideFlags: 0
