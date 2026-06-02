@@ -17,6 +17,8 @@ public class PlayerOriginator : MonoBehaviour
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+        
+        CheckpointManager.Instance.LoadGame();
     }
 
     // X key handling removed from here — Pause.cs owns it now

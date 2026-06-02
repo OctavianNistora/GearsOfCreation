@@ -2,12 +2,13 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using DefaultNamespace;
+using System.Threading.Tasks;
 
 public class CheckpointManager : MonoBehaviour
 {
     public static CheckpointManager Instance { get; private set; }
 
-    private PlayerMemento     _latestMemento;
+    private PlayerMemento _latestMemento;
     public  CheckpointTrigger LastCheckpoint { get; private set; }
     public  bool HasCheckpoint() => _latestMemento != null;
 
@@ -28,6 +29,21 @@ public class CheckpointManager : MonoBehaviour
     {
         if (SaveSystem.HasSave())
             LoadGame();
+    }
+
+    public void SetNewMementoPosition(Vector3 newPosition)
+    {
+        if (_latestMemento == null) return;
+        _latestMemento = new PlayerMemento(
+            position:        newPosition,
+            rotation:        _latestMemento.Rotation,
+            velocity:        _latestMemento.Velocity,
+            angularVelocity: _latestMemento.AngularVelocity,
+            health:          _latestMemento.Health,
+            stamina:         _latestMemento.Stamina,
+            score:           _latestMemento.Score
+        );
+        SaveGame();
     }
 
     public void SaveCheckpoint(PlayerOriginator player, CheckpointTrigger trigger)

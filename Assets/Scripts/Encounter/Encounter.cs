@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class Encounter : MonoBehaviourID
 {
     [SerializeField] private CombatEncounter combatEncounter;
-    [SerializeField] private GameObject endPlayerPosition;
+    [SerializeField] private GameObject playerPositionAfterCombat;
     [SerializeField] private EncounterType encounterType;
 
     private void Start()
@@ -28,6 +28,7 @@ public class Encounter : MonoBehaviourID
 
             //CustomSceneManager.Instance.ChangeScene("TurnCombatScene");
             CombatManager.Instance.currentEncounterType = encounterType;
+            CombatManager.Instance.playerPositionAfterCombat = playerPositionAfterCombat.transform.position;
             FadeToCombatScene();
         }
     }

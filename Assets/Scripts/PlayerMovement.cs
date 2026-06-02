@@ -27,9 +27,7 @@ public class PlayerMovement : MonoBehaviour
 
     private float currentAcceleration;
     private float currentDeceleration;
-    private bool _isGrounded = true;
-    private bool jumpPressed = false;
-    private bool jumpReleased = false;
+    private bool _isGrounded = false;
 
     //jump buffer vars
     private float _jumpBufferTimeCounter;
@@ -42,8 +40,9 @@ public class PlayerMovement : MonoBehaviour
 
     public void Start()
     {
-        currentAcceleration = movementStats.groundAcceleration;
-        currentDeceleration = movementStats.groundDeceleration;
+        _animator.SetBool("mid_air", !_isGrounded);
+        currentAcceleration = movementStats.airAcceleration;
+        currentDeceleration = movementStats.airDeceleration;
 
         currentStrategy = defaultStrategy;
         ResetInput();
@@ -126,15 +125,11 @@ public class PlayerMovement : MonoBehaviour
         {
             Jump();
             _jumpBufferTimeCounter = movementStats.jumpBufferTime;
-            jumpPressed = true;
-            jumpReleased = false;
         }
         else if (context.canceled)
         {
             StopJumpEarly();
             _coyoteTimeCounter = 0f;
-            jumpPressed = false;
-            jumpReleased = true;
         }
     }
 
