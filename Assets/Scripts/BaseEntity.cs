@@ -59,6 +59,11 @@ public abstract class BaseEntity : ScriptableObject
         OnHeal?.Invoke();
         
     }
+
+    public void RestoreHealth()
+    {
+        CurrentHp = MaxHp;
+    }
     
     public void AddModifier(BaseCombatModifier modifier)
     {

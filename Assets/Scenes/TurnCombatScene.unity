@@ -421,6 +421,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EncounterTypeAdapter
   tutorialBackground: {fileID: 239174144}
   glassyWatersBackground: {fileID: 360353343}
+  Grandson: {fileID: 11400000, guid: bffe82b87e4e519eabed93fd19095806, type: 2}
   WaterFairy: {fileID: 11400000, guid: e4f60a3e16ee8fc10ab44eed9951b7e0, type: 2}
 --- !u!1 &283543638
 GameObject:

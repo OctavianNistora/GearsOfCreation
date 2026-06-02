@@ -19,4 +19,18 @@ public class PartyManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
+
+    public void RestoreAllPartyMembersStats()
+    {
+        foreach (var member in Members)
+        {
+            member.RestoreStats();
+        }
+    }
+
+    public void CheckForDeadMembers()
+    {
+        Members.RemoveAll(member => member.CurrentHp <= 0);
+        print("Removed from party. Remaining members: " + PartyManager.Instance.Members.Count);
+    }
 }

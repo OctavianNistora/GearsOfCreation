@@ -54,6 +54,15 @@ public class CombatManager : MonoBehaviour
         _selectedTargets = null;
     }
 
+    /*
+    public void RemovePartyMember(PlayerEntity member)
+    {
+        PartyManager.Instance.Members.Remove(member);
+        _sourceActions.Remove(member);
+        print("Removed " + member.Name + " from party. Remaining members: " + PartyManager.Instance.Members.Count);
+    }
+    */
+
     public List<PlayerEntity> GetActionedAllies()
     {
         return _sourceActions.Keys.ToList();
@@ -218,6 +227,8 @@ public class CombatManager : MonoBehaviour
         _sourceActions.Clear();
         
         OnCombatRoundEnd?.Invoke();
+
+        PartyManager.Instance.CheckForDeadMembers();
         
         if (enemies.All(enemy => enemy.CurrentHp <= 0))
         {
