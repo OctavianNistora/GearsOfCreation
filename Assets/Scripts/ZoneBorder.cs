@@ -6,6 +6,23 @@ public class ZoneBorder : MonoBehaviour
     GameObject objectsUp;
     [SerializeField]
     GameObject objectsDown;
+    [SerializeField]
+    PlayerMovement player;
+
+    void Start()
+    {
+        if(player.transform.position.y < gameObject.transform.position.y)
+        {
+            objectsUp.SetActive(false);
+            objectsDown.SetActive(true);
+        }
+        else
+        {
+            objectsUp.SetActive(true);
+            objectsDown.SetActive(false);
+        }
+    }
+
     void OnTriggerExit2D(Collider2D collision)
     {
         // if player descends through border

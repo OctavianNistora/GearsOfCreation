@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using DefaultNamespace;
+using System.Threading.Tasks;
 
 public class CheckpointManager : MonoBehaviour
 {

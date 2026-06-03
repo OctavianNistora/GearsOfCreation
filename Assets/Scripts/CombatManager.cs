@@ -18,6 +18,9 @@ public class CombatManager : MonoBehaviour
     public event Action OnCombatRoundStart;
     public event Action OnCombatRoundEnd;
     public event Action<BattleEndStateEnum> OnBattleEnded;
+    
+    public Vector3 playerPositionAfterCombat = new Vector3(0, 0, 0);
+    
 
     private PlayerEntity _selectedSource;
     private BaseAction _selectedAction;

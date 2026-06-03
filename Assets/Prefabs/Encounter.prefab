@@ -124,8 +124,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 433cbc8cb6ed67f468e2fbc4e1895d1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Encounter
+  _id:
+    Value: 
   combatEncounter: {fileID: 0}
-  endPlayerPosition: {fileID: 1188699202096678201}
+  playerPositionAfterCombat: {fileID: 1188699202096678201}
+  encounterType: 0
 --- !u!1 &5542899363498280389
 GameObject:
   m_ObjectHideFlags: 0

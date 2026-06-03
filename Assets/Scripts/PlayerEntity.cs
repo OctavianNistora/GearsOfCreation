@@ -5,12 +5,17 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Ally", menuName = "Combat/Entity/Ally")]
 public class PlayerEntity : BaseEntity
 {
-
     [field: SerializeField]
     public int MaxMana { get; private set; }
     [field: SerializeField]
     public int CurrentMana { get; private set; }
     
+    public void RestoreStats()
+    {
+        RestoreHealth();
+        CurrentMana = MaxMana;
+    }
+
     public void ConsumeMana(int mana)
     {
         if (mana <= 0) return;

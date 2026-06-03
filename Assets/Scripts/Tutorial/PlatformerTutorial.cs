@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -22,7 +23,14 @@ public class PlatformerTutorial : MonoBehaviour
 
     void Start()
     {
-        ShowStep();
+        ShowMovementStep();
+    }
+
+    async void ShowMovementStep()
+    {
+        await Task.Delay(5000);
+        if (currentStep == PlatformerTutorialStep.Move && isActiveAndEnabled)
+            ShowStep();
     }
 
     void Update()
@@ -49,7 +57,7 @@ public class PlatformerTutorial : MonoBehaviour
                 narrationManager.ShowText("Use A and D to move left and right");
                 break;
             case PlatformerTutorialStep.Jump:
-                narrationManager.ShowText("Press SPACE to jump");
+                narrationManager.ShowText("Press W to jump");
                 waitingForJump = true;
                 break;
             case PlatformerTutorialStep.ClimbLedge:
