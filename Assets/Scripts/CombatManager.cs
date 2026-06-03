@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
@@ -10,9 +9,10 @@ using Random = UnityEngine.Random;
 public class CombatManager : MonoBehaviour
 {
     public static CombatManager Instance { get; private set; }
-    
+
     public EncounterType currentEncounterType;
     public List<EnemyEntity> enemies = new();
+
     public event Action OnPlayerChoiceStart;
     public event Action OnPlayerChoiceEnd;
     public event Action OnCombatRoundStart;
@@ -21,47 +21,42 @@ public class CombatManager : MonoBehaviour
     
     public Vector3 playerPositionAfterCombat = new Vector3(0, 0, 0);
     
+
     private PlayerEntity _selectedSource;
     private BaseAction _selectedAction;
     private List<BaseEntity> _selectedTargets;
     private Dictionary<PlayerEntity, SourceActionData> _sourceActions = new();
     private bool _isEscaping;
-    
+
     private void Awake()
     {
         if (Instance != null)
         {
             Destroy(gameObject);
+            return;
         }
-        
+
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
-    
+
     public void InitializeCombat(List<EnemyEntity> newEnemies)
     {
         enemies = newEnemies;
-        
-        OnPlayerChoiceStart?.GetInvocationList().ToList().ForEach(d => OnPlayerChoiceStart -= (Action)d);
-        OnPlayerChoiceEnd?.GetInvocationList().ToList().ForEach(d => OnPlayerChoiceEnd -= (Action)d);
-        OnCombatRoundStart?.GetInvocationList().ToList().ForEach(d => OnCombatRoundStart -= (Action)d);
-        OnCombatRoundEnd?.GetInvocationList().ToList().ForEach(d => OnCombatRoundEnd -= (Action)d);
-        OnBattleEnded?.GetInvocationList().ToList().ForEach(d => OnBattleEnded -= (Action<BattleEndStateEnum>)d);
-        
+
+        OnPlayerChoiceStart = null;
+        OnPlayerChoiceEnd = null;
+        OnCombatRoundStart = null;
+        OnCombatRoundEnd = null;
+        OnBattleEnded = null;
+
         _sourceActions.Clear();
         _selectedSource = null;
         _selectedAction = null;
         _selectedTargets = null;
-    }
 
-    /*
-    public void RemovePartyMember(PlayerEntity member)
-    {
-        PartyManager.Instance.Members.Remove(member);
-        _sourceActions.Remove(member);
-        print("Removed " + member.Name + " from party. Remaining members: " + PartyManager.Instance.Members.Count);
+        _isEscaping = false;
     }
-    */
 
     public List<PlayerEntity> GetActionedAllies()
     {
@@ -72,7 +67,7 @@ public class CombatManager : MonoBehaviour
     {
         _selectedSource = entity;
     }
-    
+
     public PlayerEntity GetSelectedSource()
     {
         return _selectedSource;
@@ -82,19 +77,19 @@ public class CombatManager : MonoBehaviour
     {
         _selectedAction = action;
         _selectedTargets = new List<BaseEntity>();
-        
+
         var needsContinue = _selectedAction.TargetCount > 0;
-        
+
         if (!needsContinue)
         {
             _sourceActions[_selectedSource] = new SourceActionData
             {
                 action = _selectedAction,
-                Targets = _selectedAction.TargetEnemy ? 
-                    enemies.Select(entity => entity as BaseEntity).ToList() :
-                    PartyManager.Instance.Members.Select(entity => entity as BaseEntity).ToList()
+                Targets = _selectedAction.TargetEnemy
+                    ? enemies.Select(e => (BaseEntity)e).ToList()
+                    : PartyManager.Instance.Members.Select(e => (BaseEntity)e).ToList()
             };
-            
+
             if (_sourceActions.Count >= PartyManager.Instance.Members.Count)
             {
                 StartCoroutine(StartRound());
@@ -103,21 +98,22 @@ public class CombatManager : MonoBehaviour
 
         return needsContinue;
     }
-    
+
     public BaseAction GetSelectedAbility()
     {
         return _selectedAction;
     }
-    
+
     public bool SelectTarget(BaseEntity entity)
     {
         _selectedTargets.Add(entity);
-        
-        var needsContinue = _selectedTargets.Count < _selectedAction.TargetCount && 
-                            !(
-                                _selectedAction.TargetEnemy && _selectedTargets.Count >= enemies.Count || 
-                                !_selectedAction.TargetEnemy && _selectedTargets.Count >= PartyManager.Instance.Members.Count
-                                );
+
+        var needsContinue =
+            _selectedTargets.Count < _selectedAction.TargetCount &&
+            !(
+                _selectedAction.TargetEnemy && _selectedTargets.Count >= enemies.Count ||
+                !_selectedAction.TargetEnemy && _selectedTargets.Count >= PartyManager.Instance.Members.Count
+            );
 
         if (!needsContinue)
         {
@@ -126,13 +122,13 @@ public class CombatManager : MonoBehaviour
                 action = _selectedAction,
                 Targets = _selectedTargets
             };
-            
+
             if (_sourceActions.Count >= PartyManager.Instance.Members.Count)
             {
                 StartCoroutine(StartRound());
             }
         }
-        
+
         return needsContinue;
     }
 
@@ -140,132 +136,160 @@ public class CombatManager : MonoBehaviour
     {
         return _sourceActions.Keys.ToList();
     }
-    
+
     public void AttemptEscape()
     {
         CheckEscapeRng(1f);
-        
         _sourceActions.Clear();
-        
         StartCoroutine(StartRound());
     }
-    
+
     public int GetItemUsedQuantity(BaseCombatItem item)
     {
-        var quantityUsed = 0;
+        int quantityUsed = 0;
+
         foreach (var action in _sourceActions.Values)
         {
             if (action.action == item)
-            {
                 quantityUsed++;
-            }
         }
-        
+
         return quantityUsed;
     }
-    
+
     public void SetEncounter(CombatEncounter encounter)
     {
         enemies.Clear();
+
         encounter.enemies.ForEach(enemy =>
         {
             var instance = (EnemyEntity)enemy.CreateInstance();
             enemies.Add(instance);
         });
     }
-    
+
     private void CheckEscapeRng(float chance)
     {
         var roll = Random.Range(0f, 1f);
         if (roll <= chance)
-        {
             _isEscaping = true;
-        }
     }
 
     private IEnumerator StartRound()
     {
         OnPlayerChoiceEnd?.Invoke();
-        
         OnCombatRoundStart?.Invoke();
-        
+
         foreach (var sourceAction in _sourceActions)
         {
-            yield return sourceAction.Value.action.Apply(sourceAction.Key, sourceAction.Value.Targets);
+            yield return sourceAction.Value.action.Apply(
+                sourceAction.Key,
+                sourceAction.Value.Targets
+            );
         }
-        
+
         yield return new WaitForSeconds(1.5f);
 
         foreach (var enemy in enemies)
         {
             if (enemy.CurrentHp <= 0)
-            {
                 continue;
-            }
-            
+
             var ability = enemy.Abilities[Random.Range(0, enemy.Abilities.Count)];
+
+            List<BaseEntity> targets;
 
             if (ability.TargetCount <= 0)
             {
-                yield return ability.Apply(enemy, PartyManager.Instance.Members.Where(member => member.CurrentHp > 0).Select(entity => entity as BaseEntity).ToList());
+                yield return ability.Apply(
+                    enemy,
+                    PartyManager.Instance.Members
+                        .Where(m => m.CurrentHp > 0)
+                        .Cast<BaseEntity>()
+                        .ToList()
+                );
+
                 continue;
             }
 
-            List<BaseEntity> targets;
             if (ability.TargetEnemy)
             {
-                targets = PartyManager.Instance.Members.Where(member => member.CurrentHp > 0).OrderBy(qu => Guid.NewGuid()).Take(ability.TargetCount).Select(entity => entity as BaseEntity).ToList();
-                yield return ability.Apply(enemy, targets);
+                targets = PartyManager.Instance.Members
+                    .Where(m => m.CurrentHp > 0)
+                    .OrderBy(_ => Guid.NewGuid())
+                    .Take(ability.TargetCount)
+                    .Cast<BaseEntity>()
+                    .ToList();
             }
             else
             {
-                targets = enemies.Where(e => e.CurrentHp > 0).OrderBy(qu => Guid.NewGuid()).Take(ability.TargetCount).Select(entity => entity as BaseEntity).ToList();
-                yield return ability.Apply(enemy, targets);
+                targets = enemies
+                    .Where(e => e.CurrentHp > 0)
+                    .OrderBy(_ => Guid.NewGuid())
+                    .Take(ability.TargetCount)
+                    .Cast<BaseEntity>()
+                    .ToList();
             }
+
+            yield return ability.Apply(enemy, targets);
         }
-        
+
         _sourceActions.Clear();
-        
         OnCombatRoundEnd?.Invoke();
 
-        PartyManager.Instance.CheckForDeadMembers();
-        
-        if (enemies.All(enemy => enemy.CurrentHp <= 0))
+        // =========================
+        // VICTORY
+        // =========================
+        if (enemies.All(e => e.CurrentHp <= 0))
         {
             Debug.Log("Victory!");
+
             OnBattleEnded?.Invoke(BattleEndStateEnum.Victory);
 
-            CheckpointManager.Instance.SetNewMementoPosition(playerPositionAfterCombat);
+            // 🔥 IMPORTANT: prevenim LoadGame automat în PlatformerScene
+            CheckpointManager.SkipAutoLoadOnce = true;
 
             FadeToPlatformerScene();
-            
             yield break;
         }
-        if (PartyManager.Instance.Members.All(member => member.CurrentHp <= 0))
+
+        // =========================
+        // DEFEAT
+        // =========================
+        if (PartyManager.Instance.Members.All(m => m.CurrentHp <= 0))
         {
             Debug.Log("Defeat!");
+
             OnBattleEnded?.Invoke(BattleEndStateEnum.Defeat);
+
+            FadeToPlatformerScene(); 
+            // (dacă ai LoadGame pe defeat în alt script, rămâne acolo controlul)
+
             yield break;
         }
+
+        // =========================
+        // ESCAPE
+        // =========================
         if (_isEscaping)
         {
             Debug.Log("Escaped!");
+
             OnBattleEnded?.Invoke(BattleEndStateEnum.Escape);
+
+            FadeToPlatformerScene();
             yield break;
         }
-        
+
         OnPlayerChoiceStart?.Invoke();
     }
 
-    async void FadeToPlatformerScene()
+    private async void FadeToPlatformerScene()
     {
         await FadeManager.Instance.FadeToBlack();
-
         await SceneManager.LoadSceneAsync("PlatformerScene");
-
         await FadeManager.Instance.FadeToTransparent();
     }
-
 }
 
 public struct SourceActionData

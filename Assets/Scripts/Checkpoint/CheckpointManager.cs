@@ -8,119 +8,111 @@ public class CheckpointManager : MonoBehaviour
 {
     public static CheckpointManager Instance { get; private set; }
 
+    // 🔥 used to prevent auto-load after victory scene transition
+    public static bool SkipAutoLoadOnce;
+
     private PlayerMemento _latestMemento;
-    public  CheckpointTrigger LastCheckpoint { get; private set; }
-    public  bool HasCheckpoint() => _latestMemento != null;
+    public CheckpointTrigger LastCheckpoint { get; private set; }
+
+    public bool HasCheckpoint() => _latestMemento != null;
 
     private void Awake()
     {
-        // If an old instance exists (from DontDestroyOnLoad in editor),
-        // destroy the OLD one and replace it with this fresh one.
-        // This ensures the latest compiled code is always running.
         if (Instance != null && Instance != this)
         {
-            Destroy(Instance.gameObject);
+            Destroy(gameObject);
+            return;
         }
+
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
     {
-        if (SaveSystem.HasSave())
-            LoadGame();
-    }
+        if (SkipAutoLoadOnce)
+        {
+            SkipAutoLoadOnce = false;
+            return;
+        }
 
-    public void SetNewMementoPosition(Vector3 newPosition)
-    {
-        if (_latestMemento == null) return;
-        _latestMemento = new PlayerMemento(
-            position:        newPosition,
-            rotation:        _latestMemento.Rotation,
-            velocity:        _latestMemento.Velocity,
-            angularVelocity: _latestMemento.AngularVelocity,
-            health:          _latestMemento.Health,
-            stamina:         _latestMemento.Stamina,
-            score:           _latestMemento.Score
-        );
-        SaveGame();
+        if (SaveSystem.HasSave())
+        {
+            LoadGame();
+        }
     }
 
     public void SaveCheckpoint(PlayerOriginator player, CheckpointTrigger trigger)
     {
         if (player == null || trigger == null)
         {
-            Debug.LogWarning("[Checkpoint] Save failed: missing player or trigger.");
+            Debug.LogWarning("[Checkpoint] Save failed: null reference.");
             return;
         }
 
-        // Destroy the collider on the previous checkpoint permanently
-        if (LastCheckpoint != null)
-        {
-            BoxCollider2D prev = LastCheckpoint.GetComponent<BoxCollider2D>();
-            if (prev != null)
-            {
-                Destroy(prev);
-                Debug.Log("[Checkpoint] Destroyed BoxCollider2D on '" + LastCheckpoint.name + "'.");
-            }
-            else
-            {
-                Debug.LogError("[Checkpoint] '" + LastCheckpoint.name + "' has no BoxCollider2D to destroy!");
-            }
-        }
-        else
-        {
-            Debug.Log("[Checkpoint] First checkpoint reached — no previous to destroy.");
-        }
-
         _latestMemento = player.SaveState();
-        LastCheckpoint  = trigger;
-        Debug.Log("[Checkpoint] Active checkpoint is now '" + trigger.name + "'.");
+        LastCheckpoint = trigger;
 
         SaveGame();
     }
 
     public void RestoreLastCheckpoint(PlayerOriginator player)
     {
-        if (_latestMemento == null) { Debug.LogWarning("[Checkpoint] No checkpoint saved yet."); return; }
-        if (player == null) { Debug.LogWarning("[Checkpoint] Restore failed: player is null."); return; }
+        if (_latestMemento == null || player == null)
+        {
+            Debug.LogWarning("[Checkpoint] Restore failed.");
+            return;
+        }
+
         player.RestoreState(_latestMemento);
     }
 
     public void SaveGame()
     {
-        if (_latestMemento == null) { Debug.LogWarning("[SaveSystem] No memento to save."); return; }
+        if (_latestMemento == null)
+        {
+            Debug.LogWarning("[Checkpoint] No data to save.");
+            return;
+        }
 
         SaveData data = new SaveData
         {
-            PlayerX            = _latestMemento.Position.x,
-            PlayerY            = _latestMemento.Position.y,
-            RotationZ          = _latestMemento.Rotation.eulerAngles.z,
-            Health             = _latestMemento.Health,
-            Stamina            = _latestMemento.Stamina,
-            Score              = _latestMemento.Score,
-            LastCheckpointName = LastCheckpoint != null ? LastCheckpoint.name : string.Empty,
+            PlayerX = _latestMemento.Position.x,
+            PlayerY = _latestMemento.Position.y,
+            RotationZ = _latestMemento.Rotation.eulerAngles.z,
+            Health = _latestMemento.Health,
+            Stamina = _latestMemento.Stamina,
+            Score = _latestMemento.Score,
+            LastCheckpointName = LastCheckpoint != null ? LastCheckpoint.name : string.Empty
         };
 
-        // --- SALVARE STARE DIALOGURI ---
+        // ----------------------------
+        // DIALOGUE STATE
+        // ----------------------------
         foreach (var zone in FindObjectsByType<DialogueZone>(FindObjectsSortMode.None))
         {
             if (zone.IsDisabled)
-            {
                 data.DisabledDialogueZones.Add(zone.gameObject.name);
-            }
         }
 
-        // --- SALVARE STARE ENCOUNTERS VIA REFLECTION ---
-        foreach (var encounter in FindObjectsByType<Encounter>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+        // ----------------------------
+        // ENCOUNTER SAVE (ONLY VALID ONES)
+        // ----------------------------
+        float checkpointX = LastCheckpoint != null
+            ? LastCheckpoint.transform.position.x
+            : float.MaxValue;
+
+        foreach (var encounter in FindObjectsByType<Encounter>(
+                     FindObjectsInactive.Include,
+                     FindObjectsSortMode.None))
         {
-            if (!encounter.gameObject.activeSelf)
+            if (!encounter.gameObject.activeSelf &&
+                encounter.transform.position.x <= checkpointX)
             {
-                string encounterID = GetEncounterIDViaReflection(encounter);
-                if (!string.IsNullOrEmpty(encounterID))
-                {
-                    data.DefeatedEncounterIDs.Add(encounterID);
-                }
+                string id = GetEncounterID(encounter);
+
+                if (!string.IsNullOrEmpty(id))
+                    data.DefeatedEncounterIDs.Add(id);
             }
         }
 
@@ -132,90 +124,109 @@ public class CheckpointManager : MonoBehaviour
         SaveData data = SaveSystem.Load();
         if (data == null) return;
 
+        // ----------------------------
+        // CHECKPOINT RESTORE
+        // ----------------------------
         foreach (var cp in FindObjectsByType<CheckpointTrigger>(FindObjectsSortMode.None))
         {
             if (cp.name == data.LastCheckpointName)
                 LastCheckpoint = cp;
         }
 
-        // --- RESTAURARE DIALOGURI ---
+        // ----------------------------
+        // DIALOGUE RESTORE
+        // ----------------------------
         foreach (var zone in FindObjectsByType<DialogueZone>(FindObjectsSortMode.None))
         {
             if (data.DisabledDialogueZones.Contains(zone.gameObject.name))
-            {
                 zone.ForceDisable();
-            }
             else
             {
-                var collider = zone.GetComponent<BoxCollider2D>();
-                if (collider != null) collider.enabled = true;
+                var col = zone.GetComponent<BoxCollider2D>();
+                if (col != null)
+                    col.enabled = true;
             }
         }
 
-        // --- RESTAURARE ENCOUNTERS ---
-        foreach (var encounter in FindObjectsByType<Encounter>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+        // =====================================================
+        // 🔥 CRITICAL FIX: RESET ALL ENCOUNTERS FIRST
+        // =====================================================
+        foreach (var encounter in FindObjectsByType<Encounter>(
+                     FindObjectsInactive.Include,
+                     FindObjectsSortMode.None))
         {
-            string encounterID = GetEncounterIDViaReflection(encounter);
-            if (string.IsNullOrEmpty(encounterID)) continue;
-
-            if (data.DefeatedEncounterIDs.Contains(encounterID))
-            {
-                encounter.gameObject.SetActive(false);
-            }
-            else
-            {
-                encounter.gameObject.SetActive(true);
-            }
+            encounter.gameObject.SetActive(true);
         }
 
+        // sync runtime memory
+        if (EncounterProgressManager.Instance != null)
+        {
+            EncounterProgressManager.Instance.ResetDefeatedEncounters(
+                data.DefeatedEncounterIDs
+            );
+        }
+
+        // apply save state
+        foreach (var encounter in FindObjectsByType<Encounter>(
+                     FindObjectsInactive.Include,
+                     FindObjectsSortMode.None))
+        {
+            string id = GetEncounterID(encounter);
+            if (string.IsNullOrEmpty(id)) continue;
+
+            if (data.DefeatedEncounterIDs.Contains(id))
+                encounter.gameObject.SetActive(false);
+        }
+
+        // ----------------------------
+        // PLAYER RESTORE
+        // ----------------------------
         _latestMemento = new PlayerMemento(
-            position:        new Vector3(data.PlayerX, data.PlayerY, 0f),
-            rotation:        Quaternion.Euler(0f, 0f, data.RotationZ),
-            velocity:        Vector3.zero,
+            position: new Vector3(data.PlayerX, data.PlayerY, 0f),
+            rotation: Quaternion.Euler(0f, 0f, data.RotationZ),
+            velocity: Vector3.zero,
             angularVelocity: Vector3.zero,
-            health:          data.Health,
-            stamina:         data.Stamina,
-            score:           data.Score
+            health: data.Health,
+            stamina: data.Stamina,
+            score: data.Score
         );
 
         PlayerOriginator player = FindFirstObjectByType<PlayerOriginator>();
-        if (player == null) { Debug.LogError("[SaveSystem] PlayerOriginator not found!"); return; }
+
+        if (player == null)
+        {
+            Debug.LogError("[Checkpoint] Player not found.");
+            return;
+        }
+
         player.RestoreState(_latestMemento);
-        Debug.Log("[SaveSystem] Game loaded. Player at (" + data.PlayerX + ", " + data.PlayerY + ")");
+
+        Debug.Log("[Checkpoint] Load complete.");
     }
 
-    // Rutină ajutătoare de Reflection pentru a extrage valoarea din câmpul privat/protejat '_id' moștenit din MonoBehaviourID
-    private string GetEncounterIDViaReflection(Encounter encounter)
+    // ----------------------------
+    // SAFE ENCOUNTER ID READ
+    // ----------------------------
+    private string GetEncounterID(Encounter encounter)
     {
         try
         {
-            // Căutăm câmpul numit "_id" în ierarhia claselor (deoarece aparține clasei părinte MonoBehaviourID)
-            var field = typeof(Encounter).GetField("_id", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.FlattenHierarchy);
-            if (field == null)
-            {
-                // Dacă nu-l găsește direct, verificăm tipul de bază explicit
-                field = typeof(Encounter).BaseType?.GetField("_id", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-            }
+            var field = typeof(Encounter).GetField(
+                "_id",
+                System.Reflection.BindingFlags.NonPublic |
+                System.Reflection.BindingFlags.Instance |
+                System.Reflection.BindingFlags.FlattenHierarchy
+            );
 
-            if (field != null)
-            {
-                var idObj = field.GetValue(encounter);
-                if (idObj != null)
-                {
-                    // Accesăm proprietatea .Value a obiectului ID (presupunând că ID-ul are proprietatea publică .Value de tip string)
-                    var valueProperty = idObj.GetType().GetProperty("Value");
-                    if (valueProperty != null)
-                    {
-                        return valueProperty.GetValue(idObj)?.ToString();
-                    }
-                }
-            }
+            var idObj = field?.GetValue(encounter);
+            var prop = idObj?.GetType().GetProperty("Value");
+
+            return prop?.GetValue(idObj)?.ToString();
         }
-        catch (Exception e)
+        catch
         {
-            Debug.LogError("[CheckpointManager] Reflection failed to get ID: " + e.Message);
+            return string.Empty;
         }
-        return string.Empty;
     }
 
     private void OnApplicationQuit()
