@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: W311-K33P3R
   m_EditorClassIdentifier: Assembly-CSharp::EnemyEntity
   <Name>k__BackingField: W311-K33P3R
-  <MaxHp>k__BackingField: 40
-  <CurrentHp>k__BackingField: 40
+  <MaxHp>k__BackingField: 60
+  <CurrentHp>k__BackingField: 60
   <Abilities>k__BackingField:
   - {fileID: 11400000, guid: ce88e2155a4b28c4dbf9abf5dff189d5, type: 2}
   <Thumbnail>k__BackingField: {fileID: 21300000, guid: 920a6d930515e3649bfbac20c4ddfb71, type: 3}

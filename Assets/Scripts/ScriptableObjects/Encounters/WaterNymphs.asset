@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: WaterNymphs
   m_EditorClassIdentifier: Assembly-CSharp::CombatEncounter
   enemies:
-  - {fileID: 11400000, guid: 8732e2f8a2d1e4fc1a2dd46a374c85e5, type: 2}
+  - {fileID: 11400000, guid: da470e3a4b74ec04db0d15a0d3666ef5, type: 2}
+  - {fileID: 11400000, guid: 3d47fb9101b395147bed2231e4586a86, type: 2}
+  - {fileID: 11400000, guid: 06f2579744419d843ab38fc2c94ea8bc, type: 2}

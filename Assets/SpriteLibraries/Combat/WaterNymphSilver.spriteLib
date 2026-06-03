@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5e6fedc2472449cead18ef23b5cb30d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.2D.Animation.Runtime::UnityEngine.U2D.Animation.SpriteLibrarySourceAsset
+  m_Library:
+  - m_Name: Idle
+    m_Hash: 1008081451
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Idle_1
+      m_Hash: 641084251
+      m_Sprite: {fileID: 2262786169693331672, guid: 65967b33ac75a07409f48495ac9ae4b0, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 2262786169693331672, guid: 65967b33ac75a07409f48495ac9ae4b0, type: 3}
+    - m_Name: Idle_2
+      m_Hash: 1061124833
+      m_Sprite: {fileID: -7040587931416560022, guid: 65967b33ac75a07409f48495ac9ae4b0, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -7040587931416560022, guid: 65967b33ac75a07409f48495ac9ae4b0, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 2
+  - m_Name: Hurt
+    m_Hash: 666872612
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Hurt_1
+      m_Hash: 499691303
+      m_Sprite: {fileID: 4008635529371882827, guid: 769ee217eba834b4e821da3ae2323c11, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 4008635529371882827, guid: 769ee217eba834b4e821da3ae2323c11, type: 3}
+    - m_Name: Hurt_2
+      m_Hash: 79822493
+      m_Sprite: {fileID: 85135728197038170, guid: 769ee217eba834b4e821da3ae2323c11, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 85135728197038170, guid: 769ee217eba834b4e821da3ae2323c11, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 2
+  m_PrimaryLibraryGUID: 
+  m_ModificationHash: 639161054285733693
+  m_Version: 1
