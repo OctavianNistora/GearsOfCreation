@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6068466930da674e95fe479708482a5, type: 3}
   m_Name: GlassPane3
   m_EditorClassIdentifier: Assembly-CSharp::MovementTile
-  m_Sprite: {fileID: -1857047444, guid: 7cfb90e53c70ba14488b3c0df05563f2, type: 3}
+  m_Sprite: {fileID: -1660985821, guid: 7cfb90e53c70ba14488b3c0df05563f2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

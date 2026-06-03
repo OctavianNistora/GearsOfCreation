@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: ConveyorBeltRight1
   m_EditorClassIdentifier: Assembly-CSharp::AnimatedMovementTile
   m_AnimatedSprites:
-  - {fileID: -1365878386, guid: 7cfb90e53c70ba14488b3c0df05563f2, type: 3}
-  - {fileID: 1813417396, guid: 7cfb90e53c70ba14488b3c0df05563f2, type: 3}
-  - {fileID: -1298582247, guid: 7cfb90e53c70ba14488b3c0df05563f2, type: 3}
+  - {fileID: -1510069223, guid: 7cfb90e53c70ba14488b3c0df05563f2, type: 3}
+  - {fileID: -566021989, guid: 7cfb90e53c70ba14488b3c0df05563f2, type: 3}
+  - {fileID: 2093874441, guid: 7cfb90e53c70ba14488b3c0df05563f2, type: 3}
   m_MinSpeed: 5
   m_MaxSpeed: 5
   m_AnimationStartTime: 0
