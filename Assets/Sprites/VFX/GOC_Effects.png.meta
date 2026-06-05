@@ -131,7 +131,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 192
+        y: 288
         width: 96
         height: 96
       alignment: 0
@@ -153,7 +153,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 96
-        y: 192
+        y: 288
         width: 96
         height: 96
       alignment: 0
@@ -175,7 +175,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 192
-        y: 192
+        y: 288
         width: 96
         height: 96
       alignment: 0
@@ -197,7 +197,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 96
+        y: 192
         width: 96
         height: 96
       alignment: 0
@@ -219,7 +219,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 96
-        y: 96
+        y: 192
         width: 96
         height: 96
       alignment: 0
@@ -241,7 +241,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 192
-        y: 96
+        y: 192
         width: 96
         height: 96
       alignment: 0
@@ -263,7 +263,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 96
         width: 96
         height: 96
       alignment: 0
@@ -285,7 +285,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 96
-        y: 0
+        y: 96
         width: 96
         height: 96
       alignment: 0
@@ -307,7 +307,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 192
-        y: 0
+        y: 96
         width: 96
         height: 96
       alignment: 0
@@ -320,6 +320,72 @@ TextureImporter:
       bones: []
       spriteID: d4c3b7f8ed0ea91e0800000000000000
       internalID: -2190191022267745203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GOC_Effects_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c5de02dec5588645a0508d1162e486f
+      internalID: -803654290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GOC_Effects_10
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3481c59def8e2eb49925a91d627e150d
+      internalID: 1935700618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GOC_Effects_11
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da83e951a0e676243a04ebf9708e525e
+      internalID: 823662195
       vertices: []
       indices: 
       edges: []
@@ -342,6 +408,8 @@ TextureImporter:
     nameFileIdTable:
       GOC_Effects_0: 6272953951736746308
       GOC_Effects_1: 4990194006000649005
+      GOC_Effects_10: 1935700618
+      GOC_Effects_11: 823662195
       GOC_Effects_2: 7475011930098181583
       GOC_Effects_3: 8299291718752206184
       GOC_Effects_4: 575991282962403039
@@ -349,6 +417,7 @@ TextureImporter:
       GOC_Effects_6: -5232911582031065830
       GOC_Effects_7: 8986046697371387880
       GOC_Effects_8: -2190191022267745203
+      GOC_Effects_9: -803654290
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

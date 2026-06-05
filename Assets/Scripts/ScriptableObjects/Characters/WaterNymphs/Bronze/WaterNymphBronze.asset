@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edebc423048940398126f9c58f1265a7, type: 3}
+  m_Name: WaterNymphBronze
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyEntity
+  <Name>k__BackingField: Bronze Water Nymph
+  <MaxHp>k__BackingField: 60
+  <CurrentHp>k__BackingField: 60
+  <Abilities>k__BackingField:
+  - {fileID: 11400000, guid: 8bd49163ec4e0ae4686897bf82b3ef45, type: 2}
+  - {fileID: 11400000, guid: 72549d1fc47b8684488129da96a8f141, type: 2}
+  <Thumbnail>k__BackingField: {fileID: 21300000, guid: 9585487eac47fc7499c4e4a24e00ea9f, type: 3}
+  <characterSpriteLibraryAsset>k__BackingField: {fileID: 7108339969198208228, guid: d1ce963d5a9550540b618ee0ad17cf1f, type: 3}
