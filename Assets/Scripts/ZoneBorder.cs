@@ -13,11 +13,13 @@ public class ZoneBorder : MonoBehaviour
     {
         if(player.transform.position.y < gameObject.transform.position.y)
         {
+            AudioManager.Instance.PlayMusic(AudioManager.Instance.glassyWaters);
             objectsUp.SetActive(false);
             objectsDown.SetActive(true);
         }
         else
         {
+            AudioManager.Instance.PlayMusic(AudioManager.Instance.tutorial);
             objectsUp.SetActive(true);
             objectsDown.SetActive(false);
         }
@@ -28,12 +30,14 @@ public class ZoneBorder : MonoBehaviour
         // if player descends through border
         if(collision.transform.position.y < gameObject.transform.position.y)
         {
+            AudioManager.Instance.PlayMusic(AudioManager.Instance.glassyWaters);
             objectsUp.SetActive(false);
             objectsDown.SetActive(true);
         }
         else
         {
             // if player climbs through border
+            AudioManager.Instance.PlayMusic(AudioManager.Instance.tutorial);
             objectsUp.SetActive(true);
             objectsDown.SetActive(false);
         }

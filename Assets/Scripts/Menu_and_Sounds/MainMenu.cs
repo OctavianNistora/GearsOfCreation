@@ -1,7 +1,12 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-public class MaimMenu : MonoBehaviour
+public class MainMenu : MonoBehaviour
 {
+    void Start()
+    {
+        AudioManager.Instance.PlayMusic(AudioManager.Instance.mainMenu);
+    }
+
     public void PlayGame()
     {
         SceneManager.LoadSceneAsync("PlatformerScene");
@@ -11,6 +16,5 @@ public class MaimMenu : MonoBehaviour
     {
         Application.Quit();
     }
-
 
 }

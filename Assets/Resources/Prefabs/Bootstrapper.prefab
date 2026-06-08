@@ -192,10 +192,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   musicSource: {fileID: 728421296522578678}
   SFXSource: {fileID: 3071542421343556171}
-  background: {fileID: 8300000, guid: 761f7c991e761a048a9489653f819ada, type: 3}
+  mainMenu: {fileID: 8300000, guid: 9054bb4a42a4d70458a6dbff86e6a76d, type: 3}
+  tutorial: {fileID: 8300000, guid: 761f7c991e761a048a9489653f819ada, type: 3}
+  glassyWaters: {fileID: 8300000, guid: 75ef725e3f14926479ace81e5757922e, type: 3}
+  combat: {fileID: 8300000, guid: aee0f92c163a16c4a981205d2dfd30af, type: 3}
   jump: {fileID: 8300000, guid: c1f6113b2c7a81543ad9f5b13684a8d4, type: 3}
-  death: {fileID: 8300000, guid: 6df762b0c4a54d94e9043049fdbd5f06, type: 3}
   walk: {fileID: 8300000, guid: f51fad49690b3c54db3ef4e1d4692325, type: 3}
+  defeat: {fileID: 8300000, guid: d215a5fe38847d3488b05a5d317bc207, type: 3}
+  victory: {fileID: 8300000, guid: 3f155cde342c5e74a8e0e99a94345a31, type: 3}
+  slash: {fileID: 8300000, guid: 407eae8c531075b44a7b11e35b5170ae, type: 3}
+  cleave: {fileID: 8300000, guid: c616b84bc5559a44885ca2cc4f540c2e, type: 3}
+  heal: {fileID: 8300000, guid: 61a1fd898e91ab84088ee4bce68d412c, type: 3}
+  rain: {fileID: 8300000, guid: 69647bf097465174db823913d6b9dda9, type: 3}
 --- !u!1 &2329590196268520274
 GameObject:
   m_ObjectHideFlags: 0
@@ -526,7 +534,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

@@ -18,6 +18,16 @@ public class CombatCharacterAnimationHandler : MonoBehaviour
     [SerializeField]
     private Animator vfxAnimator;
 
+    private AudioClip[] vfxSoundList = new AudioClip[4];
+
+    void Start()
+    {
+        vfxSoundList[0] = AudioManager.Instance.slash;
+        vfxSoundList[1] = AudioManager.Instance.cleave;
+        vfxSoundList[2] = AudioManager.Instance.heal;
+        vfxSoundList[3] = AudioManager.Instance.rain;
+    }
+
     public void Initialize(SpriteLibraryAsset characterSpriteLibraryAsset = null, SpriteLibraryAsset vfxSpriteLibraryAsset = null)
     {
         if (characterSpriteLibraryAsset)
@@ -47,6 +57,7 @@ public class CombatCharacterAnimationHandler : MonoBehaviour
     public IEnumerator PlayVFXAnimation(int vfxNumber)
     {
         Debug.Log("Playing VFX animation with number: " + vfxNumber);
+        AudioManager.Instance.PlaySFX(vfxSoundList[vfxNumber-1]);
         vfxAnimator.SetInteger(Number, vfxNumber);
         vfxAnimator.SetTrigger(VFX);
         yield return new WaitForSeconds(1f);

@@ -245,6 +245,10 @@ public class CombatManager : MonoBehaviour
         {
             Debug.Log("Defeat!");
             OnBattleEnded?.Invoke(BattleEndStateEnum.Defeat);
+
+            AudioManager.Instance.StopMusic();
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.defeat);
+            
             yield break;
         }
         if (_isEscaping)

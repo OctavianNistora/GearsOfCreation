@@ -11,6 +11,8 @@ public class EncounterTypeAdapter : MonoBehaviour
 
     private void Start()
     {
+        AudioManager.Instance.PlayMusic(AudioManager.Instance.combat);
+
         print(PartyManager.Instance.Members);
         switch (CombatManager.Instance.currentEncounterType)
         {
