@@ -891,6 +891,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ally 4
       objectReference: {fileID: 0}
+    - target: {fileID: 905979257403976064, guid: 0b3a7a3af139adf8e80d7099ed05d7b5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3158284234033738174, guid: 0b3a7a3af139adf8e80d7099ed05d7b5, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1
@@ -1187,6 +1191,10 @@ PrefabInstance:
     - target: {fileID: 905979257403976064, guid: 0b3a7a3af139adf8e80d7099ed05d7b5, type: 3}
       propertyPath: m_Name
       value: Ally 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 905979257403976064, guid: 0b3a7a3af139adf8e80d7099ed05d7b5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3158284234033738174, guid: 0b3a7a3af139adf8e80d7099ed05d7b5, type: 3}
       propertyPath: m_LocalPosition.y
