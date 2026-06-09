@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b334e93f69aa423bad8bb11be19dbec5, type: 3}
-  m_Name: Zana Apelor - Slap
+  m_Name: WaterFairy - Slap
   m_EditorClassIdentifier: Assembly-CSharp::SingleAttack
   <Name>k__BackingField: Rain
   <VFXNumber>k__BackingField: 4
