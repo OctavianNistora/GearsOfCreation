@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b334e93f69aa423bad8bb11be19dbec5, type: 3}
-  m_Name: Placeholder - Single
+  m_Name: Crab-67 - Single
   m_EditorClassIdentifier: Assembly-CSharp::SingleAttack
-  <Name>k__BackingField: Placeholder Slash
+  <Name>k__BackingField: Brainrot
+  <Description>k__BackingField: Placeholder description.
   <VFXNumber>k__BackingField: 1
   <ManaCost>k__BackingField: 0
   <Damage>k__BackingField: 15
