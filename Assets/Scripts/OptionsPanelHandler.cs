@@ -10,8 +10,11 @@ public class OptionsPanelHandler : MonoBehaviour
     [SerializeField] private String optionsPanelName;
 
     private VisualElement _actionPanel;
+    private VisualElement _tooltipPanel;
+    private Label _tooltipLabel;
     private List<Button> _buttonList;
-    private readonly Dictionary<Button, Action> _currentButtonActions = new();
+    private readonly Dictionary<Button, Action> _buttonClickActions = new();
+    private readonly Dictionary<Button, Action> _buttonHoverActions = new();
 
     private void Start()
     {
@@ -22,6 +25,23 @@ public class OptionsPanelHandler : MonoBehaviour
         var first = _actionPanel.Children();
         var second = first.Select(element => element.Children()).SelectMany(element => element);
         _buttonList = second.Select(element => element.Children().FirstOrDefault() as Button).ToList();
+        _buttonList.ForEach(button =>
+        {
+            button.RegisterCallback<MouseLeaveEvent>(HideTooltip);
+        });
+        
+        
+        _tooltipPanel = root.Q("AbilityTooltip");
+        _tooltipPanel.style.display = DisplayStyle.None;
+        _tooltipLabel = _tooltipPanel.Children().FirstOrDefault() as Label;
+    }
+
+    private void OnDestroy()
+    {
+        _buttonList.ForEach(button =>
+        {
+            button.UnregisterCallback<MouseLeaveEvent>(HideTooltip);
+        });
     }
 
     public void Enable(PanelsStateEnum state)
@@ -38,22 +58,50 @@ public class OptionsPanelHandler : MonoBehaviour
         _actionPanel.style.display = DisplayStyle.Flex;
     }
 
-    private void RemovePreviousEvent(int index)
+    private void RemoveButtonClickEvent(int index)
     {
-        if (!_currentButtonActions.ContainsKey(_buttonList[index]))
+        if (!_buttonClickActions.ContainsKey(_buttonList[index]))
         {
             return;
         }
         
-        var action = _currentButtonActions[_buttonList[index]];
-        _currentButtonActions.Remove(_buttonList[index]);
+        var action = _buttonClickActions[_buttonList[index]];
+        _buttonClickActions.Remove(_buttonList[index]);
         _buttonList[index].clicked -= action;
     }
 
-    private void AddButtonEvent(int index, Action action)
+    private void AddButtonClickEvent(int index, Action action)
     {
-        _currentButtonActions.Add(_buttonList[index], action);
+        _buttonClickActions.Add(_buttonList[index], action);
         _buttonList[index].clicked += action;
+    }
+
+    private void HideTooltip(MouseLeaveEvent even)
+    {
+        _tooltipPanel.style.display = DisplayStyle.None;
+    }
+    
+    private void ShowTooltip(MouseEnterEvent even, string description)
+    {
+        _tooltipLabel.text = description;
+        _tooltipPanel.style.display = DisplayStyle.Flex;
+    }
+    
+    private void RemoveButtonHoverEvent(int index)
+    {
+        if (!_buttonHoverActions.ContainsKey(_buttonList[index]))
+        {
+            return;
+        }
+        
+        _buttonHoverActions.Remove(_buttonList[index]);
+        _buttonList[index].UnregisterCallback<MouseEnterEvent, string>(ShowTooltip);
+    }
+    
+    private void AddButtonHoverEvent(int index, string description)
+    {
+        _buttonHoverActions.Add(_buttonList[index], () => ShowTooltip(new MouseEnterEvent(), description));
+        _buttonList[index].RegisterCallback<MouseEnterEvent, string>(ShowTooltip, description);
     }
     
     private void LoadItems()
@@ -82,16 +130,19 @@ public class OptionsPanelHandler : MonoBehaviour
             _buttonList[i].style.display = DisplayStyle.Flex;
             _buttonList[i].text = $"{itemsWithQuantity[i].Name}\tx{quantityList[i]}";
             
-            RemovePreviousEvent(i);
+            RemoveButtonClickEvent(i);
+            RemoveButtonHoverEvent(i);
             var item = itemsWithQuantity[i];
-            AddButtonEvent(i, () => SelectAction(item));
+            AddButtonClickEvent(i, () => SelectAction(item));
+            AddButtonHoverEvent(i, item.Description);
         }
 
         for (; i < _buttonList.Count; i++)
         {
             _buttonList[i].style.display = DisplayStyle.None;
             
-            RemovePreviousEvent(i);
+            RemoveButtonClickEvent(i);
+            RemoveButtonHoverEvent(i);
         }
     }
 
@@ -108,16 +159,19 @@ public class OptionsPanelHandler : MonoBehaviour
             
             _buttonList[i].SetEnabled(user.CurrentMana >= abilities[i].ManaCost);
             
-            RemovePreviousEvent(i);
+            RemoveButtonClickEvent(i);
+            RemoveButtonHoverEvent(i);
             var ability = abilities[i];
-            AddButtonEvent(i, () => SelectAction(ability));
+            AddButtonClickEvent(i, () => SelectAction(ability));
+            AddButtonHoverEvent(i, ability.Description);
         }
 
         for (; i < _buttonList.Count; i++)
         {
             _buttonList[i].style.display = DisplayStyle.None;
             
-            RemovePreviousEvent(i);
+            RemoveButtonClickEvent(i);
+            RemoveButtonHoverEvent(i);
         }
     }
 
@@ -138,5 +192,6 @@ public class OptionsPanelHandler : MonoBehaviour
     public void Disable()
     {
         _actionPanel.style.display = DisplayStyle.None;
+        _tooltipPanel.style.display = DisplayStyle.None;
     }
 }

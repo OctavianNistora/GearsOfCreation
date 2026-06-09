@@ -1,5 +1,8 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/TurnCombat.uss?fileID=7433441132597879392&amp;guid=ce1b67bb3551c4f9184d99ac017b4dce&amp;type=3#TurnCombat"/>
+    <ui:VisualElement name="AbilityTooltip" style="flex-grow: initial; height: 20%; top: 0; position: absolute; width: 100%; background-color: rgb(64, 64, 64); border-top-left-radius: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px; border-bottom-left-radius: 8px; display: flex; visibility: visible;">
+        <ui:Label name="AbilityTooltip_Text" text="Insert text here" class="combat-notification-row-text normal-text" style="-unity-text-auto-size: best-fit 18px 36px; -unity-text-generator: advanced; font-size: 24px; white-space: pre-wrap; margin-left: 10px; margin-right: 10px; margin-top: 2px; padding-left: 2px;"/>
+    </ui:VisualElement>
     <ui:VisualElement name="CombatToasts" style="flex-grow: initial; height: 40%; top: 0; position: absolute; width: 100%;">
         <ui:VisualElement name="CombatToast1" class="combat-notification-row" style="flex-grow: initial; height: 10%; flex-shrink: initial;">
             <ui:Label name="CombatToast_Text" text="Text 1" class="combat-notification-row-text normal-text" style="-unity-text-auto-size: best-fit 8px 64px; -unity-text-generator: advanced; font-size: 18px;"/>
@@ -42,7 +45,7 @@
         </ui:VisualElement>
         <ui:VisualElement name="CharactersPanel" enabled="true" focusable="false" class="panel-background" style="background-color: rgb(51, 51, 51); margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; width: 75%; flex-direction: row; flex-grow: initial; justify-content: space-evenly; display: flex;">
             <ui:Button text="" name="" display-tooltip-when-elided="false" triple-click-selects-line="false" double-click-selects-word="false" emoji-fallback-support="false" enable-rich-text="false" selectable="true" focusable="true" class="character-panel-element" style="display: flex;">
-                <ui:VisualElement name="Character_Root">
+                <ui:VisualElement name="Character_Root" style="display: flex;">
                     <ui:Image name="Thumbnail" source="project://database/Assets/Images/No_Image_Available.jpg?fileID=2800000&amp;guid=cd3a516f85c504c3fbf0f9d34f46cebb&amp;type=3#No_Image_Available" class="character-panel-image" style="padding-top: 2%; padding-right: 2%; padding-bottom: 2%; padding-left: 2%;"/>
                     <ui:Label text="Name" name="Name" class="normal-text" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 2%; padding-right: 2%; padding-bottom: 2%; padding-left: 2%; -unity-text-align: middle-center;"/>
                     <ui:VisualElement name="HP" style="flex-direction: row-reverse; padding-top: 2%; padding-right: 2%; padding-bottom: 2%; padding-left: 2%; align-items: center; align-content: center; align-self: auto; justify-content: center;">
