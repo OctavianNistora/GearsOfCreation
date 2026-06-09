@@ -10,6 +10,11 @@ public class AoeAttack : DamagingCharacterAbility
 
     protected override IEnumerator ApplyLogic(BaseEntity source, List<BaseEntity> targets)
     {
+        if (targets.Count == 0)
+        {
+            yield break;
+        }
+
         var animationEnumeratorList = new List<IEnumerator>();
         targets.ForEach(target => animationEnumeratorList.Add(Wrapper(source, target)));
 

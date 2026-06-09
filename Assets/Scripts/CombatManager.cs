@@ -9,6 +9,9 @@ using Random = UnityEngine.Random;
 
 public class CombatManager : MonoBehaviour
 {
+    [Header("References")]
+    public DefeatScreen defeatScreen;
+
     public static CombatManager Instance { get; private set; }
     
     public EncounterType currentEncounterType;
@@ -248,6 +251,7 @@ public class CombatManager : MonoBehaviour
 
             AudioManager.Instance.StopMusic();
             AudioManager.Instance.PlaySFX(AudioManager.Instance.defeat);
+            defeatScreen.gameObject.SetActive(true);
             
             yield break;
         }
