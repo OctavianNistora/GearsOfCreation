@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 8ff007812621feb4196bfa6555666d1d
+guid: 684111313797cba419c183fdb0dda5e3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2902886909703509365
-    second: WellGuardianIdle_0
+      213: -6570328849516232550
+    second: Crab-67Idle_0
+  - first:
+      213: -3366669957927959653
+    second: Crab-67Idle_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -49,8 +52,8 @@ TextureImporter:
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 7
-  spritePivot: {x: 0.5, y: 0}
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -100,13 +103,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: WellGuardianIdle_0
+      name: Crab-67Idle_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 578
-        height: 863
+        width: 670
+        height: 490
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,30 +118,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b8aadfb5cbfd6b7d0800000000000000
-      internalID: -2902886909703509365
+      spriteID: a908513f8b081d4a0800000000000000
+      internalID: -6570328849516232550
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WellGuardianIdle_1
+      name: Crab-67Idle_1
       rect:
         serializedVersion: 2
-        x: 578
+        x: 670
         y: 0
-        width: 578
-        height: 863
+        width: 670
+        height: 490
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: de5b61cf4b4fc874e94f2f33913e5be6
-      internalID: -2140468286
+      spriteID: b9389b9b28f2741d0800000000000000
+      internalID: -3366669957927959653
       vertices: []
       indices: 
       edges: []
@@ -147,8 +150,8 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    spriteID: 832261a62078d9046a380af9a5e34cbf
+    internalID: 0
     vertices: []
     indices: 
     edges: []
@@ -157,10 +160,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":578.0,"y":863.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":670.0,"y":490.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      WellGuardianIdle_0: -2902886909703509365
-      WellGuardianIdle_1: -2140468286
+      Crab-67Idle_0: -6570328849516232550
+      Crab-67Idle_1: -3366669957927959653
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 8ff007812621feb4196bfa6555666d1d
+guid: 392a17ad09c731b4ebb47dcf7f0db8ba
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2902886909703509365
-    second: WellGuardianIdle_0
+      213: 147159259431284069
+    second: Start button_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,11 +46,11 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 7
-  spritePivot: {x: 0.5, y: 0}
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -100,45 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: WellGuardianIdle_0
+      name: Start button_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 3
         y: 0
-        width: 578
-        height: 863
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        width: 568
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b8aadfb5cbfd6b7d0800000000000000
-      internalID: -2902886909703509365
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WellGuardianIdle_1
-      rect:
-        serializedVersion: 2
-        x: 578
-        y: 0
-        width: 578
-        height: 863
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: de5b61cf4b4fc874e94f2f33913e5be6
-      internalID: -2140468286
+      spriteID: 56dafc71190da0200800000000000000
+      internalID: 147159259431284069
       vertices: []
       indices: 
       edges: []
@@ -148,19 +126,16 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries:
-      - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":578.0,"y":863.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+      entries: []
     nameFileIdTable:
-      WellGuardianIdle_0: -2902886909703509365
-      WellGuardianIdle_1: -2140468286
+      Start button_0: 147159259431284069
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

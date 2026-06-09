@@ -19,14 +19,14 @@ MonoBehaviour:
     m_OverrideEntries:
     - m_Name: Idle_1
       m_Hash: 641084251
-      m_Sprite: {fileID: 21300000, guid: 8ff007812621feb4196bfa6555666d1d, type: 3}
+      m_Sprite: {fileID: -2902886909703509365, guid: 8ff007812621feb4196bfa6555666d1d, type: 3}
       m_FromMain: 0
-      m_SpriteOverride: {fileID: 21300000, guid: 8ff007812621feb4196bfa6555666d1d, type: 3}
+      m_SpriteOverride: {fileID: -2902886909703509365, guid: 8ff007812621feb4196bfa6555666d1d, type: 3}
     - m_Name: Idle_2
       m_Hash: 1061124833
-      m_Sprite: {fileID: 21300000, guid: 8ff007812621feb4196bfa6555666d1d, type: 3}
+      m_Sprite: {fileID: -2140468286, guid: 8ff007812621feb4196bfa6555666d1d, type: 3}
       m_FromMain: 0
-      m_SpriteOverride: {fileID: 21300000, guid: 8ff007812621feb4196bfa6555666d1d, type: 3}
+      m_SpriteOverride: {fileID: -2140468286, guid: 8ff007812621feb4196bfa6555666d1d, type: 3}
     m_FromMain: 0
     m_EntryOverrideCount: 2
   - m_Name: Hurt
@@ -35,16 +35,16 @@ MonoBehaviour:
     m_OverrideEntries:
     - m_Name: Hurt_1
       m_Hash: 499691303
-      m_Sprite: {fileID: 21300000, guid: 8ff007812621feb4196bfa6555666d1d, type: 3}
+      m_Sprite: {fileID: -3390000511712083319, guid: 614f89e1c3bc0d941aa9dd0e0ca55363, type: 3}
       m_FromMain: 0
-      m_SpriteOverride: {fileID: 21300000, guid: 8ff007812621feb4196bfa6555666d1d, type: 3}
+      m_SpriteOverride: {fileID: -3390000511712083319, guid: 614f89e1c3bc0d941aa9dd0e0ca55363, type: 3}
     - m_Name: Hurt_2
       m_Hash: 79822493
-      m_Sprite: {fileID: 21300000, guid: 8ff007812621feb4196bfa6555666d1d, type: 3}
+      m_Sprite: {fileID: 984809488705094779, guid: 614f89e1c3bc0d941aa9dd0e0ca55363, type: 3}
       m_FromMain: 0
-      m_SpriteOverride: {fileID: 21300000, guid: 8ff007812621feb4196bfa6555666d1d, type: 3}
+      m_SpriteOverride: {fileID: 984809488705094779, guid: 614f89e1c3bc0d941aa9dd0e0ca55363, type: 3}
     m_FromMain: 0
     m_EntryOverrideCount: 2
   m_PrimaryLibraryGUID: 
-  m_ModificationHash: 639152481303479358
+  m_ModificationHash: 639166396076125529
   m_Version: 1

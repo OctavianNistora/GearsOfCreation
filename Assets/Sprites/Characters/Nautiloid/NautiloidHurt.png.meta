@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 8ff007812621feb4196bfa6555666d1d
+guid: 5b33b950c80324944b2e3f05b3564633
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2902886909703509365
-    second: WellGuardianIdle_0
+      213: 9096090179388927361
+    second: NautiloidHurt_0
+  - first:
+      213: -6340376354958713647
+    second: NautiloidHurt_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -49,8 +52,8 @@ TextureImporter:
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 7
-  spritePivot: {x: 0.5, y: 0}
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -100,13 +103,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: WellGuardianIdle_0
+      name: NautiloidHurt_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 578
-        height: 863
+        width: 624
+        height: 662
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,30 +118,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b8aadfb5cbfd6b7d0800000000000000
-      internalID: -2902886909703509365
+      spriteID: 18d656333ddcb3e70800000000000000
+      internalID: 9096090179388927361
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WellGuardianIdle_1
+      name: NautiloidHurt_1
       rect:
         serializedVersion: 2
-        x: 578
+        x: 624
         y: 0
-        width: 578
-        height: 863
+        width: 624
+        height: 662
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: de5b61cf4b4fc874e94f2f33913e5be6
-      internalID: -2140468286
+      spriteID: 1dc56644c457208a0800000000000000
+      internalID: -6340376354958713647
       vertices: []
       indices: 
       edges: []
@@ -147,8 +150,8 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    spriteID: 0be42c9e81c236445930eabc7aa78e6c
+    internalID: 0
     vertices: []
     indices: 
     edges: []
@@ -157,10 +160,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":578.0,"y":863.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":624.0,"y":662.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      WellGuardianIdle_0: -2902886909703509365
-      WellGuardianIdle_1: -2140468286
+      NautiloidHurt_0: 9096090179388927361
+      NautiloidHurt_1: -6340376354958713647
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

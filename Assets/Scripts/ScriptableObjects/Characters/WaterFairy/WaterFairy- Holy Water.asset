@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d09f237879284579b9571706aff974af, type: 3}
-  m_Name: Zana Apelor - Holy Water
+  m_Name: WaterFairy- Holy Water
   m_EditorClassIdentifier: Assembly-CSharp::Heal
   <Name>k__BackingField: Holy Water
   <VFXNumber>k__BackingField: 3

@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba0f5540caf94c288588a97364f1baab, type: 3}
   m_Name: Grandson - Character
   m_EditorClassIdentifier: Assembly-CSharp::PlayerEntity
-  <Name>k__BackingField: Grandson
+  <Name>k__BackingField: Gideon
   <MaxHp>k__BackingField: 100
-  <CurrentHp>k__BackingField: 100
+  <CurrentHp>k__BackingField: 60
   <Abilities>k__BackingField:
   - {fileID: 11400000, guid: e14e352465aa0fedfa476f9f52f81c68, type: 2}
   - {fileID: 11400000, guid: 86ab0acb4c892b17da43c8426e0f4953, type: 2}

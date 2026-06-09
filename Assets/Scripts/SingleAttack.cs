@@ -11,6 +11,11 @@ public class SingleAttack : DamagingCharacterAbility
 
     protected override IEnumerator ApplyLogic(BaseEntity source, List<BaseEntity> targets)
     {
+        if (targets.Count == 0)
+        {
+            yield break;
+        }
+        
         var target = targets.First();
         
         yield return target.CombatCharacterAnimationHandler.PlayVFXAnimation(VFXNumber);
