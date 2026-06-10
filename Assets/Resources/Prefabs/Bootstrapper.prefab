@@ -177,6 +177,7 @@ Transform:
   - {fileID: 5750581573823113305}
   - {fileID: 3985455783473266401}
   - {fileID: 8397345212315027128}
+  - {fileID: 3928564403274300964}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1834591056331136819
@@ -522,6 +523,50 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8732e2f8a2d1e4fc1a2dd46a374c85e5, type: 2}
   - {fileID: 11400000, guid: 8732e2f8a2d1e4fc1a2dd46a374c85e5, type: 2}
   - {fileID: 11400000, guid: 8732e2f8a2d1e4fc1a2dd46a374c85e5, type: 2}
+--- !u!1 &5544474077963583194
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3928564403274300964}
+  - component: {fileID: 8708722516580393778}
+  m_Layer: 0
+  m_Name: ChestProgressManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3928564403274300964
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5544474077963583194}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6002215864389713547}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8708722516580393778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5544474077963583194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dabd8461b1c1e646a489f29ccb46501, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ChestProgressManager
 --- !u!1 &6461461347857108802
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,6 +16,7 @@ public class VictoryTrigger : MonoBehaviour
             SaveSystem.ResetProgress();
             CheckpointManager.Instance.ResetCheckpoints();
             EncounterProgressManager.Instance.ResetProgress();
+            ChestProgressManager.Instance.ResetProgress();
         }
     }
 }
