@@ -81,9 +81,9 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 5
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 0b830c5d1971c99439c2b59f0b5fa6b0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 582e2e3e5a1dabe4abfebebf85d1f269, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -127,7 +127,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.07817078, y: -2.7172766}
+  m_Offset: {x: -1.1387548, y: 0.83236694}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -137,7 +137,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 9.705681, y: 6.299608}
+  m_Size: {x: 11.826849, y: 15.964342}
   m_EdgeRadius: 0
 --- !u!114 &5616921166264170659
 MonoBehaviour:
@@ -152,6 +152,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CheckpointTrigger
   _activateOnce: 0
-  _checkpointRenderer: {fileID: 0}
-  _inactiveColor: {r: 1, g: 1, b: 1, a: 1}
-  _activeColor: {r: 0, g: 1, b: 0, a: 1}
+  _checkpointSpriteRenderer: {fileID: 5768551462899006842}
+  _inactiveSprite: {fileID: 21300000, guid: 582e2e3e5a1dabe4abfebebf85d1f269, type: 3}
+  _activeSprite: {fileID: 21300000, guid: 50fd5e6b86f7e824c89cbad2bd5d407a, type: 3}

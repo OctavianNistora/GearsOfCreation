@@ -6,10 +6,9 @@ public class CheckpointTrigger : MonoBehaviour
     [Tooltip("If true, this checkpoint can only be activated once.")]
     [SerializeField] private bool _activateOnce = true; // default true — checkpoint should only save once
 
-    [Header("Visual Feedback (optional)")]
-    [SerializeField] private Renderer _checkpointRenderer;
-    [SerializeField] private Color _inactiveColor = Color.white;
-    [SerializeField] private Color _activeColor   = Color.green;
+    [SerializeField] private SpriteRenderer _checkpointSpriteRenderer;
+    [SerializeField] private Sprite _inactiveSprite;
+    [SerializeField] private Sprite _activeSprite;
 
     private bool _hasBeenActivated = false;
 
@@ -39,8 +38,8 @@ public class CheckpointTrigger : MonoBehaviour
 
     private void UpdateVisual(bool active)
     {
-        if (_checkpointRenderer == null) return;
-        _checkpointRenderer.material.color = active ? _activeColor : _inactiveColor;
+        print("[Checkpoint] Visual updated: " + active);
+        _checkpointSpriteRenderer.sprite = active ? _activeSprite : _inactiveSprite;
     }
 
     public void Deactivate()
