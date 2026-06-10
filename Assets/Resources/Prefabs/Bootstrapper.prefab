@@ -223,6 +223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f803cc8d172394040a705ae515004b08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CheckpointManager
+  activeCheckpoints: 000000000000
 --- !u!1 &1931113284327172206
 GameObject:
   m_ObjectHideFlags: 0

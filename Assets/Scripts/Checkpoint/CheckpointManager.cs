@@ -34,6 +34,13 @@ public class CheckpointManager : MonoBehaviour
         activeCheckpoints = new bool[6]; // reset active checkpoints on start
     }
 
+    public void ResetCheckpoints()
+    {
+        activeCheckpoints = new bool[6];
+        LastCheckpoint = null;
+        _latestMemento = null;
+    }
+
     public void SetNewMementoPosition(Vector3 newPosition)
     {
         if (_latestMemento == null) return;

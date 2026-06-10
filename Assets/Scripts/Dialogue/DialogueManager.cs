@@ -15,8 +15,8 @@ public class DialogueManager : MonoBehaviour
     private Coroutine typingCoroutine;
     private bool isTyping = false;
     private bool dialogueActive = false;
-    private float simpleDelayAmount = 0.05f;
-    private float interpunctuationDelayAmount = 0.1f;
+    private float simpleDelayAmount = 0.02f;
+    private float interpunctuationDelayAmount = 0.05f;
     private DialogueCharacter currentDialogueCharacter;
 
     private void Awake()

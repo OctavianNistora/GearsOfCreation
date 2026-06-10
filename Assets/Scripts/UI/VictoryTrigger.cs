@@ -1,3 +1,4 @@
+using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,6 +12,10 @@ public class VictoryTrigger : MonoBehaviour
             player.GetComponent<PlayerInput>().SwitchCurrentActionMap("Dialogue");
             VictoryScreen.Instance.children.SetActive(true);
             AudioManager.Instance.PlaySFX(AudioManager.Instance.victory);
+            
+            SaveSystem.ResetProgress();
+            CheckpointManager.Instance.ResetCheckpoints();
+            EncounterProgressManager.Instance.ResetProgress();
         }
     }
 }
