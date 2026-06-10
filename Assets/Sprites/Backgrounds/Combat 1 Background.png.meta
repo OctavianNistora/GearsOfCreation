@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 58761f0a8f73f9240bf40f21373262f9
+guid: f33ea375ad48e8644a066bf073db3047
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8599919583920743316
-    second: Combat screen 2_0
+      213: -4904461923882074536
+    second: Combat screen_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Combat screen 2_0
+      name: Combat screen_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c6c9a77e3b2f6a880800000000000000
-      internalID: -8599919583920743316
+      spriteID: 85e749c7dd9dfebb0800000000000000
+      internalID: -4904461923882074536
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Combat screen 2_0: -8599919583920743316
+      Combat screen_0: -4904461923882074536
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
