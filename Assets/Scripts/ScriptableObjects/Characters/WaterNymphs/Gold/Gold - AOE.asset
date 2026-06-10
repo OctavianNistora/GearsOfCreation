@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Gold - AOE
   m_EditorClassIdentifier: Assembly-CSharp::AoeAttack
   <Name>k__BackingField: Gold Hex
+  <Description>k__BackingField: Placeholder description.
   <VFXNumber>k__BackingField: 1
   <ManaCost>k__BackingField: 0
-  <Damage>k__BackingField: 10
+  <Damage>k__BackingField: 5

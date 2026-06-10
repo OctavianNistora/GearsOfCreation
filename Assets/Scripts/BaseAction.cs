@@ -7,6 +7,8 @@ public abstract class BaseAction : ScriptableObject
 {
     [field: SerializeField]
     public string Name { get; private set; }
+    [field: SerializeField]
+    public string Description { get; private set; } = "Placeholder description.";
     public abstract int TargetCount {get; }
     public abstract bool TargetEnemy  { get; }
     [field: SerializeField]

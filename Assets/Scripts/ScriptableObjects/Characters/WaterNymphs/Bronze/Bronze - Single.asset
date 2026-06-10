@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Bronze - Single
   m_EditorClassIdentifier: Assembly-CSharp::SingleAttack
   <Name>k__BackingField: Bronze Curse
+  <Description>k__BackingField: Placeholder description.
   <VFXNumber>k__BackingField: 2
   <ManaCost>k__BackingField: 0
-  <Damage>k__BackingField: 20
+  <Damage>k__BackingField: 15

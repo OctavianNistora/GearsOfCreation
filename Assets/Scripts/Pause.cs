@@ -31,9 +31,9 @@ public class Pause : MonoBehaviour
     private void Update()
     {
         // Verificăm tasta X. Va funcționa în orice scenă
-        if (Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Debug.Log("[Pause] X detected in Pause.Update");
+            Debug.Log("[Pause] Escape detected in Pause.Update");
             TogglePause();
         }
     }
@@ -82,6 +82,13 @@ public class Pause : MonoBehaviour
         if (_isPaused) TogglePause();
     }
 
+    public void OpenSettings()
+    {
+        VolumeSettings.Instance.previousUI = _pauseCanvas;
+        VolumeSettings.Instance.children.SetActive(true);
+        _pauseCanvas.SetActive(false);
+    }
+
     public void QuitToMainMenu()
     {
         _isPaused = false;
@@ -89,7 +96,16 @@ public class Pause : MonoBehaviour
         Time.timeScale = 1f;
         _cachedPlayerInput = null;
         
-        SceneManager.LoadScene("Main_Menu");
+        FadeToMainMenu();
+    }
+
+    public async void FadeToMainMenu()
+    {
+        await FadeManager.Instance.FadeToBlack();
+
+        await SceneManager.LoadSceneAsync("Main_Menu");
+
+        await FadeManager.Instance.FadeToTransparent();
     }
 
     private void OnDestroy()

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Bronze - AOE
   m_EditorClassIdentifier: Assembly-CSharp::AoeAttack
   <Name>k__BackingField: Bronze Hex
+  <Description>k__BackingField: Placeholder description.
   <VFXNumber>k__BackingField: 2
   <ManaCost>k__BackingField: 0
-  <Damage>k__BackingField: 10
+  <Damage>k__BackingField: 5

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b334e93f69aa423bad8bb11be19dbec5, type: 3}
+  m_Name: WaterFairy - Slap
+  m_EditorClassIdentifier: Assembly-CSharp::SingleAttack
+  <Name>k__BackingField: Rain
+  <Description>k__BackingField: The force of nature deals 15 damage to an enemy
+  <VFXNumber>k__BackingField: 4
+  <ManaCost>k__BackingField: 0
+  <Damage>k__BackingField: 15

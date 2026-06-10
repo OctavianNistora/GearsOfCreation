@@ -9,7 +9,23 @@ public class MainMenu : MonoBehaviour
 
     public void PlayGame()
     {
-        SceneManager.LoadSceneAsync("PlatformerScene");
+        FadeToPlatformerScene();
+    }
+
+    public void OpenSettings()
+    {
+        VolumeSettings.Instance.previousUI = gameObject;
+        VolumeSettings.Instance.children.SetActive(true);
+        gameObject.SetActive(false);
+    }
+
+    public async void FadeToPlatformerScene()
+    {
+        await FadeManager.Instance.FadeToBlack();
+
+        await SceneManager.LoadSceneAsync("PlatformerScene");
+
+        await FadeManager.Instance.FadeToTransparent();
     }
 
     public void QuitGame()

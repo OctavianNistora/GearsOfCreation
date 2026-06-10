@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Small Health Potion
   m_EditorClassIdentifier: Assembly-CSharp::DefaultNamespace.Combat.Items.HealthPotion
   <Name>k__BackingField: Small Health Potion
+  <Description>k__BackingField: Heals the target for 25 HP
   <VFXNumber>k__BackingField: 3
   <HealAmount>k__BackingField: 25

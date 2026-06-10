@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Grandson - Ground Bash
   m_EditorClassIdentifier: Assembly-CSharp::AoeAttack
   <Name>k__BackingField: Ground Bash
+  <Description>k__BackingField: The pipe hits the ground, dealing 10 damage to all
+    enemies
   <VFXNumber>k__BackingField: 2
   <ManaCost>k__BackingField: 15
   <Damage>k__BackingField: 10

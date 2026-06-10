@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Grandson - Bonk
   m_EditorClassIdentifier: Assembly-CSharp::SingleAttack
   <Name>k__BackingField: Bonk
+  <Description>k__BackingField: Hit the enemy's head with force, dealing 20 damage
   <VFXNumber>k__BackingField: 1
   <ManaCost>k__BackingField: 0
   <Damage>k__BackingField: 20
