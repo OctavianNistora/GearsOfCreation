@@ -8,8 +8,26 @@ public class VolumeSettings : MonoBehaviour
     [SerializeField] private Slider musicSlider;
     [SerializeField] private Slider SFXSlider;
 
+    public GameObject children;
+    public GameObject previousUI;
+
+    public static VolumeSettings Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+        }
+        
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+
     private void Start()
     {
+        Instance.children.SetActive(false);
+
         if (PlayerPrefs.HasKey("musicVolume"))
         {
             LoadVolume();
@@ -43,4 +61,11 @@ public class VolumeSettings : MonoBehaviour
         SetMusicVolume();
         SetSFXVolume();
     }
+
+    public void Back()
+    {
+        previousUI.SetActive(true);
+        Instance.children.SetActive(false);
+    }
+
 }

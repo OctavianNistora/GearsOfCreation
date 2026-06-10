@@ -31,9 +31,9 @@ public class Pause : MonoBehaviour
     private void Update()
     {
         // Verificăm tasta X. Va funcționa în orice scenă
-        if (Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Debug.Log("[Pause] X detected in Pause.Update");
+            Debug.Log("[Pause] Escape detected in Pause.Update");
             TogglePause();
         }
     }
@@ -80,6 +80,13 @@ public class Pause : MonoBehaviour
     public void ResumeFromButton()
     {
         if (_isPaused) TogglePause();
+    }
+
+    public void OpenSettings()
+    {
+        VolumeSettings.Instance.previousUI = _pauseCanvas;
+        VolumeSettings.Instance.children.SetActive(true);
+        _pauseCanvas.SetActive(false);
     }
 
     public void QuitToMainMenu()
