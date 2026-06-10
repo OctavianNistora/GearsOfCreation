@@ -17,6 +17,8 @@ public class DefeatScreen : MonoBehaviour
 
     public async void FadeToPlatformerScene()
     {
+        AudioManager.Instance.StopSFX();
+
         gameObject.SetActive(false);
 
         await FadeManager.Instance.FadeToBlack();
@@ -28,6 +30,8 @@ public class DefeatScreen : MonoBehaviour
 
     public async void FadeToMainMenu()
     {
+        AudioManager.Instance.StopSFX();
+
         gameObject.SetActive(false);
 
         await FadeManager.Instance.FadeToBlack();

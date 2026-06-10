@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Silver - AOE
   m_EditorClassIdentifier: Assembly-CSharp::AoeAttack
   <Name>k__BackingField: Silver Hex
+  <Description>k__BackingField: Placeholder description.
   <VFXNumber>k__BackingField: 4
   <ManaCost>k__BackingField: 0
-  <Damage>k__BackingField: 10
+  <Damage>k__BackingField: 5

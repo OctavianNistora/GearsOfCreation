@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: WaterFairy- Holy Water
   m_EditorClassIdentifier: Assembly-CSharp::Heal
   <Name>k__BackingField: Holy Water
+  <Description>k__BackingField: Bless one of your party members, healing them for
+    35 HP
   <VFXNumber>k__BackingField: 3
   <ManaCost>k__BackingField: 20
-  <HealAmount>k__BackingField: 40
+  <HealAmount>k__BackingField: 35
