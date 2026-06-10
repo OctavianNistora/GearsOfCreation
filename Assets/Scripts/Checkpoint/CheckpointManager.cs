@@ -9,6 +9,8 @@ public class CheckpointManager : MonoBehaviour
     public static CheckpointManager Instance { get; private set; }
 
     private PlayerMemento _latestMemento;
+
+    public bool[] activeCheckpoints = new bool[6];
     public  CheckpointTrigger LastCheckpoint { get; private set; }
     public  bool HasCheckpoint() => _latestMemento != null;
 
@@ -29,6 +31,7 @@ public class CheckpointManager : MonoBehaviour
     {
         if (SaveSystem.HasSave())
             LoadGame();
+        activeCheckpoints = new bool[6]; // reset active checkpoints on start
     }
 
     public void SetNewMementoPosition(Vector3 newPosition)

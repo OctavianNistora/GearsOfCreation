@@ -10,11 +10,19 @@ public class CheckpointTrigger : MonoBehaviour
     [SerializeField] private Sprite _inactiveSprite;
     [SerializeField] private Sprite _activeSprite;
 
+    public int checkpointIndex; // index to identify this checkpoint in the CheckpointManager
+
     private bool _hasBeenActivated = false;
 
     private void Start()
     {
-        UpdateVisual(active: false);
+        if (CheckpointManager.Instance.activeCheckpoints[checkpointIndex])
+        {
+            _hasBeenActivated = true;
+            UpdateVisual(active: true);
+        }
+        else
+            UpdateVisual(active: false);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -33,12 +41,12 @@ public class CheckpointTrigger : MonoBehaviour
         CheckpointManager.Instance.SaveCheckpoint(player, this);
 
         _hasBeenActivated = true;
+        CheckpointManager.Instance.activeCheckpoints[checkpointIndex] = true;
         UpdateVisual(active: true);
     }
 
     private void UpdateVisual(bool active)
     {
-        print("[Checkpoint] Visual updated: " + active);
         _checkpointSpriteRenderer.sprite = active ? _activeSprite : _inactiveSprite;
     }
 

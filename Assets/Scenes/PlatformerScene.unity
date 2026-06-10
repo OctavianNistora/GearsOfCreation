@@ -607,6 +607,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Checkpoint (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5616921166264170659, guid: 471a0faf49baebd4ca5c3454fe0a5948, type: 3}
+      propertyPath: checkpointIndex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5630417948747719692, guid: 471a0faf49baebd4ca5c3454fe0a5948, type: 3}
       propertyPath: m_LocalPosition.x
       value: 75.76
@@ -18145,6 +18149,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Checkpoint (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5616921166264170659, guid: 471a0faf49baebd4ca5c3454fe0a5948, type: 3}
+      propertyPath: checkpointIndex
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5630417948747719692, guid: 471a0faf49baebd4ca5c3454fe0a5948, type: 3}
       propertyPath: m_LocalPosition.x
       value: 27.82
@@ -19711,6 +19719,10 @@ PrefabInstance:
     - target: {fileID: 4995392293321402967, guid: 471a0faf49baebd4ca5c3454fe0a5948, type: 3}
       propertyPath: m_Name
       value: Checkpoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 5616921166264170659, guid: 471a0faf49baebd4ca5c3454fe0a5948, type: 3}
+      propertyPath: checkpointIndex
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5630417948747719692, guid: 471a0faf49baebd4ca5c3454fe0a5948, type: 3}
       propertyPath: m_LocalPosition.x
@@ -127661,7 +127673,7 @@ Tilemap:
       - {fileID: 2100353080, guid: 7cfb90e53c70ba14488b3c0df05563f2, type: 3}
       - {fileID: 1169465011, guid: 7cfb90e53c70ba14488b3c0df05563f2, type: 3}
       - {fileID: -922147482, guid: 7cfb90e53c70ba14488b3c0df05563f2, type: 3}
-      m_AnimationSpeed: 5.0000005
+      m_AnimationSpeed: 5
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 36, y: -49, z: 0}
@@ -132199,6 +132211,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Checkpoint (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5616921166264170659, guid: 471a0faf49baebd4ca5c3454fe0a5948, type: 3}
+      propertyPath: checkpointIndex
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5630417948747719692, guid: 471a0faf49baebd4ca5c3454fe0a5948, type: 3}
       propertyPath: m_LocalPosition.x
       value: 46.5
@@ -132700,6 +132716,10 @@ PrefabInstance:
     - target: {fileID: 4995392293321402967, guid: 471a0faf49baebd4ca5c3454fe0a5948, type: 3}
       propertyPath: m_Name
       value: Checkpoint (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5616921166264170659, guid: 471a0faf49baebd4ca5c3454fe0a5948, type: 3}
+      propertyPath: checkpointIndex
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5630417948747719692, guid: 471a0faf49baebd4ca5c3454fe0a5948, type: 3}
       propertyPath: m_LocalPosition.x
@@ -134413,11 +134433,11 @@ PrefabInstance:
       objectReference: {fileID: 1533694257}
     - target: {fileID: 5016439724168772201, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 49.36
+      value: 50.41
       objectReference: {fileID: 0}
     - target: {fileID: 5016439724168772201, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -40.81
+      value: -41.73
       objectReference: {fileID: 0}
     - target: {fileID: 5016439724168772201, guid: 4e367d4b982510a64b08f2975753804e, type: 3}
       propertyPath: m_LocalPosition.z
