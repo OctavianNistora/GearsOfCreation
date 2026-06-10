@@ -96,7 +96,16 @@ public class Pause : MonoBehaviour
         Time.timeScale = 1f;
         _cachedPlayerInput = null;
         
-        SceneManager.LoadScene("Main_Menu");
+        FadeToMainMenu();
+    }
+
+    public async void FadeToMainMenu()
+    {
+        await FadeManager.Instance.FadeToBlack();
+
+        await SceneManager.LoadSceneAsync("Main_Menu");
+
+        await FadeManager.Instance.FadeToTransparent();
     }
 
     private void OnDestroy()

@@ -1,9 +1,11 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class DefeatScreen : MonoBehaviour
+public class VictoryScreen : MonoBehaviour
 {
-    public static DefeatScreen Instance { get; private set; }
+    public GameObject children;
+    
+    public static VictoryScreen Instance { get; private set; }
     private void Awake()
     {
         if (Instance != null)
@@ -15,24 +17,21 @@ public class DefeatScreen : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public async void FadeToPlatformerScene()
+    void Start()
     {
-        AudioManager.Instance.StopSFX();
+        children.SetActive(false);
+    }
 
-        gameObject.SetActive(false);
-
-        await FadeManager.Instance.FadeToBlack();
-
-        await SceneManager.LoadSceneAsync("PlatformerScene");
-
-        await FadeManager.Instance.FadeToTransparent();
+    public void QuitToMainMenu()
+    {
+        FadeToMainMenu();
     }
 
     public async void FadeToMainMenu()
     {
         AudioManager.Instance.StopSFX();
 
-        gameObject.SetActive(false);
+        children.SetActive(false);
 
         await FadeManager.Instance.FadeToBlack();
 

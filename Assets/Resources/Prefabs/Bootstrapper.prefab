@@ -59,7 +59,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   initialPartyMembers: []
   initialInventoryItems:
-  - {fileID: 11400000, guid: 00415c0734dce382c8e26c177c40a4d6, type: 2}
   - {fileID: 11400000, guid: ac95107bd49dcf3819b1ffe3da8201dc, type: 2}
   - {fileID: 11400000, guid: 113d805a48b2d5f25b0e167ed435a68d, type: 2}
 --- !u!1 &930246628801185277
