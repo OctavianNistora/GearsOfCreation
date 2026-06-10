@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager Instance;
-    public TextMeshProUGUI textUI;
+
     [SerializeField] private PlayerInput playerInput;
     private DialogueLine[] lines;
     private int lineIndex;
@@ -38,7 +38,7 @@ public class DialogueManager : MonoBehaviour
         dialogueActive = true;
         lines = dialogue.lines;
         lineIndex = 0;
-        textUI.gameObject.SetActive(true);
+        NarrationManager.Instance.textUI.gameObject.SetActive(true);
         ShowLine();
     }
 
@@ -49,8 +49,8 @@ public class DialogueManager : MonoBehaviour
         if (typingCoroutine != null)
             StopCoroutine(typingCoroutine);
 
-        textUI.text = lines[lineIndex].speaker.characterName + ": " + lines[lineIndex].text;
-        textUI.maxVisibleCharacters = lines[lineIndex].speaker.characterName.Length + 2;
+        NarrationManager.Instance.textUI.text = lines[lineIndex].speaker.characterName + ": " + lines[lineIndex].text;
+        NarrationManager.Instance.textUI.maxVisibleCharacters = lines[lineIndex].speaker.characterName.Length + 2;
         currentVisibleCharactersIndex = 0;
 
         typingCoroutine = StartCoroutine(TypeLine(lines[lineIndex].text));
@@ -63,7 +63,7 @@ public class DialogueManager : MonoBehaviour
         while (currentVisibleCharactersIndex < text.Length)
         {
             char character = text[currentVisibleCharactersIndex];
-            textUI.maxVisibleCharacters++;
+            NarrationManager.Instance.textUI.maxVisibleCharacters++;
 
             if (character == ';' || character == ',' || character == ':' || character == '-' || character == '.' || character == '?' || character == '!')
             {
@@ -98,7 +98,7 @@ public class DialogueManager : MonoBehaviour
         {
             // Finish instantly
             StopCoroutine(typingCoroutine);
-            textUI.maxVisibleCharacters = lines[lineIndex].speaker.characterName.Length + 2 + lines[lineIndex].text.Length;
+            NarrationManager.Instance.textUI.maxVisibleCharacters = lines[lineIndex].speaker.characterName.Length + 2 + lines[lineIndex].text.Length;
             isTyping = false;
         }
         else
@@ -120,7 +120,7 @@ public class DialogueManager : MonoBehaviour
             currentDialogueCharacter.SetTalking(false);
 
             dialogueActive = false;
-            textUI.gameObject.SetActive(false);
+            NarrationManager.Instance.textUI.gameObject.SetActive(false);
             FadeTransition();
         }
     }

@@ -14,7 +14,6 @@ public enum PlatformerTutorialStep
 public class PlatformerTutorial : MonoBehaviour
 {
     public PlatformerTutorialStep currentStep;
-    [SerializeField] private NarrationManager narrationManager;
     [SerializeField] private PlayerInput playerInput;
 
     //temp
@@ -54,18 +53,18 @@ public class PlatformerTutorial : MonoBehaviour
         switch (currentStep)
         {
             case PlatformerTutorialStep.Move:
-                narrationManager.ShowText("Use A and D to move left and right");
+                NarrationManager.Instance.ShowText("Use A and D to move left and right");
                 break;
             case PlatformerTutorialStep.Jump:
-                narrationManager.ShowText("Press W to jump");
+                NarrationManager.Instance.ShowText("Press W to jump");
                 waitingForJump = true;
                 break;
             case PlatformerTutorialStep.ClimbLedge:
-                narrationManager.ShowText("That cliff seems a bit too high to jump on... Try to reach it anyway!");
+                NarrationManager.Instance.ShowText("That cliff seems a bit too high to jump on... Try to reach it anyway!");
                 waitingForClimbLedge = true;
                 break;
             case PlatformerTutorialStep.PickUpWeapon:
-                narrationManager.ShowText("Might be useful later...");
+                NarrationManager.Instance.ShowText("Might be useful later...");
                 Invoke("NextStep",3);
                 break;
             case PlatformerTutorialStep.Done:
@@ -77,7 +76,7 @@ public class PlatformerTutorial : MonoBehaviour
     void NextStep()
     {
         currentStep++;
-        narrationManager.HideText();
+        NarrationManager.Instance.HideText();
         //ShowStep();
     }
 }

@@ -1,9 +1,14 @@
+using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     void Start()
     {
+        SaveSystem.ResetProgress();
+        CheckpointManager.Instance.ResetCheckpoints();
+        EncounterProgressManager.Instance.ResetProgress();
+        ChestProgressManager.Instance.ResetProgress();
         AudioManager.Instance.PlayMusic(AudioManager.Instance.mainMenu);
     }
 
