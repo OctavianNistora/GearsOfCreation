@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: WaterFairy - Slap
   m_EditorClassIdentifier: Assembly-CSharp::SingleAttack
   <Name>k__BackingField: Rain
+  <Description>k__BackingField: The force of nature deals 15 damage to an enemy
   <VFXNumber>k__BackingField: 4
   <ManaCost>k__BackingField: 0
   <Damage>k__BackingField: 15
