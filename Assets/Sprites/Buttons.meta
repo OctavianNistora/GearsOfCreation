@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Sprites/Buttons.meta
 guid: 88e6cb0830a13204dba1bdc7541692d3
+=======
+guid: c5465a4588b4ab64894707375887b877
+>>>>>>> origin/main:Assets/Sprites/Characters/Crab-67.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
