@@ -9,6 +9,8 @@ public class MainMenu : MonoBehaviour
         CheckpointManager.Instance.ResetCheckpoints();
         EncounterProgressManager.Instance.ResetProgress();
         ChestProgressManager.Instance.ResetProgress();
+        PartyManager.Instance.ResetProgress();
+        PartyInitializer.Instance.Start();
         AudioManager.Instance.PlayMusic(AudioManager.Instance.mainMenu);
     }
 

@@ -33,4 +33,10 @@ public class PartyManager : MonoBehaviour
         Members.RemoveAll(member => member.CurrentHp <= 0);
         print("Removed from party. Remaining members: " + PartyManager.Instance.Members.Count);
     }
+
+    public void ResetProgress()
+    {
+        Members.Clear();
+        Inventory.Clear();
+    }
 }

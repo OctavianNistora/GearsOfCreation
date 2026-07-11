@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
+using DG.Tweening;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Animator _animator;
     [SerializeField] private Tilemap groundTilemap;
     [SerializeField] private PlayerMovementStats movementStats;
+    [SerializeField] private ParticleController particleController;
     
     [Header("Ground Check")]
     [SerializeField] private GameObject groundCheckBoxCenter;
@@ -79,13 +81,24 @@ public class PlayerMovement : MonoBehaviour
         {
             _animator.SetBool("walk", false);
             newVelocity = Mathf.Lerp(newVelocity, 0, currentDeceleration * Time.fixedDeltaTime);
+            transform.DORotate(new Vector3(0, 0, 0), 0.5f);
         }
         else
         {
             _animator.SetBool("walk", true);
             newVelocity = Mathf.Lerp(newVelocity, targetVelocity, currentAcceleration * Time.fixedDeltaTime);
+
+            if (horizontal > 0)
+            {
+                transform.DORotate(new Vector3(0, 0, -10), 1f);
+            }
+            else
+            {
+                transform.DORotate(new Vector3(0, 0, 10), 1f);
+            }
         }
 
+        //float horizontalMovementSpeed = 10;
         //_rigidbodyControl.SetHorizontalVelocity(horizontal * horizontalMovementSpeed);
 
 
@@ -136,6 +149,11 @@ public class PlayerMovement : MonoBehaviour
     public void OnGroundedStateChange(bool isGrounded)
     {
         _isGrounded = isGrounded;
+        particleController.isGrounded = isGrounded;
+        if (isGrounded)
+        {
+            particleController.PlayFallParticles();
+        }
 
         _animator.SetBool("mid_air", !isGrounded);
         if (isGrounded)
