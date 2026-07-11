@@ -49,4 +49,10 @@ public static class SaveSystem
         File.Delete(SavePath);
         Debug.Log("[SaveSystem] Save deleted.");
     }
+
+    public static void ResetProgress()
+    {
+        File.Delete(SavePath);
+        Debug.Log("[SaveSystem] Save deleted.");
+    }
 }

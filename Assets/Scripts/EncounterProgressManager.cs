@@ -56,5 +56,11 @@ namespace DefaultNamespace
             
             _encounterDefeated.Add(_currentEncounterId.Value);
         }
+
+        public void ResetProgress()
+        {
+            _currentEncounterId = null;
+            _encounterDefeated.Clear();
+        }
     }
 }

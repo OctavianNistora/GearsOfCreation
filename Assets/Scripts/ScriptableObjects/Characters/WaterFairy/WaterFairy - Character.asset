@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: WaterFairy - Character
   m_EditorClassIdentifier: Assembly-CSharp::PlayerEntity
   <Name>k__BackingField: Water Fairy
-  <MaxHp>k__BackingField: 80
-  <CurrentHp>k__BackingField: 80
+  <MaxHp>k__BackingField: 60
+  <CurrentHp>k__BackingField: 60
   <Abilities>k__BackingField:
   - {fileID: 11400000, guid: 3047aabf44dfefe1bb16ee0529310219, type: 2}
   - {fileID: 11400000, guid: b29a49143f93f62a4b1b2fcd4376fcf7, type: 2}

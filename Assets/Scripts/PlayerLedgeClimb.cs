@@ -6,6 +6,7 @@ using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
+using FirstGearGames.SmoothCameraShaker;
 
 public class PlayerLedgeClimb : MonoBehaviour
 {
@@ -27,6 +28,8 @@ public class PlayerLedgeClimb : MonoBehaviour
     [SerializeField] private float verticalSpeed = 5;
     [SerializeField] private float horizontalSpeed = 5;
     [SerializeField] private float verticalErrorCorrection = 0.05f;
+
+    [SerializeField] private ShakeData shakeData;
     
     private Dictionary<AbstractConditionEmitter, bool> _conditions = new();
     private Coroutine _climbLedgeCoroutine;
@@ -65,6 +68,7 @@ public class PlayerLedgeClimb : MonoBehaviour
 
     private void ClimbLedge()
     {
+        CameraShakerHandler.Shake(shakeData);
         _animator.SetTrigger("ledge_grab");
         
         float? xPosition = null;

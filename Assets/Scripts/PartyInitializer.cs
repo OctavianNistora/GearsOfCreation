@@ -4,10 +4,22 @@ using UnityEngine;
 
 public class PartyInitializer : MonoBehaviour
 {
+    public static PartyInitializer Instance { get; private set; }
     [SerializeField] private List<PlayerEntity> initialPartyMembers;
     [SerializeField] private List<BaseCombatItem> initialInventoryItems;
     
-    void Start()
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+        }
+        
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+
+    public void Start()
     {
         initialPartyMembers.ForEach(member =>
         {
